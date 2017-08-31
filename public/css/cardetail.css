@@ -1,0 +1,264 @@
+.product-intro{
+	margin-top: 30px;
+}
+.product-intro .preview-wrapper{
+	float: left;
+	width: 560px;
+}
+.product-intro .item-info-wrapper{
+	float: right;
+	width: 700px;
+	padding-left: 28px;
+}
+.product-intro .preview-wrapper img{
+	border: 1px solid #cbcbcb;
+}
+
+
+/* carousel */
+#owl-sm {
+    width: 508px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#owl-sm .item {
+	position: relative;
+    display: block;
+    margin: 5px;
+}
+#owl-sm img {
+    display: block;
+    width: 100%;
+}
+.owl-theme .owl-controls .owl-pagination{
+	display: none;
+}
+#owl-sm .owl-buttons .owl-prev,
+#owl-sm .owl-buttons .owl-next{
+	position: absolute;
+	top: 10px;
+	height: 60px;
+	width: 25px;
+}
+#owl-sm .owl-buttons .owl-prev{
+	left: -25px;
+	background: url("../img/icon/ar-left-sm.jpg") no-repeat center;
+}
+#owl-sm .owl-buttons .owl-next{
+	right: -25px;
+	background: url("../img/icon/ar-right-sm.jpg") no-repeat center;	
+}
+
+.header-wrapper{
+	display: flex;
+	font-size: 14px;
+}
+.header-wrapper .product-name{
+	flex: 1;
+	font-size: 18px;
+	font-weight: bold;
+}
+.header-wrapper .wechat{
+	flex: 0 0 200px;
+	margin-left: 30px;
+	background-color: #fafafa;
+}
+.header-wrapper .wechat .desc{
+	float: right;
+	width: 130px;
+	height: 56px;
+	line-height: 28px;
+	font-size: 14px;
+}
+.header-wrapper .wechat .desc p{
+	font-size: 12px;
+}
+.item-info-wrapper a{
+	color: #333;
+}
+.item-info-wrapper .dt{
+	margin-left: 10px;
+	color: #999;
+}
+.item-info-wrapper .dd{
+	color: #333;
+}
+.item-info-wrapper .li{
+	display: flex;
+	line-height: 50px;
+}
+.item-info-wrapper .li .dt{
+	display: inline-block;
+	width: 60px;
+}
+.item-info-wrapper .li .dd{
+	margin-left: 20px;
+	display: inline-block;
+}
+.guide-price{
+	margin-top: 20px;
+	border-top: 1px solid #da3a4d;
+	background-color: #feefef;
+	height: 68px;
+	line-height: 68px;
+}
+.guide-price .dt{
+	display: inline-block;
+}
+.guide-price .price{
+	margin-left: 15px;
+	color: #ee2e2c;
+	font-size: 24px;
+}
+.guide-price .dd{
+	float: right;
+	display: inline-block;
+	margin-right: 20px;
+}
+.guide-price .view-count{
+	color: #ee2e2c;
+}
+.company .dd {
+	position: relative;
+}
+.company .dd span{
+	position: absolute;
+	right: -25px;
+	top: 16px;
+	height: 20px;
+	width: 20px;
+	font-size: 16px;
+	background: url("../img/icon/approve-icon.png") no-repeat;
+}
+.choose-type li{
+	display: inline-block;
+	margin-right: 10px;
+}
+.choose-type li a{
+	padding: 10px 10px;
+	border: 1px solid #bbbac0;
+}
+.choose-type .selected a,
+.choose-type li a:hover{
+	border-color: #ef3634;
+}
+.choose-type dt{
+	float: left;
+	margin-right: 20px;
+}
+.choose-type dd{
+	overflow: hidden;
+}
+
+.service{
+	margin-left: 12px;
+	margin-top: 33px;
+}
+.service a{
+	height: 40px;
+	line-height: 40px;
+	background-color: #ffeded;
+	color: #ef3634;
+}
+.service .qq{
+	background: #ffeded url("../img/icon/qq-logo.png") 8px 13px no-repeat;
+}
+.service .span{
+	display: inline-block;
+	height: 45px;
+	line-height: 45px;
+	margin-right: 10px;
+	padding-left: 30px;
+	padding-right: 10px;
+	border: 1px solid #ef3634;
+}
+.service .span span{
+	display: inline-block;
+	padding-left: 10px;
+}
+.service .website{
+	background: #ffeded url("../img/icon/e.png") 8px 14px no-repeat;
+	width: 84px;
+}
+.service .website:hover{
+	background-color: #FA8072;
+	color: red;
+}
+.service .home{
+	background: #ffeded url("../img/icon/home.png") 8px 14px no-repeat;
+	width: 84px;
+}
+.service .home:hover{
+	background-color: #FA8072;
+	color: red;
+}
+.service .tel{
+	background: #ffeded url("../img/icon/tel-icon.png") 8px 13px no-repeat;
+	cursor: default;
+}
+
+/* 产品详情 */
+#product-detail img{
+	padding-bottom: 16px;
+}
+
+
+/* picZoomer样式 */
+.picZoomer{
+	position: relative;
+}
+.picZoomer-pic-wp{
+	position: relative;
+	overflow: hidden;
+}
+.picZoomer-pic-wp:hover .picZoomer-cursor{
+	display: block;
+}
+.picZoomer-zoom-pic{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.picZoomer-pic{
+	width: 100%;
+	height: 100%;
+}
+.picZoomer-zoom-wp{
+	display: none;
+	position: absolute;
+	z-index: 999;
+	overflow: hidden;
+}
+.picZoomer-cursor{
+	display: none;
+	cursor: crosshair;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-radius: 50%;
+	border: 1px solid #eee;
+	background-color: rgba(0,0,0,.1);
+}
+.picZoomCursor-ico{
+	width: 23px;
+	height: 23px;
+	position: absolute;
+	top: 40px;
+	left: 40px;
+	background: url(images/zoom-ico.png) left top no-repeat;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

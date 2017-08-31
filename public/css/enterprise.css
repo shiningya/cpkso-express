@@ -1,0 +1,169 @@
+﻿.category .category-list .brand-ident li{
+			position:relative;
+		}
+		.category .category-list .brand-ident li.active a span{
+			width:0;
+			height:0;
+			position:absolute;
+			border-right:5px solid transparent;
+			border-left:5px solid transparent;
+			border-bottom:5px solid #da3a4d;
+			margin-top:10px;
+			top:17px;
+			right:10px;
+		}
+		.logo-list{
+			border:1px solid #ebebeb;
+			background:#f7f7f7;
+			height:660px;
+		}
+		.inforow span b{
+			color:#000;
+		}
+		.logo-list li.side-list-item{
+			height:66px;
+			margin:12px 0;
+		}
+		.logo-list li a{
+			margin-top:26px;
+			height:80px;
+		}
+		table{
+			margin-top:20px;
+			/*border-collapse: collapse;*/
+		}
+		table tr{
+			display:inline-block;/*将tr设置为块体元素*/
+	        margin:10px 0;
+		}
+		table td{
+			padding:10px  20px;
+		}
+		table td:first-child{
+			padding:0;
+			
+		}
+		td p{
+			font-size:16px;
+			line-height:30px;
+		}
+		.inforow td p:nth-child(2) span{
+			 margin:0 40px;
+		}
+		.inforow td p:nth-child(2) span:first-child{
+			 margin-left:0;
+		}
+		.jinshanlogo{
+			border:1px solid #b9b9b9;
+			width:100px;
+			height:100px;
+			text-align:center;
+			vertical-align: middle;
+		}
+		td p a{
+			font-size:16px;
+			color:#000;
+		}
+		.certify{
+			width:250px;
+		}
+		.certify a{
+			background:#da3a4d;
+			display:inline-block;
+			color:#fff;
+			margin:3px 0;
+			padding:4px 10px;
+		}
+		.certify a.popCertify:hover{
+			background:#f00;
+		}
+		.t2{
+			background:#f5f5f5;
+		}
+		.certify .uncertify{
+			display:inline-block;
+			background-color:#808080;
+		}
+		
+
+
+.member{
+	background:#da3a4d;
+	padding:15px 10px;
+	color:#fff;
+	overflow:hidden;
+}
+.member span{
+	font-size:16px;
+	float:left;
+}
+.member a{
+	float:right;
+	color:#fff;
+	text-decoration: none;
+	font-size:12px;
+	border:1px solid #fff;
+}
+
+	/*--------------------弹窗样式------------*/
+.box {
+display: none;
+position:absolute;
+top: 30%;
+left: 15%;
+width: 935px;
+background:#fff;
+height:895px;
+z-index:1001;
+}
+.cover{
+	position:fixed;
+	top:0;
+	left:0;
+	display:none;
+	width:100%;
+	height:100%;
+	opacity:0.5;
+	background:#000;
+}
+.box table{
+	width:870px;
+	height:80%;
+	margin-left:30px;
+	border: 1px solid #ccc;
+	text-align:center;
+}
+.box .box-title{
+	font-size:18px;
+	font-weight:bold;
+	margin:20px 0 15px 30px;
+	
+}
+.box .box-title img{
+	margin-left:700px;
+}
+.box table caption{
+	text-align:center;
+	background:#da3a4d;
+	font-size:18px;
+	color:#fff;
+}
+.box table tr td{
+	font-size:16px;
+	border:1px solid #ccc;
+}
+.box table tr td:first-child{
+	width:200px;
+}
+.box table tr td:last-child:not(.certifyInfo){
+	text-align:left;
+}
+.box table tr .certifyInfo{
+	background:#da3a4d;
+	font-size:18px;
+	color:#fff;
+	padding:10px 0;
+}
+.box table tr .beian{
+	color:#da3a4d;
+}

@@ -1,0 +1,79 @@
+@charset "utf-8";
+/* CSS Document */
+a{ 
+    color:black;}
+.left{
+	float:left;}
+.clear{
+	clear:both;}
+/*左选项卡*/
+.nav_help{
+	width:240px;}
+.nav_help li{
+	background-color:#f2f2f2;
+	border-bottom:1px solid #cccccc;
+	cursor: pointer;
+	padding:15px 100px 15px 30px;}
+.nav_help>.cur_li{
+	background-color:#da3a4d;
+	color:white;}
+.nav_help>.cur_li a{
+	color: #fff;
+}
+.nav_help>.cur_li a:hover{
+	color: #fff;
+}
+/*右内容*/
+.content_h{
+	margin-left:260px;}
+.content_h h1{
+	font-size:20px;
+	margin-left:15px;}
+.content_h p{
+	font-size:14px;
+	line-height:30px;}
+.about_p{
+	margin:auto 120px;}
+.font{
+	font-size:18px;
+	line-height:40px;
+	font-weight:bold;}
+.new_map{
+	margin-bottom:40px;}
+.new_map li{
+	float:left;
+	line-height:30px;
+	padding:0 15px;}
+/*网站地图*/
+#map-footer{
+	background-color:#3A3A3A;
+}
+#map-footer dl{
+	text-align:center;
+	margin-top:40px;
+}
+#map-footer dt{
+	padding:3px;
+	color:#fff;
+}
+#map-footer dd{
+	padding:3px;
+	
+}
+#map-footer p{
+	margin-top:20px;
+	margin-bottom:10px;
+	color:#fff;
+	font-size:16px;
+}
+#map-footer a{
+	color:#A6A6A6;
+	font-size:13px;
+}
+#map-footer a:hover{
+	color:#fff;
+	text-decoration:none;
+}
+#wx{
+	text-align:center;
+}

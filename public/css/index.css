@@ -1,0 +1,580 @@
+.header .header-right>img{
+	padding-right: 50px;
+}
+/* 首页banner区样式 */
+.nav-banner{
+	width: 336px;
+	height: 556px;
+	border: 2px solid #e7e7e7;
+	float: left;
+	overflow: hidden;
+}
+.nav-banner .search-wrapper{
+	margin: 28px 16px;
+}
+.nav-banner .search-wrapper .title-wrapper{
+	border-bottom: 1px solid #ececec;
+}
+.nav-banner .search-wrapper .search-title{
+	display: inline;
+	padding-left: 10px;
+	font-size: 18px;
+	font-weight: bold;
+	vertical-align: bottom;
+}
+.nav-banner .search-wrapper .desc{
+	float: right;
+	font-size: 12px;
+	vertical-align: bottom;
+}
+.nav-banner .search-wrapper .count{
+	color: #da3a4d;
+}
+.nav-banner .search input{
+	width: 200px;
+	height: 30px;
+	margin: 10px 4px 5px 0;
+	padding: 0 10px;
+	line-height: 30px;
+	font-size: 14px;
+	border: 1px solid #a2a2a2;
+	border-radius: 4px;
+	outline-color: transparent;
+}
+.nav-banner .search input:focus::-webkit-input-placeholder{
+    color:transparent;
+}
+.nav-banner .search input:focus{
+	border-color: #da3a4d;
+}
+.nav-banner .search input::-webkit-input-placeholder{
+	color: #a2a2a2;
+}
+.nav-banner .search a{
+	padding: 6px 16px;
+	background-color: #da3a4d;
+	font-size: 14px;
+	color: #fff;
+	border-radius: 4px;
+}
+.nav-banner .search a:hover{
+	color: #fff;
+	cursor: pointer;
+}
+.nav-banner .filter{
+	margin-top: 18px;
+}
+.nav-banner .nav-tabs{
+	margin: 16px 0;
+}
+.nav-banner .nav-tabs li a{
+	padding: 5px 51px;
+	margin-right: 0;
+}
+.nav-banner .filter .tab{
+	position: relative;
+	padding-bottom: 4px;
+	border-bottom: 2px solid #dc4759;
+}
+.nav-banner .filter .tab .icon-wrapper{
+	position: absolute;
+	top: 10px;
+	left: 0;
+}
+.nav-banner .filter .tab li{
+	display: inline-block;
+}
+.nav-banner .filter .tab a{
+	color: #dc4759;
+}
+.nav-banner .filter .tab li:first-child{
+	margin-right: 156px;
+	margin-left: 10px;
+}
+.nav-banner a{
+	color: #808080;
+}
+.nav-banner a:hover{
+	color: #da3a4d;
+}
+.nav-banner .filter .filter-type .title{
+	margin: 15px 0;
+	font-size: 14px;
+	font-weight:bold;
+}
+
+.nav-banner .filter .filter-type li{
+	display: inline-block;
+	margin-right: 5px;
+}
+.nav-banner .filter .brand li {
+	padding: 3px;
+}
+.nav-banner .filter .brand li:first-child{
+	padding-left: 0;
+	text-align: center;
+}
+.nav-banner .filter .brand img {
+	height: 28px;
+	width: 28px;
+}
+.nav-banner .filter .price li a{
+	display: inline-block;
+	height: 26px;
+	line-height: 26px;
+	font-size: 12px;
+	/*text-align: center;*/
+}
+.nav-banner .filter .parts li{
+	padding-left:8px;
+}
+.nav-banner .filter .parts li a{
+	display: inline-block;
+	width: 80px;
+	height: 60px;
+	line-height: 60px;
+	padding-top: 45px;
+	font-size: 12px;
+	text-align: center;
+	background-size: 80px 60px;
+	background-repeat: no-repeat;
+}
+.nav-banner .filter .parts li a:first-child{
+	background-image: url("../img/standard.jpg");
+}
+.nav-banner .filter .parts li:nth-child(2) a{
+	background-image: url("../img/auxiliary.jpg");
+}
+.nav-banner .filter .parts li:nth-child(3) a{
+	background-image: url("../img/carbody.jpg");
+}
+.nav-banner .filter .parts li:nth-child(4) a{
+	background-image: url("../img/electric.jpg");
+}
+.nav-banner .filter .parts li:nth-child(5) a{
+	background-image: url("../img/steering.jpg");
+}
+.nav-banner .filter .parts li:nth-child(6) a{
+	background-image: url("../img/underpan.jpg");
+}
+.nav-banner .filter .parts li:nth-child(7) a{
+	background-image: url("../img/sealing.jpg");
+}
+.nav-banner .filter .parts li:nth-child(8) a{
+	background-image: url("../img/interior.jpg");
+}
+.nav-banner .filter .type li a{
+	display: inline-block;
+	height: 26px;
+	line-height: 26px;
+	padding-right: 3px;
+	font-size: 12px;
+}
+.nav-banner .filter .level li{
+	padding-right: 16px;
+}
+.nav-banner .filter .level li a{
+	display: inline-block;
+	width: 50px;
+	height: 26px;
+	line-height: 26px;
+	padding-top: 30px;
+	font-size: 12px;
+	text-align: center;
+	background-size: 50px 30px;
+	background-repeat: no-repeat;
+}
+.nav-banner .filter .level li a:first-child{
+	background-image: url("../img/icon/car-icon-1.png");
+}
+.nav-banner .filter .level li:nth-child(2) a{
+	background-image: url("../img/icon/car-icon-2.png");
+}
+.nav-banner .filter .level li:nth-child(3) a{
+	background-image: url("../img/icon/car-icon-3.png");
+}
+.nav-banner .filter .level li:nth-child(4) a{
+	background-image: url("../img/icon/car-icon-4.png");
+}
+.banners{
+	margin-left: 336px;
+}
+
+/* 覆盖bootstrap轮播图默认样式 */
+@media screen and (min-width: 768px) {
+	.carousel-indicators {
+		bottom: 0;
+	}
+}
+/* 大轮播图 */
+#sliders .owl-controls{
+	position: absolute;
+	bottom: 30px;
+	right: 5%;
+}
+#sliders .owl-controls .owl-page span{
+	border-radius: 0;
+	margin: 4px;
+	background-color: #fff;
+	border: none;
+	transform:rotate(-45deg);
+	opacity: 1;
+}
+#sliders .owl-controls .owl-page.active span{
+	width: 12px;
+	height: 12px;
+	border: none;
+	background-color: #da3a4d;
+}
+/* 小轮播图 */
+.recommend .carousel-indicators{
+	left: 20%;
+}
+.recommend .carousel-indicators>li{
+	width: 18px;
+	height: 16px;
+	line-height: 16px;
+	border-radius: 0;
+	border: none;
+	margin: 2px;
+	background-color: #fff;
+	color: #000;
+	font-size: 12px;
+	text-indent: 0;
+}
+.recommend .carousel-indicators .active {
+	width: 18px;
+	height: 16px;
+	margin: 2px;
+	border: none;
+	background-color: #da3a4d;
+	color: #fff;
+}
+
+.banners .banner-sm{
+	width: 924px;
+	height: 140px;
+	margin-top: 6px;
+}
+.banners .banner{
+	float: left;
+	width: 456px;
+	height: 140px;
+	overflow: hidden;
+}
+.banners .banner:first-child{
+	margin-right: 12px;
+}
+
+
+
+/* 最新资讯 */
+.news .news-container{
+	position: relative;
+	margin: 0 50px;
+	height: 200px;
+}
+.nav-tabs .fr-li {
+	float: right;
+}
+.nav-tabs .fr-li a {
+	color: rgba(218, 58, 77, 0.8);
+	font-weight: 700;
+}
+.nav-tabs .fr-li a:hover {
+	color: red;
+}
+.news .list-wrapper{
+	width: 1200px;
+	height: 150px;
+	margin-left: -20px;
+	font-size: 0;
+	overflow: hidden;
+}
+.owl-lg {
+    width: 1160px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.owl-lg .item {
+	position: relative;
+    display: block;
+    margin: 5px;
+}
+.owl-lg img {
+    display: block;
+    width: 100%;
+}
+
+.owl-lg .item .title{
+	position: absolute;
+	bottom: -10px;
+	left: 0;
+	line-height: 24px;
+	height: 24px;
+	width: 100%;
+	background-color: rgba(0,0,0,0.5);
+	color: #fff;
+	text-align: center;
+	font-size: 14px;
+}
+.owl-lg .item .title:hover{
+	color: #da3a4d;
+}
+.owl-theme .owl-controls .owl-pagination{
+	height: 0;
+}
+.owl-lg.owl-theme .owl-controls .owl-page span{
+	position: absolute;
+	display: none;
+	top: 10px;
+	height: 150px;
+	width: 50px;
+	margin: 0;
+}
+.owl-lg.owl-theme .owl-controls .owl-page:first-child span{
+	display: block;
+	left: -50px;
+	background: url("../img/icon/ar-left.png") no-repeat center;
+}
+.owl-lg.owl-theme .owl-controls .owl-page:nth-child(2) span{
+	display: block;
+	right: -50px;
+	background: url("../img/icon/ar-right.png") no-repeat center;
+}
+
+.products{
+	display: flex;
+	justify-content: space-between;
+}
+.products .nav-tabs li a{
+	padding: 5px 10px;
+}
+.products .list-content{
+	display: flex;
+	justify-content: space-between;
+}
+.products .list-content .list-item{
+	position: relative;
+	display: flex;
+	width: 450px;
+	height: 250px;
+	margin-bottom: 12px;
+}
+.products .list-content .list-item .car-logo{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	height: 40px;
+	width: 40px;
+}
+.products .list-content .detail{
+	flex: 0 0 116px;
+	width: 116px;
+	height: 100%;
+	color: #fff;
+	background-color: #da3a4d;
+	text-align: center;
+}
+.products .list-content .title{
+	display: inline-block;
+	margin: 38px 10px 0;
+	padding: 0 10px;
+	max-height: 64px;
+	line-height: 32px;
+	width: 96px;
+	font-size: 16px;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	overflow: hidden;
+}
+.products .list-content .desc{
+	height: 110px;
+	padding-top: 8px;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-size: 12px;
+	overflow: hidden;
+}
+.products .list-content a{
+	flex: 1;
+	height: 100%;
+	width: 300px;
+	border: 1px solid #d2d2d6;
+}
+.products .list-content a:hover{
+	border-color: #da3a4d;
+}
+.products .list-content img{
+	height: 100%;
+	width: 100%;
+}
+.recommend{
+	height: 570px;
+	margin: 25px 0 12px;
+	font-size: 0;
+}
+.recommend .owl-controls{
+	position: absolute;
+	bottom: 30px;
+	left: 10px;
+}
+.recommend .owl-theme .owl-controls .owl-page span{
+	background-color: #fff;
+	border-radius: 0;
+	opacity: 1;
+	margin: 4px;
+}
+.recommend .owl-theme .owl-controls .owl-page.active span{
+	background-color: #da3a4d;
+}
+.recommend .header{
+	height: 36px;
+	width: 100%;
+	line-height: 36px;
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: 16px;
+	background-color: #da3a4d;
+}
+.recommend .header .title{
+	float: left;
+	height: 36px;
+	line-height: 36px;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-left: 10px;
+	font-size: 16px;
+	background-color: #da3a4d;
+	color: #fff;
+}
+.recommend .header a {
+	float: right;
+	color: #fff;
+	padding: 0 20px;
+}
+.recommend .header a:hover {
+	color: rgba(255, 255, 255, 0.5);
+}
+.recommend .msg-wrapper {
+	border: 2px solid #e5e5e5;
+	border-top: none;
+	height: 534px;
+}
+.recommend img{
+	height: 100%;
+	width: 100%;
+}
+.recommend .slogan{
+	height: 44px;
+	line-height: 44px;
+	margin: 0 10px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #000;
+	text-align: center;
+	border-bottom: 1px solid #d2d2d2;
+}
+.recommend .msg{
+	padding: 10px;
+	box-sizing: border-box;
+}
+.recommend .msg a{
+	display: inline-block;
+	width: 300px;
+	color: #676767;
+	font-size: 14px;
+	line-height: 25px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.company-show{
+	width: 100%;
+}
+.company-show .title{
+	display: flex;
+	width: 80%;
+	margin: 28px auto 24px;
+}
+.company-show .line{
+	flex: 1;
+	position: relative;
+	top: -6px;
+	border-bottom: 3px dotted #7d7d7d;	
+}
+.company-show .text{
+	padding: 0 12px;
+	font-weight: 700;
+	font-size: 20px;
+}
+.company-show .show-list{
+	margin-left: -18px;
+}
+.company-show .show-pics{
+	float: left;
+	margin-left: 18px;
+	margin-bottom: 18px;
+	width: 621px;
+}
+.company-show .show-pics .title{
+	height: 44px;
+	width: 100%;
+	line-height: 44px;
+	margin: 0;
+	font-size: 16px;
+	padding-left: 10px;
+	background-color: #da3a4d;
+	color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

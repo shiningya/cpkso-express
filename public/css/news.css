@@ -1,0 +1,125 @@
+.news-container .news-item{
+	padding: 25px 0; 
+	border-bottom: 1px dashed #dcdcdc;
+}
+.news-container .news-item-image{
+	float: left;
+	position: relative;
+	width: 240px;
+	height: 150px;
+}
+.news-container .news-item-image span{
+	position: absolute;
+	top: 10px;
+	left: 0;
+	width: 68px;
+	height: 26px;
+	padding-right: 10px;
+	line-height: 26px;
+	text-align: center;
+	color: #fff;
+	background: url("../img/icon/tag-bg.png") no-repeat;
+	z-index: 9;
+}
+.news-container .news-item-info{
+	position: relative;
+	float: right;
+	width: 660px;
+	height: 150px;
+}
+.news-container .news-item-info .news-item-title{
+	line-height: 25px;
+	font-size: 20px;
+}
+.news-container .news-item-info .news-item-title a{
+	color: #4d4d4d;
+}
+.news-container .news-item-info .news-item-title a:hover{
+	color: #da3a4d;
+}
+.news-container .news-item-info .news-item-summary{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: #a0a0a0;
+}
+.news-container .news-item-info .news-item-footer{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+.news-container .news-item-info .news-item-footer .news-time{
+	float: left;
+	color: #999;
+}
+.news-container .news-item-info .news-item-footer .news-tags{
+	float: right;
+}
+.news-container .news-item-info .news-item-footer .news-tags a{
+	color: #da3a4d;
+}
+.site-rank-list .rank-title{
+	font-size: 18px;
+	padding-left: 10px;
+	border-left: 2px solid #da3a4d;
+	color: #333;
+}
+.site-rank-list .product-info {
+	padding-top: 10px;
+	overflow: hidden;
+}
+.site-rank-list .product-info .desc{
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: #4d4d4d;
+	font-size: 16px;
+}
+.site-rank-list .product-info .desc:hover{
+	color: #da3a4d;
+}
+.site-rank-list .product-info .msg{
+	height: 30px;
+	line-height: 30px;
+}
+.site-rank-list .product-info .msg .price{
+	float: left;
+	font-size: 14px;
+	color: #da3a4d;
+}
+.site-rank-list .product-info .msg .price span{
+	font-size: 18px;
+}
+.site-rank-list .product-info .msg .view-count{
+	float: right;
+	font-size: 12px;
+	color: #a6a6a6;
+}
+.site-rank-list .product-info .msg .view-count span{
+	font-size: 10px;
+}
+.site-rank-list .site-rank-list-item{
+	display: flex;
+	margin-top: 10px;
+}
+.site-rank-list .site-rank-list-item>a{
+	flex: 0 0 130px;
+	width: 128px;
+	border: 1px solid #ccc;
+}
+.site-rank-list .site-rank-list-item .product-info{
+	flex: 1;
+	margin-left: 10px;
+}
+.site-rank-list .site-rank-list-item .product-info .desc{
+	font-size: 14px;
+}
+.site-rank-list .site-rank-list-item .product-info .msg{
+	margin-top: 25px;
+}
+
+
+
+

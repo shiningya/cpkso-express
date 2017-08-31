@@ -1,0 +1,250 @@
+
+/*############companyPro����CSS###############*/
+
+/*��˾�ſ�*/
+.model-img{
+	margin:0px auto;
+}
+.row-3{
+	margin-top:30px;
+}
+.model-title{
+	text-align:center;
+	color:#fff;
+	font-size:22px;
+	padding:15px 0px;
+}
+.model-list li{
+	text-align:center;
+	background-color:#f6f6f6;
+	font-size:16px;
+}
+.model-list li a{
+	color:#545353;
+}
+.model-list li a:hover{
+	text-decoration:none;
+	color:#005197;
+}
+.model-details-title{
+	padding:15px 0px;
+	font-size:18px;
+	border-bottom:1px #005197 solid;
+	color:#005197;
+	margin-bottom:10px;
+}
+.model-details p{
+	line-height:30px;
+	text-indent:2em;
+	text-align:justify;
+	text-justify:inter-ideograph;
+}
+.model-details img{
+	margin:0px auto;
+}
+.news-model{
+	margin-top:15px;
+}
+.news-model span{
+	float:right;
+}
+.news-model a{
+	color:#666;
+	font-size:16px;
+}
+.news-model a:hover, .news-model a:focus{
+	text-decoration:none;
+	color:#d30a1c;
+}
+
+.news-model p{
+	margin-top:5px;
+	font-size:13px;
+}
+.paging{
+display:inline-block;
+	text-align:center;
+	margin-top:-10px;
+	margin-left:200px;
+}
+
+.navbar .nav .nav-tab a{
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  width: 142px;
+  text-align: center;
+  margin: auto;
+  color: #fff;
+  padding: 0;
+  font-size: 18px;
+}
+.navbar .nav .nav-tab a:hover{
+  color: #da3a4d;
+}
+.navbar .nav .nav-tab.active a:hover{
+  color: #fff;
+}
+
+
+/*.pagination .active a{
+	background-color:#f00;
+	border:none;
+}
+.pagination .active a:hover{
+	background-color:#f00;
+}
+.pagination  li  a{
+	color:#000;
+	margin:0 5px;
+	border:1px solid #ddd;
+}
+.pagination li span{
+	color:#000;
+	border:none;
+}
+.pagination  li a button{
+	border:none;
+	background:#f00;
+	color:#fff;
+	padding:5px ;
+}
+*/
+.paging #Pagination {
+  float: left;
+  overflow: hidden;
+}
+.paging #Pagination .pagination {
+  height: 40px;
+  text-align: right;
+  font-family: \u5b8b\u4f53,Arial;
+}
+.paging #Pagination .pagination a,
+.paging #Pagination .pagination span {
+  float: left;
+  display: inline;
+  color:#000;
+  padding: 5px 10px;
+  text-decoration:none;
+  border: 1px solid #e6e6e6;
+  margin:0  5px;
+  background: #f6f6f6;
+  font-family: \u5b8b\u4f53,Arial;
+  font-size: 14px;
+  cursor: pointer;
+}
+.paging #Pagination .pagination .current {
+  background: #f00;
+  color: #fff;
+}
+.paging #Pagination .pagination .prev,
+.paging #Pagination .pagination .next {
+  float: left;
+  padding: 5px 10px;
+  border: 1px solid #e6e6e6;
+  background: #f6f6f6;
+  cursor: pointer;
+}
+.paging #Pagination .pagination .prev i,
+.paging #Pagination .pagination .next i {
+  display: inline-block;
+  width: 4px;
+  height: 11px;
+  margin-right: 5px;
+}
+.paging #Pagination .pagination .prev {
+  border-right: none;
+}
+.paging #Pagination .pagination .prev i {
+  background-position: -144px -1px;
+  *background-position: -144px -4px;
+}
+.paging #Pagination .pagination .next i {
+  background-position: -156px -1px;
+  *background-position: -156px -4px;
+}
+.paging #Pagination .pagination .pagination-break {
+  padding: 11px 5px;
+  border: none;
+  border-left: 1px solid #e6e6e6;
+  background: none;
+  cursor: default;
+}
+.paging .searchPage {
+  float: left;
+  padding: 8px 0;
+  margin-top:3px;
+}
+.paging .searchPage .page-sum {
+  padding: 11px 13px;
+  color: #000;
+  font-family: \u5b8b\u4f53,Arial;
+  font-size: 14px;
+}
+.paging .searchPage .page-go {
+  padding: 8px 0;
+  color: #000;
+  font-family: \u5b8b\u4f53,Arial;
+  font-size: 14px;
+  padding: 10px 0\9;
+  *padding: 6px 0;
+}
+.paging .searchPage .page-go input {
+  width: 21px;
+  height: 20px;
+  margin: 0 5px;
+  padding-left: 5px;
+  border: 1px solid #e4e4e4;
+}
+.paging .searchPage .page-btn {
+  margin: 9px 0 5px 5px;
+  display:inline-block;
+  padding: 2px 5px;
+  color:#fff;
+  padding:5px ;
+  background:#f00;
+  border-radius: 2px;
+  color: #fff;
+  font-family: Arial, 'Microsoft YaHei';
+  font-size: 14px;
+  text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

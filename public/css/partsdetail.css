@@ -1,0 +1,66 @@
+.adapter-table .table-title{
+	float: left;
+	width: 60px;
+	height: 301px;
+	line-height: 40px;
+	margin: 0;
+	padding: 70px 20px 100px;
+	background-color: #da3a4d;
+	color: #fff;
+	font-weight: bold;
+}
+.adapter-table .table{
+	float: right;
+	width: 1200px;
+}
+.adapter-table .table th{
+	height: 50px;
+	padding-top: 13px;
+	padding-left: 26px;
+	font-size: 18px;
+	background-color: #f5f5f5;
+}
+.adapter-table .table tr{
+	height: 50px;
+}
+.adapter-table .table .subtitle{
+	width: 90px;
+	line-height: 33px;
+	text-align: center;
+}
+.adapter-table .table .detail{
+	display: flex;
+	flex-wrap: wrap;
+	height: 50px;
+	overflow: hidden;
+	padding-left: 26px;
+	line-height: 18px;
+}
+.adapter-table .table .detail span{
+	margin-right: 15px;
+}
+.adapter-table .table .detail span:hover{
+	color: #da3a4d;
+	cursor: pointer;
+}
+// .table-bordered > tbody > tr > td{
+// 	border: none;
+// 	border-left: 1px solid #ddd;
+// }
+
+#product-config .table tr{
+	height: 60px;
+	line-height: 60px;
+}
+#product-config .table th{
+	width: 185px;
+	line-height: 43px;
+	padding-left: 40px;
+	background-color: #f5f5f5;
+	font-size: 16px;
+}
+#product-config .table td{
+	line-height: 43px;
+}
+
+
