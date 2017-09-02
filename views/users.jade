@@ -1,6 +1,120 @@
 extends layout
 
+block title
+  title= '产品快搜-新能源电动车'
+  meta(name="keywords", content="产品快搜新能源电动车、老年代步车、电动车、电动车求购、电动车配件、产品快搜网")
+  meta(name="description", content="产品快搜新能源电动车网是国内最专业的新能源电动车咨询网站，拥有最全的电动车库、电动车配件库，提供权威的新能源电动车政策新闻、新能源电动车报价、新能源电动车配件等服务信息。是新能源电动车企业产品推广、品牌宣传、拓展市场、网络推广的第一选择。为你购买新能源电动车整车和配件提供专业的、有效的价值信息。")
+append link
+  link(rel="stylesheet", href="css/index.css")
+  link(rel="stylesheet", href="css/owl.carousel.min.css")
+  link(rel="stylesheet", href="css/owl.theme.min.css")
 block content
-  for car in hotCar
-    h1= car.id
-    p Welcome to #{car.id}
+  .main-body
+    .banner-wrapper
+      .nav-banner
+        .search-wrapper
+          .search
+            .title-wrapper
+              h2.search-title 直接搜索
+            input#car-input(type='text', placeholder='请输入车型名称', (onkeydown)='entersearch(1);')
+            a#car-search-btn(title='我要搜车', target='_blank') 我要搜车
+            input#parts-input(type='text', placeholder='请输入配件名称', (onkeydown)='entersearch(2);')
+            a#parts-search-btn(title='配件搜索', target='_blank') 配件搜索
+          .filter
+            .title-wrapper
+              h2.search-title 条件搜索
+              p.desc 全方位多角度的保障
+            .tabbable
+              ul.nav.nav-tabs
+                li.active
+                  a(href='#types', data-toggle='tab', title='车型库') 车型库
+                li
+                  a(href='#types', data-toggle='tab', title='车型库') 车型库
+              .tab-content
+                .tab-pane.active#types
+                  ul.details
+                    li.filter-type
+                      h3.title 品牌
+                      ul#brand.type-list.brand
+                        li
+                          a(title='特斯拉', href='carresult.html?carCondition.brand.id=99')
+                            img(src='img/icon/logo-1.png')
+                        li
+                          a(title='比亚迪', href='carresult.html?carCondition.brand.id=7')
+                            img(src='img/icon/logo-2.png')
+                        li
+                          a(title='雷克萨斯', href='carresult.html?carCondition.brand.id=60')
+                            img(src='img/icon/logo-3.png')
+                        li
+                          a(title='北汽新能源', href='carresult.html?carCondition.brand.id=8')
+                            img(src='img/icon/logo-4.png')
+                        li
+                          a(title='福特', href='carresult.html?carCondition.brand.id=34')
+                            img(src='img/icon/logo-5.png')
+                        li
+                          a(title='日产', href='carresult.html?carCondition.brand.id=88')
+                            img(src='img/icon/logo-6.png')
+                        li
+                          a(title='雪佛兰', href='carresult.html?carCondition.brand.id=107')
+                            img(src='img/icon/logo-7.png')
+                    li.filter-type
+                      h3.title 价格
+                      ul#brand.type-list.price
+                        li
+                          a(title='10万以下', href='carresult.html?carCondition.price=1') 10万以下
+                        li
+                          a(title='10-20万', href='carresult.html?carCondition.price=2') 10-20万
+                        li
+                          a(title='20-30万', href='carresult.html?carCondition.price=3') 20-30万
+                        li
+                          a(title='30-50万', href='carresult.html?carCondition.price=4') 30-50万
+                        li
+                          a(title='50万以上', href='carresult.html?carCondition.price=5') 50万以上
+                    li.filter-type
+                      h3.title 类型
+                      ul#brand.type-list.type
+                        li
+                          a(title='低速电动车', href='carresult.html?carCondition.energy_type=低速电动车') 低速电动车
+                        li
+                          a(title='纯电动', href='carresult.html?carCondition.energy_type=纯电动') 纯电动
+                        li
+                          a(title='插电式', href='carresult.html?carCondition.energy_type=插电式') 插电式
+                        li
+                          a(title='增程式', href='carresult.html?carCondition.energy_type=增程式') 增程式
+                        li
+                          a(title='混合动力', href='carresult.html?carCondition.energy_type=混合动力') 混合动力
+                    li.filter-type
+                      h3.title 级别
+                      ul#brand.type-list.level
+                        li
+                          a(title='微型', href='carresult.html?carCondition.level=微型') 微型
+                        li
+                          a(title='小型', href='carresult.html?carCondition.level=小型') 小型
+                        li
+                          a(title='紧凑型', href='carresult.html?carCondition.level=紧凑型') 紧凑型
+                        li
+                          a(title='中型', href='carresult.html?carCondition.level=中型') 中型
+                .tab-pane#parts  
+                  .filter-type
+                    h3.title 分类
+                    ul.type-list.parts
+                      li
+                        a(title='标准件',href='partsresult.html?partsCondition.category_id=6') 标准件
+                      li
+                        a(title='辅助件',href='partsresult.html?partsCondition.category_id=7') 辅助件
+                      li
+                        a(title='车身系统',href='partsresult.html?partsCondition.category_id=8') 车身系统
+                      li
+                        a(title='电气系统',href='partsresult.html?partsCondition.category_id=9') 电气系统
+                      li
+                        a(title='转向系统',href='partsresult.html?partsCondition.category_id=10') 转向系统
+                      li
+                        a(title='底盘系统',href='partsresult.html?partsCondition.category_id=11') 底盘系统
+                      li
+                        a(title='密封系统',href='partsresult.html?partsCondition.category_id=12') 密封系统
+                      li
+                        a(title='内饰系统',href='partsresult.html?partsCondition.category_id=13') 内饰系统
+      .banners(style='height:556px;')
+append script
+  script(src='js/owl.carousel.min.js')
+
