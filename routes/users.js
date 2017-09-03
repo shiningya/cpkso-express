@@ -4,28 +4,40 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  axios.all([getHotCar(), getNewCar(), getdsCar(), getcyCar()]).then(axios.spread(function (hotCar, newCar, dsCar, cyCar){
-    var data = {};
-    console.log(dsCar);
-    data.hotCar = hotCar.data.response.data.PlaceCars;
-    data.newCar = newCar.data.response.data.PlaceCars;
-    data.dsCar = dsCar.data.response.data.PlaceCars;
-    data.cyCar = cyCar.data.response.data.PlaceCars;
-    res.render('users', data)
-  }));
+    axios.all([getSliders(), getBanners()]).then(axios.spread(function(sliders, banners) {
+        var data = {};
+        data.sliders = sliders.data.response.data.PlaceCars;
+        data.banners = banners.data.response.data.PlaceCars;
+        // data.hotCar = hotCar.data.response.data.PlaceCars;
+        // data.hotCar = hotCar.data.response.data.PlaceCars;
+        // data.newCar = newCar.data.response.data.PlaceCars;
+        // data.dsCar = dsCar.data.response.data.PlaceCars;
+        // data.cyCar = cyCar.data.response.data.PlaceCars;
+        res.render('users', data)
+    }));
 });
 
-function getHotCar() {
-  return axios.get('http://localhost:8080/cpkso/ev/placeCar_findByAdsUniqueId?ads_unique_id=HOT');
+function getSliders() {
+    return axios.get('http://ev.cpkso.com/ev/placeCar_findByAdsUniqueId?ads_unique_id=A01');
 }
-function getNewCar() {
-  return axios.get('http://localhost:8080/cpkso/ev/placeCar_findByAdsUniqueId?ads_unique_id=NEW');
+
+function getBanners() {
+    return axios.get('http://ev.cpkso.com/ev/placeCar_findByAdsUniqueId?ads_unique_id=A02');
 }
-function getdsCar() {
-  return axios.get('http://localhost:8080/cpkso/ev/placeCar_findByAdsUniqueId?ads_unique_id=DSCX');
-}
-function getcyCar() {
-  return axios.get('http://localhost:8080/cpkso/ev/placeCar_findByAdsUniqueId?ads_unique_id=CYCX');
-}
+// function getHotCar() {
+//   return axios.get('http://ev.cpkso.com/ev/placeCar_findByAdsUniqueId?ads_unique_id=HOT');
+// }
+// function getHotCar() {
+//   return axios.get('http://ev.cpkso.com/ev/placeCar_findByAdsUniqueId?ads_unique_id=HOT');
+// }
+// function getNewCar() {
+//   return axios.get('http://ev.cpkso.com/ev/placeCar_findByAdsUniqueId?ads_unique_id=NEW');
+// }
+// function getdsCar() {
+//   return axios.get('http://ev.cpkso.com/ev/placeCar_findByAdsUniqueId?ads_unique_id=DSCX');
+// }
+// function getcyCar() {
+//   return axios.get('http://ev.cpkso.com/ev/placeCar_findByAdsUniqueId?ads_unique_id=CYCX');
+// }
 
 module.exports = router;
