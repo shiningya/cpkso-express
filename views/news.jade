@@ -44,8 +44,8 @@ block content
                         img(src='http://ev.cpkso.com/uploadPath/#{item.thumb}')
                       span.tag #{item.artCt.name}
                     .news-item-info
-                      h4.news-item-title #{item.title}
-                        a(href='news/#{item.content}')
+                      h4.news-item-title
+                        a(href='news/#{item.content}') #{item.title}
                       p.news-item-summary
                       .news-item-footer
                         .news-time #{item.publish_time}
@@ -76,10 +76,18 @@ block content
                 a(href='/car/#{item.car.id}',target='_blank')
                   img(src='http://ev.cpkso.com/adsPath/#{item.pic}')
                   span #{item.car.name}
-                  b #{item.car.param[0].price}
+                  b #{item.car.params[0].price}
         #btad.ad-item
           a(href='/car/#{promo5[0].car.id}',target='_blank')
             img(src='http://ev.cpkso.com/adsPath/#{promo5[0].pic}')
 append script
   script(src='js/jquery.page.js')
+  script.
+    $('.pagination').Mpage({
+      pageCount: 20,
+      current: 1,
+      mclick: function(p){
+        //- console.log(p);
+      }
+    });
 
