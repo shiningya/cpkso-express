@@ -18,33 +18,6 @@ router.get('/', function(req, res, next) {
     }));
 });
 
-// router.get('/:page', function(req, res, next) {
-//     // var page = req.params.page;
-//     // var url = 'http://ev.cpkso.com/article_skipPage?articleCondition.pageNo=' + page;
-//     // console.log(url);
-//     axios.get('http://ev.cpkso.com/ev/article_search').then(function(response){
-//         console.log(response);
-//     });
-//     axios.get('http://ev.cpkso.com/article_skipPage?articleCondition.pageNo=5').then(function(response){
-//         console.log(response);
-//     });
-
-//     // axios.all([getBanner(), getPage(page), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
-//     //     var data = {};
-//     //     console.log(news);
-//     //     data.banner = banner.data.response.data.PlaceArts;
-//     //     data.news = news.data.response.data.Articles;
-//     //     console.log(news);
-//     //     data.pageinfo = news.data.response.data.Article_condition;
-//     //     data.promo1 = promo1.data.response.data.PlaceCars;
-//     //     data.promo2 = promo2.data.response.data.PlaceArts;
-//     //     data.promo3 = promo3.data.response.data.PlaceCars;
-//     //     data.promo4 = promo4.data.response.data.PlaceCars;
-//     //     data.promo5 = promo5.data.response.data.PlaceCars;
-//     //     res.render('news', data);
-//     // }));
-// });
-
 router.get('/xinche/', function(req, res) {
     axios.all([getBanner(), getNews2(1), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};

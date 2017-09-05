@@ -5,13 +5,13 @@ block title
   meta(name="keywords", content="新能源电动车新闻网、电动车配件咨询网")
   meta(name="description", content="新能源电动车新闻网是产品快搜新能源电动车网旗下新闻资讯频道，汇集了国内外新能源电动车行业市场行情、电动车企业动态、新能源电动车汗液政策法规等各类资讯，为用户提供最新、最全面新能源行业信息及最前沿的新能源电动汽车技术资讯。")
 append link
-  link(rel="stylesheet", href="css/news.css")
-  link(rel="stylesheet", href="css/company.css")
+  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/news.css")
+  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/company.css")
 block content
   .main-body
     .header-wrapper(style='height:300px;')
       #banner.header-banner
-        a(href='/news/:#{banner[0].id}')
+        a(href='http://ev.cpkso.com/news/:#{banner[0].id}')
           img(src='http://ev.cpkso.com/adsPath/#{banner[0].pic}')
     .content-container
       .content-left
@@ -20,20 +20,21 @@ block content
           ul#atabs.nav.nav-tabs
             li
               a 分类：
-            li
-              a.tab(href='/news/xinche/') 新车
-            li
-              a.tab(href='/news/xinche/') 技术
-            li
-              a.tab(href='/news/xinche/') 行业
-            li
-              a.tab(href='/news/xinche/') 政策
-            li
-              a.tab(href='/news/xinche/') 导购
-            li
-              a.tab(href='/news/xinche/') 用车
-            li
-              a.tab(href='/news/xinche/') 品牌
+            block newsNav
+              li
+                a.tab(href='/news/xinche/') 新车
+              li
+                a.tab(href='/news/jishu/') 技术
+              li
+                a.tab(href='/news/hangye/') 行业
+              li
+                a.tab(href='/news/zhengce/') 政策
+              li
+                a.tab(href='/news/daogou/') 导购
+              li
+                a.tab(href='/news/yongche/') 用车
+              li
+                a.tab(href='/news/pinpai/') 品牌
           #artlist.tab-content
             #new-car.tab-pane.active
               .news-container
@@ -81,11 +82,11 @@ block content
           a(href='/car/#{promo5[0].car.id}',target='_blank')
             img(src='http://ev.cpkso.com/adsPath/#{promo5[0].pic}')
 append script
-  script(src='js/jquery.page.js')
+  script(src='http://ev.cpkso.com/style/js/lib/jquery.page.js')
   script.
     $('.pagination').Mpage({
-      pageCount: 20,
-      current: 1,
+      pageCount: #{pageinfo.maxPageNo},
+      current: #{pageinfo.pageNo},
       mclick: function(p){
         //- console.log(p);
       }
