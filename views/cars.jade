@@ -18,14 +18,14 @@ block content
       dl#category.category-list.clearfix
         dt.title 分类：
         .category-item
-          a.choose-all.choose-on(href='/cars/0-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0') 不限
-          a(href='/cars/15-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0') 低速电动车
-          a(href='/cars/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}') 电动乘用车
-          a(href='/cars/14-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0') 电动三轮车
-          a(href='/cars/4-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0') 电动客车
+          a.choose-all.choose-on(href='/cars/search/0-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0') 不限
+          a(href='/cars/search/15-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0') 低速电动车
+          a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}') 电动乘用车
+          a(href='/cars/search/14-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0') 电动三轮车
+          a(href='/cars/search/4-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0') 电动客车
       #categoryBrand.category-list.clearfix
         dt.title 品牌：
-        a.choose-all.choose-on(href='/cars/#{ids[0]}-0-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}') 不限
+        a.choose-all.choose-on(href='/cars/search/#{ids[0]}-0-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}') 不限
         #firstLetters.brand-ident
           ul
             li.active
@@ -85,7 +85,7 @@ block content
           #brandA.tab-pane.brand-list.active
             mixin brands(brands)
               each brand in brands
-                a(href='/cars/#{ids[0]}-#{brand.id}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}') #{brand.brand}
+                a(href='/cars/search/#{ids[0]}-#{brand.id}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}') #{brand.brand}
             +brands(brands.a)
           #brandB.tab-pane.brand-list
             +brands(brands.b)
@@ -140,44 +140,45 @@ block content
       dl#categoryPrice.category-list.clearfix
         dt.title 价格：
         dd.category-item
-          a.choose-all.choose-on(href='/cars/#{ids[0]}-#{ids[1]}-0-#{ids[3]}-#{ids[4]}-#{ids[5]}') 不限
-          a(href='/cars/#{ids[0]}-#{ids[1]}-1-#{ids[3]}-#{ids[4]}-#{ids[5]}') 10万以下
-          a(href='/cars/#{ids[0]}-#{ids[1]}-2-#{ids[3]}-#{ids[4]}-#{ids[5]}') 10-20万
-          a(href='/cars/#{ids[0]}-#{ids[1]}-3-#{ids[3]}-#{ids[4]}-#{ids[5]}') 20-30万
-          a(href='/cars/#{ids[0]}-#{ids[1]}-4-#{ids[3]}-#{ids[4]}-#{ids[5]}') 30-50万
-          a(href='/cars/#{ids[0]}-#{ids[1]}-5-#{ids[3]}-#{ids[4]}-#{ids[5]}') 50万以上
+          a.choose-all.choose-on(href='/cars/search/#{ids[0]}-#{ids[1]}-0-#{ids[3]}-#{ids[4]}-#{ids[5]}') 不限
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-1-#{ids[3]}-#{ids[4]}-#{ids[5]}') 10万以下
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-2-#{ids[3]}-#{ids[4]}-#{ids[5]}') 10-20万
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-3-#{ids[3]}-#{ids[4]}-#{ids[5]}') 20-30万
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-4-#{ids[3]}-#{ids[4]}-#{ids[5]}') 30-50万
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-5-#{ids[3]}-#{ids[4]}-#{ids[5]}') 50万以上
       dl#categoryMile.category-list.clearfix
         dt.title 续航：
         dd.category-item
-          a.choose-all.choose-on(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-0-#{ids[4]}-#{ids[5]}') 不限
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-1-#{ids[4]}-#{ids[5]}') 100公里以下
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-2-#{ids[4]}-#{ids[5]}') 100-200公里
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-3-#{ids[4]}-#{ids[5]}') 200-300公里
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-4-#{ids[4]}-#{ids[5]}') 300-400公里
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-5-#{ids[4]}-#{ids[5]}') 400公里以上
-      dl#categoryType.category-list.clearfix
-        dt.title 类型：
-        dd.category-item
-          a.choose-all.choose-on(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-#{ids[5]}') 不限
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-纯电动-#{ids[5]}') 纯电动
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-插电式-#{ids[5]}') 插电式
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-增程式-#{ids[5]}') 增程式
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-混合动力-#{ids[5]}') 混合动力
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-燃料电池-#{ids[5]}') 燃料电池
-      dl#categoryLevel.category-list.clearfix
-        dt.title 级别：
-        dd.category-item
-          a.choose-all.choose-on(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-0') 不限
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-微型') 微型
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-小型') 小型
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-紧凑型') 紧凑型
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-中型') 中型
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-中大型') 中大型
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-豪华型') 豪华型
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-SUV') SUV
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-MPV') MPV
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-跑车') 跑车
-          a(href='/cars/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-商用') 商用
+          a.choose-all.choose-on(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-0-#{ids[4]}-#{ids[5]}') 不限
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-1-#{ids[4]}-#{ids[5]}') 100公里以下
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-2-#{ids[4]}-#{ids[5]}') 100-200公里
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-3-#{ids[4]}-#{ids[5]}') 200-300公里
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-4-#{ids[4]}-#{ids[5]}') 300-400公里
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-5-#{ids[4]}-#{ids[5]}') 400公里以上
+      if ids[0] === '3'
+        dl#categoryType.category-list.clearfix
+          dt.title 类型：
+          dd.category-item
+            a.choose-all.choose-on(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-#{ids[5]}') 不限
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-纯电动-#{ids[5]}') 纯电动
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-插电式-#{ids[5]}') 插电式
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-增程式-#{ids[5]}') 增程式
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-混合动力-#{ids[5]}') 混合动力
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-燃料电池-#{ids[5]}') 燃料电池
+        dl#categoryLevel.category-list.clearfix
+          dt.title 级别：
+          dd.category-item
+            a.choose-all.choose-on(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-0') 不限
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-微型') 微型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-小型') 小型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-紧凑型') 紧凑型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-中型') 中型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-中大型') 中大型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-豪华型') 豪华型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-SUV') SUV
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-MPV') MPV
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-跑车') 跑车
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-商用') 商用
     .content-container.car-search-result
       .content-left
         #car-result.search-result.product-container
@@ -185,7 +186,7 @@ block content
             each car in cars
               li.list-item
                 .figure
-                  a(href='/cars/')
+                  a(href='/cars/#{car.car.id}')
                     if car.car.prompt===1
                       span.recommend-icon
                     img(src='http://ev.cpkso.com/uploadPath/#{car.car.pic_thumbs[0]}')
@@ -194,7 +195,7 @@ block content
                       img(src='http://ev.cpkso.com/brandPath/#{car.car.brand.pic}')
                   .car-info
                     .info-wrapper
-                      a(href='/cars/') 详情
+                      a(href='/cars/#{car.car.id}') 详情
                       a.cus-service(href='javascript:;') 客服
                       a(href='/companys/',target='_blank') 官网
                     .car-detail
@@ -217,10 +218,10 @@ block content
                               span #{car.car.params[0].accelerate}s
                 .detail
                   if car.car.w1===1
-                    a.desc(href='/cars/',style='text-indent:26px;') #{car.car.name}
+                    a.desc(href='/cars/#{car.car.id}',style='text-indent:26px;') #{car.car.name}
                       span.hot-icon
                   else
-                    a.desc(href='/cars/') #{car.car.name}
+                    a.desc(href='/cars/#{car.car.id}') #{car.car.name}
                   .company-detail
                     a.company-name(href='/company/',target='_blank') #{car.car.company.name}
                       if car.car.company.vip===1
@@ -237,7 +238,7 @@ block content
       .content-right
         #showBar1.show-bar-sm
           mixin bar(bar)
-            a(href='/cars/')
+            a(href='/cars/#{bar[0].(car).id}')
               img(src='http://ev.cpkso.com/adsPath/#{bar[0].pic}')
           +bar(promo1)
         .info-container

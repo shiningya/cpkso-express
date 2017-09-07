@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
     }));
 });
 
-router.get('/:str', function(req, res, next) {
+router.get('/search/:str', function(req, res, next) {
     var ids = req.params.str.split('-');
     var args = '?';
     if (ids[0] !== '0') {
@@ -61,6 +61,18 @@ router.get('/:str', function(req, res, next) {
     }));
 });
 
+router.get('/:id', function(req, res, next) {
+    var id = req.params.id;
+    axios.all([getCar(id), getParams(), getPromo8()]).then(axios.spread(function(car, params, promo8) {
+        var data = {};
+        data.id = id;
+        data.car = car.data.response.data.Car;
+        data.promo8 = promo8.data.response.data.PlaceCars;
+        res.render('car', data);
+    }));
+});
+
+/* 车型库 */
 function getBrandList() {
     return axios.get('http://ev.cpkso.com/ev/brand_listByInital');
 }
@@ -96,6 +108,20 @@ function getPromo6() {
 
 function getPromo7() {
     return axios.get('http://ev.cpkso.com/ev/placeCar_findByAdsUniqueId?ads_unique_id=LR03');
-}    
+}   
+
+/* 车型详情页 */
+function getCar(id) {
+    var url = 'http://ev.cpkso.com/car_singleById?car.id=' + id;
+    return axios.get(url);
+}
+
+function getParams() {
+    return axios.get('http://ev.cpkso.com/param_findParamTables');
+}
+
+function getPromo8() {
+    return axios.get('http://ev.cpkso.com/placeCar_findByAdsUniqueId?ads_unique_id=CDET');
+}
 
 module.exports = router;
