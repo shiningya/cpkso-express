@@ -19,7 +19,7 @@ body(data-spy='scroll',data-target='.myScrollspy')
         li
             a(href='http://ev.cpkso.com') 首页
         li
-            a(href='http://ev.cpkso.com/cars/') 车型库
+            a(href='/cars/') 车型库
         li.active #{car.car.name}
     .main-body
       #pdetail.product-intro.clearfix
@@ -90,6 +90,7 @@ body(data-spy='scroll',data-target='.myScrollspy')
                 a(href='#product-config',data-toggle='tab') 参数配置
             .tab-content
               #product-detail.tab-pane.active
+                div!= car.car.detail
               #product-config.tab-pane                
                 div(style='width:920px;')
                   form#filter.param-filter.wrap(action='http://ev.cpkso.com/ev/param_findParamTables',method='post',enctype='multipart/form-data')
@@ -202,7 +203,7 @@ body(data-spy='scroll',data-target='.myScrollspy')
     script(src='http://ev.cpkso.com/style/js/lib/jquery.form.js')
     script(src='http://ev.cpkso.com/style/js/lib/owl.carousel.min.js')
     script(src='http://ev.cpkso.com/style/js/lib/mustache.min.js')
-    script.
+    //- script.
       $(document).ready(function() {
         var url = window.location.href;
         var arr = url.split('/');
