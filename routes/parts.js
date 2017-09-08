@@ -20,9 +20,11 @@ router.get('/', function(req, res, next) {
 
 router.get('/search/:str', function(req, res, next) {
     var ids = req.params.str.split('-');
+    var id = ids[0];
     var args = '';
     axios.all([getParts(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6()]).then(axios.spread(function(parts, promo1, promo2, promo3, promo4, promo5, promo6) {
         var data = {};
+        data.id = id;
         data.pageinfo = parts.data.response.data.Parts_condition;
         data.parts = parts.data.response.data.Partss;
         data.promo1 = promo1.data.response.data.PlacePartss;
@@ -83,8 +85,8 @@ function getPart(id) {
     return axios.get(url);
 }
 
-// function getPromo8() {
-//     return axios.get('http://ev.cpkso.com/placeCar_findByAdsUniqueId?ads_unique_id=CDET');
-// }
+function getPromo8() {
+    return axios.get('http://ev.cpkso.com/ev/placeParts_findByAdsUniqueId?ads_unique_id=PDET');
+}
 
 module.exports = router;

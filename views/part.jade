@@ -1,0 +1,122 @@
+extends layout
+
+head
+  block title
+    title= '车型库、新能源电动车车型大全-产品快搜新能源电动车'
+    meta(name="keywords", content="低速电动车、电动乘用车、电动三轮车、电动客车、新能源电动车分类、新能源电动车品牌、新能源电动车价格、新能源电动车续航里程")
+    meta(name="description", content="产品快搜新能源电动车车型库为您提供各种型号的新能源电动车，囊括了的参数、型号、图片、价格、厂家等信息，是的专业平台，带给您最准确的信息。")
+  append link
+    link(rel="stylesheet", href="http://ev.cpkso.com/style/css/searchresult.css")
+    link(rel="stylesheet", href="http://ev.cpkso.com/style/css/cardetail.css")
+    link(rel="stylesheet", href="http://ev.cpkso.com/style/css/partsdetail.css")
+    link(rel="stylesheet", href="http://ev.cpkso.com/style/css/news.css")
+    link(rel="stylesheet", href="http://ev.cpkso.com/style/css/owl.carousel.min.css")
+    link(rel="stylesheet", href="http://ev.cpkso.com/style/css/param_detail.css")
+body(data-spy='scroll',data-target='.myScrollspy')
+  block content
+    .product-head-nav
+      ol.breadcrumb
+        span.location 当前位置：
+        li
+            a(href='http://ev.cpkso.com') 首页
+        li
+            a(href='/parts/') 配件库
+        li.active #{part.name}
+    .main-body
+      #pdetail.product-intro.clearfix
+        .preview-wrapper
+          .preview
+            .main-img.picZoomer
+              img(src='http://ev.cpkso.com/uploadPath/#{part.pics[0]}')
+            .spec-list
+              .spec-items.J-img-list
+                ul#owl-sm.owl-carousel
+                  each pic in part.pics
+                    li.item
+                      img(src='http://ev.cpkso.com/uploadPath/#{pic}')
+        .item-info-wrapper
+          .header-wrapper.clearfix
+            .product-name #{part.name}
+          .guide-price
+            .dt 配件价格：
+              if part.price
+                span.price #{part.price}
+              else
+                span.price 暂无价格
+            .dd 已有
+              span.view-count #{part.hot}
+              人浏览
+          .company.li
+            .dt 公司
+            .dd #{part.company.name}
+              if part.company.vip===1
+                span
+          .company.li
+            .dt 类型
+            .dd #{part.category.name} - #{part.ct2}
+          .company.li
+            .dt 产地
+            if part.company.city
+              .dd #{part.category.name} - #{part.ct2}
+            else
+              .dd 不详
+          .contact.li
+            .dt 联系人
+            if part.company.charge
+              .dd #{part.company.charge}
+            else
+              .dd 暂无
+          .address.li
+            .dt 地址
+            if part.company.address
+              .dd #{part.company.address}
+            else
+              .dd 暂无
+          .service
+            if part.company.url
+              a.span.website(href='#{part.company.url}',rel='nofollow',target='_blank') 官网
+            a.span.home(href='/companies/company') 企业库
+            if part.company.contact||part.company.contact2
+              a.span.tel(href='javascript:;') 联系方式
+                span #{part.company.contact}  #{part.company.contact2}
+      .content-container
+        .content-left
+          .product-container
+            ul.nav.nav-tabs
+              li.active
+                a(href='#product-detail',data-toggle='tab') 产品详情
+              li
+                a(href='#product-config',data-toggle='tab') 参数配置
+            .tab-content
+              #product-detail.tab-pane.active
+                div!= part.detail
+              #product-config.tab-pane
+                table.table.table-bordered
+                  each config in part.partsFields
+                    if config.ctField.name
+                      tr
+                        th #{config.ctField.name}
+                        td #{config.value}
+        .content-right
+          .site-recommend
+            h3.title 相似产品推荐
+            ul#simprecommend.site-rank-list
+              each part in promo8
+                li.site-rank-list-item
+                  a(href='/parts/#{part.parts.id}')
+                    img(src='http://ev.cpkso.com/adsPath/#{part.pic}')
+                  .product-info
+                    a.desc(href='/parts/#{part.parts.id}') #{part.parts.name}
+                    .msg
+                      p.price #{part.parts.price}
+                
+  append script                          
+    script(src='http://ev.cpkso.com/style/js/lib/jquery.form.js')
+    script(src='http://ev.cpkso.com/style/js/lib/owl.carousel.min.js')
+    script.
+      $('#owl-sm').owlCarousel({
+        items: 5,
+        navigation: true,
+        navigationText: ["", ""],
+        responsive: false
+      });
