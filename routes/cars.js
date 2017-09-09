@@ -2,6 +2,7 @@ var express = require('express');
 var axios = require('axios');
 var router = express.Router();
 
+/* 车型列表 */
 router.get('/', function(req, res, next) {
     var ids = ['0','0','0','0','0','0'];
     var args = '';
@@ -22,6 +23,7 @@ router.get('/', function(req, res, next) {
     }));
 });
 
+/* 筛选车型列表 */
 router.get('/search/:str', function(req, res, next) {
     var ids = req.params.str.split('-');
     var args = '?';
@@ -61,6 +63,7 @@ router.get('/search/:str', function(req, res, next) {
     }));
 });
 
+/* 车型详情页 */
 router.get('/:id', function(req, res, next) {
     var id = req.params.id;
     axios.all([getCar(id), getParams(), getPromo8()]).then(axios.spread(function(car, params, promo8) {
@@ -72,7 +75,7 @@ router.get('/:id', function(req, res, next) {
     }));
 });
 
-/* 车型库 */
+/* 获取车型库数据 */
 function getBrandList() {
     return axios.get('http://ev.cpkso.com/ev/brand_listByInital');
 }

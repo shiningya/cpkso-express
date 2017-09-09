@@ -12,7 +12,28 @@
 			top:17px;
 			right:10px;
 		}
-		.logo-list{
+		.brief {
+			display: inline-block;
+			width: 600px;
+			/*对宽度的定义,根据情况修改*/
+			height: 30px;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+		
+		.paging {
+			text-align: center;
+		}
+		
+		.content p .approve-icon {
+			display: inline-block;
+			height: 18px;
+			width: 18px;
+			background-image: url('style/img/icon/approve-icon.png');
+			background-repeat: no-repeat;
+		}
+			.logo-list{
 			border:1px solid #ebebeb;
 			background:#f7f7f7;
 			height:660px;

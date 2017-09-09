@@ -41,12 +41,12 @@ block content
                 each item in news
                   .news-item.clearfix
                     .news-item-image
-                      a(href='news/#{item.content}')
+                      a(href='#{item.content}')
                         img(src='http://ev.cpkso.com/uploadPath/#{item.thumb}')
                       span.tag #{item.artCt.name}
                     .news-item-info
                       h4.news-item-title
-                        a(href='news/#{item.content}') #{item.title}
+                        a(href='#{item.content}') #{item.title}
                       p.news-item-summary
                       .news-item-footer
                         .news-time #{item.publish_time}

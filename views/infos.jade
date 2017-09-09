@@ -1,0 +1,269 @@
+extends layout
+
+block title
+  title= '供求信息、新能源电动车采购信息-产品快搜新能源电动车'
+  meta(name="keywords", content="整车、配件、采购信息、企业求购、供求信息")
+  meta(name="description", content="产品快搜新能源电动车供求信息里有新能源电动汽车产业链企业的采购求购信息汇总,企业可以发布供求信息、有助于企业找到最合适的供应商,采购到满意的产品。")
+append link
+  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/index.css")
+  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/needmsg.css")
+  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/style.css")
+  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/searchresult.css")
+block content
+  .product-head-nav
+    ol.breadcrumb
+      span.location 当前位置：
+      li
+        a(href='/') 首页
+      li.active 企业库
+  .main-body
+    #filter.category
+      #category.category-list.clearfix
+        dt.title 省市：
+        a.choose-all.choose-on(href='/companies/search/0-#{ids[1]}') 不限
+        #firstLetters.brand-ident
+          ul
+            li.active
+              a(href='#brandA',data-toggle='enter',onclick='return false;') A
+            li
+              a(href='#brandB',data-toggle='enter',onclick='return false;') B
+            li
+              a(href='#brandC',data-toggle='enter',onclick='return false;') C
+            li
+              a(href='#brandF',data-toggle='enter',onclick='return false;') F
+            li
+              a(href='#brandG',data-toggle='enter',onclick='return false;') G
+            li
+              a(href='#brandH',data-toggle='enter',onclick='return false;') H
+            li
+              a(href='#brandJ',data-toggle='enter',onclick='return false;') J
+            li
+              a(href='#brandL',data-toggle='enter',onclick='return false;') L
+            li
+              a(href='#brandN',data-toggle='enter',onclick='return false;') N
+            li
+              a(href='#brandQ',data-toggle='enter',onclick='return false;') Q
+            li
+              a(href='#brandS',data-toggle='enter',onclick='return false;') S
+            li
+              a(href='#brandT',data-toggle='enter',onclick='return false;') T
+            li
+              a(href='#brandX',data-toggle='enter',onclick='return false;') X
+            li
+              a(href='#brandY',data-toggle='enter',onclick='return false;') Y
+            li
+              a(href='#brandZ',data-toggle='enter',onclick='return false;') Z
+            li
+        #tabcontent.tab-content
+          #brandA.tab-pane.brand-list.active
+            a(href='/companies/search/1-#{ids[1]}') 安徽
+            a(href='/companies/search/2-#{ids[1]}') 澳门
+          #brandB.tab-pane.brand-list
+            a(href='/companies/search/3-#{ids[1]}') 北京
+          #brandC.tab-pane.brand-list
+            a(href='/companies/search/4-#{ids[1]}') 重庆
+          #brandF.tab-pane.brand-list
+            a(href='/companies/search/5-#{ids[1]}') 福建
+          #brandG.tab-pane.brand-list
+            a(href='/companies/search/6-#{ids[1]}') 广东
+            a(href='/companies/search/7-#{ids[1]}') 广西
+            a(href='/companies/search/8-#{ids[1]}') 贵州
+            a(href='/companies/search/9-#{ids[1]}') 甘肃
+          #brandH.tab-pane.brand-list
+            a(href='/companies/search/10-#{ids[1]}') 河南
+            a(href='/companies/search/11-#{ids[1]}') 河北
+            a(href='/companies/search/12-#{ids[1]}') 黑龙江
+            a(href='/companies/search/13-#{ids[1]}') 海南
+            a(href='/companies/search/14-#{ids[1]}') 湖南
+            a(href='/companies/search/15-#{ids[1]}') 湖北
+          #brandJ.tab-pane.brand-list
+            a(href='/companies/search/16-#{ids[1]}') 江西
+            a(href='/companies/search/17-#{ids[1]}') 江苏
+            a(href='/companies/search/18-#{ids[1]}') 吉林
+          #brandL.tab-pane.brand-list
+            a(href='/companies/search/19-#{ids[1]}') 辽宁
+          #brandN.tab-pane.brand-list
+            a(href='/companies/search/20-#{ids[1]}') 内蒙古
+            a(href='/companies/search/21-#{ids[1]}') 宁夏
+          #brandQ.tab-pane.brand-list
+            a(href='/companies/search/22-#{ids[1]}') 青海
+          #brandS.tab-pane.brand-list
+            a(href='/companies/search/23-#{ids[1]}') 山东
+            a(href='/companies/search/24-#{ids[1]}') 山西
+            a(href='/companies/search/25-#{ids[1]}') 陕西
+            a(href='/companies/search/26-#{ids[1]}') 四川
+            a(href='/companies/search/27-#{ids[1]}') 上海
+          #brandT.tab-pane.brand-list
+            a(href='/companies/search/28-#{ids[1]}') 台湾
+            a(href='/companies/search/29-#{ids[1]}') 天津
+          #brandX.tab-pane.brand-list
+            a(href='/companies/search/30-#{ids[1]}') 新疆
+            a(href='/companies/search/31-#{ids[1]}') 西藏
+            a(href='/companies/search/32-#{ids[1]}') 香港
+          #brandY.tab-pane.brand-list
+            a(href='/companies/search/33-#{ids[1]}') 云南
+          #brandZ.tab-pane.brand-list
+            a(href='/companies/search/34-#{ids[1]}') 浙江
+      dl.category-list.clearfix
+        dt.title 分类：
+        dd.category-item
+          a.choose-all.choose-on(href='/companies/search/#{ids[0]}-0') 不限
+          a(href='/companies/search/#{ids[0]}-1') 整车
+          a(href='/companies/search/#{ids[0]}-2') 配件
+    .product-release.clearfix
+      .form-wrapper
+        form#needForm.form-horizontal(name='needForm' method='post' action='require_add' enctype='multipart/form-data')
+          .form-group.clearfix
+            label.col-sm-3.control-label(for='pname') 产品名称
+            .col-sm-8
+              input#pname.form-control(type='text',name='require.title')
+          .form-group.clearfix
+            label.col-sm-3.control-label 产品分类
+            .col-sm-4
+              select#s_main.form-control(name='require.category.id')
+                option(value='1') 整车
+                option(value='2') 配件
+            .col-sm-4
+              select#s_sub.form-control(name='require.category.id')
+                option(value='3') 电动乘用车
+                option(value='4') 电动客车
+                option(value='5') 微型电动车
+          .form-group.clearfix
+            label.col-sm-3.control-label 选择省市
+            .col-sm-4
+              select#province.form-control(name='require.province',onChange='getCity(this.options[this.selectedIndex].value)')
+                option(value="") -请选择-
+                option(value="北京") 北京
+                option(value="上海") 上海
+                option(value="天津") 天津
+                option(value="重庆") 重庆
+                option(value="河北") 河北
+                option(value="山西") 山西
+                option(value="内蒙古") 内蒙古
+                option(value="辽宁") 辽宁
+                option(value="吉林") 吉林
+                option(value="黑龙江") 黑龙江
+                option(value="江苏") 江苏
+                option(value="浙江") 浙江
+                option(value="安徽") 安徽
+                option(value="福建") 福建
+                option(value="江西") 江西
+                option(value="山东") 山东
+                option(value="河南") 河南
+                option(value="湖北") 湖北
+                option(value="湖南") 湖南
+                option(value="广东") 广东
+                option(value="广西") 广西
+                option(value="海南") 海南
+                option(value="四川") 四川
+                option(value="贵州") 贵州
+                option(value="云南") 云南
+                option(value="西藏") 西藏
+                option(value="陕西") 陕西
+                option(value="甘肃") 甘肃
+                option(value="宁夏") 宁夏
+                option(value="青海") 青海
+                option(value="新疆") 新疆
+                option(value="香港") 香港
+                option(value="澳门") 澳门
+                option(value="台湾") 台湾
+                option(value="其它") 其它
+            .col-sm-4
+              select#city.form-control(name='require.city')
+                option(value='') -请选择-
+          .form-group
+            label.col-sm-3.control-label 产品图片
+            .col-sm-8
+              input(type='file',name='pic',data-min-file-count='1',data-max-file-count='1')
+          .form-group.clearfix
+            label.col-sm-3.control-label 需求说明
+            .col-sm-8
+              textarea.form-control(name='require.brief',rows='3')
+          .form-group.clearfix
+            label.col-sm-3.control-label(for='ECalendar_case1') 截止日期
+            .col-sm-8
+              input.input-text.Wdate(type='text',name='require.expire_date',onfocus='WdatePiker()')
+          .form-group.clearfix
+            label.col-sm-3.control-label 需求数量
+            .col-sm-4
+              select#s_main.form-control(name='require.buyerType')
+                option(value='ENTERPRISE') 企业采购
+                option(value='PERSONAL') 个人采购
+            .col-sm-4
+              input.form-control(type='number',name='require.number',placeholder='填写数量')
+          .form-group.clearfix
+            label.col-sm-3.control-label 联系人
+            .col-sm-8
+              input#uname.form-control(type='text',name='require.name')
+          .form-group.clearfix
+            label.col-sm-3.control-label(for='tel') 手机号
+            .col-sm-8
+              input#tel.form-control(type='text',name='require.tel')
+          .form-group.clearfix
+            label.col-sm-3.control-label(for='wechat') 微信号
+            .col-sm-8
+              input#wechat.form-control(type='text',name='require.wechat')
+          .form-group.clearfix
+            label.col-sm-3.control-label(for='qq') QQ号
+            .col-sm-8
+              input#qq.form-control(type='text',name='pic')
+          .form-group.clearfix
+            label.col-sm-3.control-label(for='inputEmail3') 邮箱
+            .col-sm-8
+              input#inputEmail3.form-control(type='email',name='require.email')
+          .form-group.clearfix
+            .col-sm-offset-3.col-sm-8
+              button.release-btn(type='submit',onClick='return check()') 发布需求
+        img(src='http://ev.cpkso.com/style/img/icon/release.png')
+      .product-release-list
+        ul
+        each info in infos
+          li.list-item
+            a(href='/infos/#{info.id}')
+              if info.pic_thumb
+                img(src='http://ev.cpkso.com/requirePath/#{info.pic_thumb}')
+              else
+                img(src='http://ev.cpkso.com/style/img/no.jpg')
+            .product-detail
+              a.desc(href='/infos/#{info.id}') #{info.title}
+              ul
+                li
+                  dt 类型：
+                  dd #{info.category.name}
+                li
+                  dt 采购数量：
+                  if info.buyerType==='ENTERPRISE'
+                    dd 【企业采购】#{info.number}台
+                  else if info.buyerType==='PERSONAL'
+                    dd 【个人采购】#{info.number}台
+                li
+                  dt 联系人：
+                  dd #{info.name}
+                li
+                  dt 所在地：
+                  dd #{info.city}
+                li
+                  dt 截止日期：
+                  dd #{info.expire_date}
+                li
+                  a.a_post(href='/infos/#{info.id}') 点击查看详情>>
+        .page-wrapper
+        .pagination
+
+              
+            
+    .cut-line
+
+append script
+  script(src='http://ev.cpkso.com/style/js/lib/enter.js')
+  script(src='http://ev.cpkso.com/style/js/lib/jquery.page.js')
+  script(src='http://ev.cpkso.com/style/lib/My97DatePicker/4.8/WdatePicker.js')
+  script.
+    $('.pagination').Mpage({
+      pageCount: #{pageinfo.maxPageNo},
+      current: #{pageinfo.pageNo},
+      mclick: function(p){
+        //- console.log(p);
+      }
+    });
+ 

@@ -110,6 +110,45 @@ block content
           a(href='/companies/search/#{ids[0]}-2') 配件
     .content-container.car-search-result
       .content-left
+        table#Companytable
+          each company in companies
+            tr.inforow
+              td(style='width:100px;')
+                .jinshanlogo
+                  a(href='/companies/#{company.id}')
+                    if company.logo
+                      img(src='http://ev.cpkso.com/uploadPath/#{company.logo}')
+                    else
+                      img(src='http://ev.cpkso.com/style/image1/logo.png')
+              td.content(style='width:900px;margin:0 20px;')
+                p
+                  a(href='/companies/#{company.id}')
+                    b #{company.name}
+                  if company.vip==='1'
+                    span.approve-icon
+                p
+                  span
+                    b 企业类型：
+                    if company.company_ct==='0'
+                      span 生产型
+                    else if company.company_ct==='1'
+                      span 销售型
+                    else
+                      span #{company.company_ct}
+                  span
+                    b 注册地址：
+                    span #{company.province}
+                  span
+                    b 联系人：
+                    span #{company.charge}
+                p.brief
+                  span
+                    b 企业简介：
+                    span #{company.brief}
+              td.certify
+                div
+                  a(href='/companies/#{company.id}',target='_blank') 企业官网
+                    
         .page-wrapper
           .pagination
       .content-right
