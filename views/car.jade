@@ -17,7 +17,7 @@ body(data-spy='scroll',data-target='.myScrollspy')
       ol.breadcrumb
         span.location 当前位置：
         li
-            a(href='http://ev.cpkso.com') 首页
+            a(href='/') 首页
         li
             a(href='/cars/') 车型库
         li.active #{car.car.name}
@@ -76,7 +76,7 @@ body(data-spy='scroll',data-target='.myScrollspy')
           .service
             if car.car.company.url
               a.span.website(href='#{car.car.company.url}',rel='nofollow',target='_blank') 官网
-            a.span.home(href='/companies/company') 企业库
+            a.span.home(href='/companies/#{car.car.company.id}',target='_blank') 企业库
             if car.car.company.contact||car.car.company.contact2
               a.span.tel(href='javascript:;') 联系方式
                 span #{car.car.company.contact}  #{car.car.company.contact2}

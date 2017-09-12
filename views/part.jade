@@ -18,7 +18,7 @@ body(data-spy='scroll',data-target='.myScrollspy')
       ol.breadcrumb
         span.location 当前位置：
         li
-            a(href='http://ev.cpkso.com') 首页
+            a(href='/') 首页
         li
             a(href='/parts/') 配件库
         li.active #{part.name}
@@ -75,7 +75,7 @@ body(data-spy='scroll',data-target='.myScrollspy')
           .service
             if part.company.url
               a.span.website(href='#{part.company.url}',rel='nofollow',target='_blank') 官网
-            a.span.home(href='/companies/company') 企业库
+            a.span.home(href='/companies/#{part.company.id}',target='_blank') 企业库
             if part.company.contact||part.company.contact2
               a.span.tel(href='javascript:;') 联系方式
                 span #{part.company.contact}  #{part.company.contact2}

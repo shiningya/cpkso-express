@@ -20,11 +20,12 @@ router.get('/', function(req, res, next) {
 router.get('/infos/search/:str', function(req, res, next) {
     var ids = req.params.str.split('-');
     var args = '';
-    axios.all([getInfos(args)]).then(axios.spread(function(infos) {
+    axios.all([getInfos(args),getPromo()]).then(axios.spread(function(infos,promo) {
         var data = {};
         data.ids = ids;
         data.pageinfo = infos.data.response.data.Require_condition;
         data.infos = infos.data.response.data.Requires;
+        data.promo = promo.data.response.data.PlaceCars;
         res.render('infos', data);
     }));
 });
@@ -32,12 +33,12 @@ router.get('/infos/search/:str', function(req, res, next) {
 /* 供求信息详情 */
 router.get('/:id', function(req, res, next) {
     var id = req.params.id;
-    axios.all([getInfo(id), getComCars(id), getComNews(id)]).then(axios.spread(function(info, comCars, comNews) {
+    axios.all([getInfo(id), getOffers(id), getPromo()]).then(axios.spread(function(info, offers, promo) {
         var data = {};
         data.id = id;
-        data.info = info.data.response.data.Info;
-        data.comCars = comCars.data.response.data.Cars;
-        data.comNews = comNews.data.response.data.Article;
+        data.info = info.data.response.data.Require;
+        data.offers = offers.data.response.data.Offers;
+        data.promo = promo.data.response.data.PlaceCars;
         res.render('info', data);
     }));
 });
@@ -54,17 +55,12 @@ function getPromo() {
 
 /* 获取企业首页数据 */
 function getInfo(id) {
-    var url = 'http://ev.cpkso.com/ev/company_singleById?company.id=' + id;
+    var url = 'http://ev.cpkso.com/ev/require_singleById?require.id=' + id;
     return axios.get(url);
 }
 
-function getComCars(id) {
-    var url = 'http://ev.cpkso.com/ev/car_findByCompanyIdF?company_id=' + id;
-    return axios.get(url);
-}
-
-function getComNews(id) {
-    var url = 'http://ev.cpkso.com/ev/article_findByCompanyId?company_id=' + id;
+function getOffers(id) {
+    var url = 'http://ev.cpkso.com/ev/offer_findByRequire?require_id=' + id;
     return axios.get(url);
 }
 

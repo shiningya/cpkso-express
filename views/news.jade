@@ -41,12 +41,12 @@ block content
                 each item in news
                   .news-item.clearfix
                     .news-item-image
-                      a(href='#{item.content}')
+                      a(href='/news/#{item.content}')
                         img(src='http://ev.cpkso.com/uploadPath/#{item.thumb}')
                       span.tag #{item.artCt.name}
                     .news-item-info
                       h4.news-item-title
-                        a(href='#{item.content}') #{item.title}
+                        a(href='/news/#{item.content}') #{item.title}
                       p.news-item-summary
                       .news-item-footer
                         .news-time #{item.publish_time}
@@ -55,7 +55,7 @@ block content
       .content-right
         #newsad.right4
           #newsA.ad-item(style='margin-top:20px;')
-            a(href='/car/#{promo1[0].car.id}',target='_blank')
+            a(href='/cars/#{promo1[0].car.id}',target='_blank')
               img(src='http://ev.cpkso.com/adsPath/#{promo1[0].pic}')
           .recommendRead
             a 推荐阅读
@@ -67,19 +67,19 @@ block content
                   span #{item.article.title}
         #aditem.right3
           #newsB.ad-item
-            a(href='/car/#{promo3[0].car.id}',target='_blank')
+            a(href='/cars/#{promo3[0].car.id}',target='_blank')
               img(src='http://ev.cpkso.com/adsPath/#{promo3[0].pic}')
           .recommendRead
             a 最新车型
           ul#newslistB.list-unstyled.zixun-item
             each item in promo4
               li
-                a(href='/car/#{item.car.id}',target='_blank')
+                a(href='/cars/#{item.car.id}',target='_blank')
                   img(src='http://ev.cpkso.com/adsPath/#{item.pic}')
                   span #{item.car.name}
                   b #{item.car.params[0].price}
         #btad.ad-item
-          a(href='/car/#{promo5[0].car.id}',target='_blank')
+          a(href='/cars/#{promo5[0].car.id}',target='_blank')
             img(src='http://ev.cpkso.com/adsPath/#{promo5[0].pic}')
 append script
   script(src='http://ev.cpkso.com/style/js/lib/jquery.page.js')

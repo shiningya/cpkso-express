@@ -1,0 +1,95 @@
+extends layout
+
+block title
+  title= '车型库、新能源电动车车型大全-产品快搜新能源电动车'
+  meta(name="keywords", content="低速电动车、电动乘用车、电动三轮车、电动客车、新能源电动车分类、新能源电动车品牌、新能源电动车价格、新能源电动车续航里程")
+  meta(name="description", content="产品快搜新能源电动车车型库为您提供各种型号的新能源电动车，囊括了的参数、型号、图片、价格、厂家等信息，是的专业平台，带给您最准确的信息。")
+append link
+  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/master.css")
+  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/company.css")
+  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/base1.css")
+block content
+  .product-head-nav
+    ol.breadcrumb
+      span.location 当前位置：
+      li
+        a(href='/') 首页
+      li
+        a(href='/infos/') 求购信息
+      li.active #{info.title}
+  .main-body
+    .products
+      #purseInfo.content
+        .left-product
+          if info.pic
+            img(src='http://ev.cpkso.com/requirePath/#{info.pic}')
+          else
+            img(src='http://ev.cpkso.com/style/img/no.jpg')
+        .rightText
+          .time
+            a #{info.expire_date}
+            img(src='http://ev.cpkso.com/style/image1/clock.png')
+          .Buytitle #{info.title}
+            if info.reply
+              a 已收到报价 #{info.reply} 条
+            else
+              a 暂无报价信息
+          .productInfo
+            .left
+              div
+                img(src='http://ev.cpkso.com/style/image1/logo/cate.png')
+                分类
+                span #{info.category.name}
+              div
+                img(src='http://ev.cpkso.com/style/image1/logo/addr.png')
+                所在地
+                span #{info.name}
+              div
+                img(src='http://ev.cpkso.com/style/image1/logo/amount.png')
+                采购量
+                span #{info.number}
+            .right
+              div
+                img(src='http://ev.cpkso.com/style/image1/logo/time.png')
+                报名截止
+                span #{info.expire_date}
+              div
+                img(src='http://ev.cpkso.com/style/image1/logo/type.png')
+                采购类型
+                if info.buyerType==='ENTERPRISE'
+                  span 企业采购
+                else if info.buyerType==='PERSONAL'
+                  span 个人采购
+              div
+                img(src='http://ev.cpkso.com/style/image1/logo/contact.png')
+                联系方式
+                span.contact(style='color:#f00;') 留言后可见
+          .button
+            button 查看联系方式
+    .content-down
+      .brief
+        table
+          tr
+            td.need 需求说明
+            td#state(style='text-align:left;padding-left:20px;max-width:960px;')!=info.brief
+      a.priceInfo 报价信息
+      table
+        thead
+          tr
+            td 联系人
+            td 联系电话
+            td 相关说明
+            td 发布时间
+        tbody#tabinfo
+          each offer in offers
+            tr
+              td(style='width:200px;',nowrap) #{offer.name}
+              td(style='width:100px;',nowarp) #{offer.tel}
+              td(nowarp) #{offer.brief}
+              td(style='width:150px;',nowarp) #{offer.require.publish_time}
+    #bimg.bottom-img
+      a(href='/cars/#{promo[0].car.id}')
+        img(src='http://ev.cpkso.com/adsPath/#{promo[0].pic}')
+        
+append script                          
+  script(src='http://ev.cpkso.com/style/js/lib/jquery.form.js')

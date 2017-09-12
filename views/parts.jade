@@ -11,7 +11,7 @@ block content
     ol.breadcrumb
       span.location 当前位置：
       li
-        a(href='http://ev.cpkso.com') 首页
+        a(href='/') 首页
       li.active 配件库
   .main-body
     #filter.category
@@ -150,7 +150,7 @@ block content
                     .info-wrapper
                       a(href='/parts/#{part.id}') 详情
                       a.cus-service(href='javascript:;') 客服
-                      a(href='/companys/',target='_blank') 官网
+                      a(href='/companys/#{part.company.id}',target='_blank') 官网
                     .car-detail
                       p.parts-info 简介：#{part.brief}
                 .detail
@@ -160,7 +160,7 @@ block content
                   else
                     a.desc(href='/parts/#{part.id}') #{part.name}
                   .company-detail
-                    a.company-name(href='/company/',target='_blank') #{part.company.name}
+                    a.company-name(href='/company/#{part.company.id}',target='_blank') #{part.company.name}
                       if part.company.vip===1
                         span.approve-icon
                   .msg
