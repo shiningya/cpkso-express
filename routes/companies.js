@@ -29,15 +29,47 @@ router.get('/companies/search/:str', function(req, res, next) {
 });
 
 /* 企业首页 */
-router.get('/:id', function(req, res, next) {
+router.get('/:id/', function(req, res, next) {
     var id = req.params.id;
-    axios.all([getCompany(id), getComCars(id), getComNews(id)]).then(axios.spread(function(company, comCars, comNews) {
+    axios.all([getCompany(id), getComProds(id), getComNews(id)]).then(axios.spread(function(company, comProds, comNews) {
         var data = {};
         data.id = id;
         data.company = company.data.response.data.Company;
-        data.comCars = comCars.data.response.data.Cars;
+        data.comProds = comProds.data.response.data.Cars?comProds.data.response.data.Cars:comProds.data.response.data.Partss;
         data.comNews = comNews.data.response.data.Article;
         res.render('company', data);
+    }));
+});
+
+router.get('/:id/intro', function(req, res, next) {
+    var id = req.params.id;
+    axios.all([getCompany(id)]).then(axios.spread(function(company) {
+        var data = {};
+        data.id = id;
+        data.company = company.data.response.data.Company;
+        res.render('intro', data);
+    }));
+});
+
+router.get('/:id/products', function(req, res, next) {
+    var id = req.params.id;
+    axios.all([getCompany(id), getComProds(id)]).then(axios.spread(function(company, comProds) {
+        var data = {};
+        data.id = id;
+        data.company = company.data.response.data.Company;
+        data.comProds = comProds.data.response.data.Cars?comProds.data.response.data.Cars:comProds.data.response.data.Partss;
+        res.render('products', data);
+    }));
+});
+
+router.get('/:id/trend', function(req, res, next) {
+    var id = req.params.id;
+    axios.all([getCompany(id), getComNews(id)]).then(axios.spread(function(company, comNews) {
+        var data = {};
+        data.id = id;
+        data.company = company.data.response.data.Company;
+        data.comNews = comNews.data.response.data.Article;
+        res.render('trend', data);
     }));
 });
 
@@ -53,7 +85,7 @@ function getCompany(id) {
     return axios.get(url);
 }
 
-function getComCars(id) {
+function getComProds(id) {
     var url = 'http://ev.cpkso.com/ev/car_findByCompanyIdF?company_id=' + id;
     return axios.get(url);
 }

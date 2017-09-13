@@ -1,0 +1,32 @@
+.products
+  h4.title 供应产品
+  #car-result.search-result.product-container
+    ul.list-content
+      each prod in comProds
+        li.list-item
+          .figure
+            a(href='/cars/#{prod.car.id}')
+              if prod.car.prompt===1
+                span.recommend-icon
+              img(src='http://ev.cpkso.com/uploadPath/#{prod.car.pic_thumbs[0]}')
+            a.car-logo(href='javascript:;')
+              if prod.car.brand
+                img(src='http://ev.cpkso.com/brandPath/#{prod.car.brand.pic}')
+          .detail
+            if prod.car.w1===1
+              a.desc(href='/cars/#{prod.car.id}',style='text-indent:26px;') #{prod.car.name}
+                span.hot-icon
+            else
+              a.desc(href='/cars/#{prod.car.id}') #{prod.car.name}
+            .company-detail
+              a.company-name(href='/company/#{prod.car.company.id}',target='_blank') #{prod.car.company.name}
+                if prod.car.company.vip===1
+                  span.approve-icon
+            .msg
+              if prod.car.params[0]&&prod.car.params[0].price
+                p.price ￥#{prod.car.params[0].price}万
+              else
+                p.price 暂无价格
+              //- if car.hot
+              //-   p.view-count 已浏览#{car.hot}
+

@@ -1,0 +1,18 @@
+header.header
+  .header-left
+    img(src='http://ev.cpkso.com/uploadPath/#{company.logo}', alt='logo')
+  .header-right
+    img(src='http://ev.cpkso.com/style/image1/phone-logo.png')
+    span #{company.contact}
+nav.nav-wrapper
+  ul.nav-list
+    li
+      a(href='http://ev.cpkso.com', title='返回主站') 返回主站
+    li
+      a(href='/companies/#{company.id}/', title='首页') 首页
+    li
+      a(href='/companies/#{company.id}/intro', title='公司介绍') 公司介绍
+    li
+      a(href='/companies/#{company.id}/products', title='供应产品') 供应产品
+    li
+      a(href='/companies/#{company.id}/trend', title='公司动态') 公司动态
