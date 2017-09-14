@@ -109,6 +109,7 @@ router.get('/hangye/', function(req, res) {
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
+        console.log(data.pageinfo);
         data.promo1 = promo1.data.response.data.PlaceCars;
         data.promo2 = promo2.data.response.data.PlaceArts;
         data.promo3 = promo3.data.response.data.PlaceCars;
@@ -131,6 +132,7 @@ router.get('/hangye/:page', function(req, res, next) {
         data.promo3 = promo3.data.response.data.PlaceCars;
         data.promo4 = promo4.data.response.data.PlaceCars;
         data.promo5 = promo5.data.response.data.PlaceCars;
+        console.log(data.pageinfo);
         res.render('news/hangye', data);
     }));
 });
