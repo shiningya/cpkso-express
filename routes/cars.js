@@ -23,10 +23,32 @@ router.get('/', function(req, res, next) {
     }));
 });
 
+router.get('/list/:page', function(req, res, next) {
+    var page = req.params.page;
+    var ids = ['0','0','0','0','0','0'];
+    var args = '?carCondition.pageNo=' + page;
+    axios.all([getBrandList(), getPage(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6(), getPromo7()]).then(axios.spread(function(brands, cars, promo1, promo2, promo3, promo4, promo5, promo6, promo7) {
+        var data = {};
+        data.list = true;
+        data.ids = ids;
+        data.brands = brands.data.response.data;
+        data.cars = cars.data.response.data.Cars;
+        data.pageinfo = cars.data.response.data.Car_condition;
+        data.promo1 = promo1.data.response.data.PlaceCars;
+        data.promo2 = promo2.data.response.data.PlaceArts;
+        data.promo3 = promo3.data.response.data.PlaceArts;
+        data.promo4 = promo4.data.response.data.PlaceCars;
+        data.promo5 = promo5.data.response.data.PlaceArts;
+        data.promo6 = promo6.data.response.data.PlaceArts;
+        data.promo7 = promo7.data.response.data.PlaceCars;
+        res.render('cars', data);
+    }));
+});
+
 /* 筛选车型列表 */
 router.get('/search/:str', function(req, res, next) {
     var ids = req.params.str.split('-');
-    var args = '?';
+    var args = '?carCondition.pageNo=' + ids[6] + '&';
     if (ids[0] !== '0') {
         args += 'carCondition.category_id=' + ids[0] + '&';
     };
@@ -46,7 +68,7 @@ router.get('/search/:str', function(req, res, next) {
         args += 'carCondition.level=' + ids[5];
     };
     console.log(args);
-    axios.all([getBrandList(), getCars(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6(), getPromo7()]).then(axios.spread(function(brands, cars, promo1, promo2, promo3, promo4, promo5, promo6, promo7) {
+    axios.all([getBrandList(), getPage(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6(), getPromo7()]).then(axios.spread(function(brands, cars, promo1, promo2, promo3, promo4, promo5, promo6, promo7) {
         var data = {};
         data.ids = ids;
         data.brands = brands.data.response.data;
@@ -82,6 +104,11 @@ function getBrandList() {
 
 function getCars(args) {
     var url = 'http://ev.cpkso.com/ev/car_search' + args;
+    return axios.get(url);
+}
+
+function getPage(args) {
+    var url = 'http://localhost:8080/cpkso/car_skipPage' + args;
     return axios.get(url);
 }
 

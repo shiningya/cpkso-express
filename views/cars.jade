@@ -18,14 +18,14 @@ block content
       dl#category.category-list.clearfix
         dt.title 分类：
         .category-item
-          a.choose-all.choose-on(href='/cars/search/0-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0') 不限
-          a(href='/cars/search/15-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0') 低速电动车
-          a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}') 电动乘用车
-          a(href='/cars/search/14-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0') 电动三轮车
-          a(href='/cars/search/4-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0') 电动客车
+          a.choose-all.choose-on(href='/cars/search/0-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0-1') 不限
+          a(href='/cars/search/15-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0-1') 低速电动车
+          a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1') 电动乘用车
+          a(href='/cars/search/14-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0-1') 电动三轮车
+          a(href='/cars/search/4-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0-1') 电动客车
       #categoryBrand.category-list.clearfix
         dt.title 品牌：
-        a.choose-all.choose-on(href='/cars/search/#{ids[0]}-0-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}') 不限
+        a.choose-all.choose-on(href='/cars/search/#{ids[0]}-0-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1') 不限
         #firstLetters.brand-ident
           ul
             li.active
@@ -85,7 +85,7 @@ block content
           #brandA.tab-pane.brand-list.active
             mixin brands(brands)
               each brand in brands
-                a(href='/cars/search/#{ids[0]}-#{brand.id}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}') #{brand.brand}
+                a(href='/cars/search/#{ids[0]}-#{brand.id}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1') #{brand.brand}
             +brands(brands.a)
           #brandB.tab-pane.brand-list
             +brands(brands.b)
@@ -140,45 +140,45 @@ block content
       dl#categoryPrice.category-list.clearfix
         dt.title 价格：
         dd.category-item
-          a.choose-all.choose-on(href='/cars/search/#{ids[0]}-#{ids[1]}-0-#{ids[3]}-#{ids[4]}-#{ids[5]}') 不限
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-1-#{ids[3]}-#{ids[4]}-#{ids[5]}') 10万以下
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-2-#{ids[3]}-#{ids[4]}-#{ids[5]}') 10-20万
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-3-#{ids[3]}-#{ids[4]}-#{ids[5]}') 20-30万
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-4-#{ids[3]}-#{ids[4]}-#{ids[5]}') 30-50万
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-5-#{ids[3]}-#{ids[4]}-#{ids[5]}') 50万以上
+          a.choose-all.choose-on(href='/cars/search/#{ids[0]}-#{ids[1]}-0-#{ids[3]}-#{ids[4]}-#{ids[5]}-1') 不限
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-1-#{ids[3]}-#{ids[4]}-#{ids[5]}-1') 10万以下
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-2-#{ids[3]}-#{ids[4]}-#{ids[5]}-1') 10-20万
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-3-#{ids[3]}-#{ids[4]}-#{ids[5]}-1') 20-30万
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-4-#{ids[3]}-#{ids[4]}-#{ids[5]}-1') 30-50万
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-5-#{ids[3]}-#{ids[4]}-#{ids[5]}-1') 50万以上
       dl#categoryMile.category-list.clearfix
         dt.title 续航：
         dd.category-item
-          a.choose-all.choose-on(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-0-#{ids[4]}-#{ids[5]}') 不限
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-1-#{ids[4]}-#{ids[5]}') 100公里以下
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-2-#{ids[4]}-#{ids[5]}') 100-200公里
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-3-#{ids[4]}-#{ids[5]}') 200-300公里
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-4-#{ids[4]}-#{ids[5]}') 300-400公里
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-5-#{ids[4]}-#{ids[5]}') 400公里以上
+          a.choose-all.choose-on(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-0-#{ids[4]}-#{ids[5]}-1') 不限
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-1-#{ids[4]}-#{ids[5]}-1') 100公里以下
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-2-#{ids[4]}-#{ids[5]}-1') 100-200公里
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-3-#{ids[4]}-#{ids[5]}-1') 200-300公里
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-4-#{ids[4]}-#{ids[5]}-1') 300-400公里
+          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-5-#{ids[4]}-#{ids[5]}-1') 400公里以上
       if ids[0] === '3'
         dl#categoryType.category-list.clearfix
           dt.title 类型：
           dd.category-item
-            a.choose-all.choose-on(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-#{ids[5]}') 不限
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-纯电动-#{ids[5]}') 纯电动
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-插电式-#{ids[5]}') 插电式
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-增程式-#{ids[5]}') 增程式
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-混合动力-#{ids[5]}') 混合动力
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-燃料电池-#{ids[5]}') 燃料电池
+            a.choose-all.choose-on(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-#{ids[5]}-1') 不限
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-纯电动-#{ids[5]}-1') 纯电动
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-插电式-#{ids[5]}-1') 插电式
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-增程式-#{ids[5]}-1') 增程式
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-混合动力-#{ids[5]}-1') 混合动力
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-燃料电池-#{ids[5]}-1') 燃料电池
         dl#categoryLevel.category-list.clearfix
           dt.title 级别：
           dd.category-item
-            a.choose-all.choose-on(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-0') 不限
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-微型') 微型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-小型') 小型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-紧凑型') 紧凑型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-中型') 中型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-中大型') 中大型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-豪华型') 豪华型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-SUV') SUV
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-MPV') MPV
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-跑车') 跑车
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-商用') 商用
+            a.choose-all.choose-on(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-0-1') 不限
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-微型-1') 微型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-小型-1') 小型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-紧凑型-1') 紧凑型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-中型-1') 中型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-中大型-1') 中大型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-豪华型-1') 豪华型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-SUV-1') SUV
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-MPV-1') MPV
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-跑车-1') 跑车
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-商用-1') 商用
     .content-container.car-search-result
       .content-left
         #car-result.search-result.product-container
@@ -223,7 +223,7 @@ block content
                   else
                     a.desc(href='/cars/#{car.car.id}') #{car.car.name}
                   .company-detail
-                    a.company-name(href='/company/#{car.car.company.id}',target='_blank') #{car.car.company.name}
+                    a.company-name(href='/companies/#{car.car.company.id}',target='_blank') #{car.car.company.name}
                       if car.car.company.vip===1
                         span.approve-icon
                   .msg
@@ -233,8 +233,129 @@ block content
                       p.price 暂无价格
                     if car.hot
                       p.view-count 已浏览#{car.hot}
-        .page-wrapper
-          .pagination
+        .page-wrapper.clearfix
+          if list
+            .pagination.clearfix
+              if pageinfo.pageNo===1
+                span.disabled(href='javascript:;') 上一页
+              else
+                a(href=pageinfo.pageNo-1) 上一页
+              if pageinfo.maxPageNo < 7
+                - var n = 1
+                while n <= pageinfo.maxPageNo
+                  if n===pageinfo.pageNo
+                    - var url = '/cars/list/' + n
+                    span.current(href=url)= n++
+                  else
+                    - var url = '/cars/list/' + n
+                    a(href=url)= n++     
+              else if pageinfo.pageNo <= 3
+                - var n = 1
+                while n <= 5
+                  if n===pageinfo.pageNo
+                    - var url = '/cars/list/' + n
+                    span.current(href=url)= n++
+                  else
+                    - var url = '/cars/list/' + n
+                    a(href=url)= n++
+                a ...
+                - var url = '/cars/list/' + pageinfo.maxPageNo
+                a(href=url) #{pageinfo.maxPageNo}
+              else if pageinfo.pageNo > pageinfo.maxPageNo-2
+                a(href='1') 1
+                a ...
+                - var n = pageinfo.pageNo-2
+                while n <= pageinfo.maxPageNo
+                  if n===pageinfo.pageNo
+                    - var url = '/cars/list/' + n
+                    span.current(href=url)= n++
+                  else
+                    - var url = '/cars/list/' + n
+                    a(href=url)= n++        
+              else
+                a(href='1') 1
+                if pageinfo.pageNo > 4
+                  a ...
+                - var n = pageinfo.pageNo-2
+                while n <= pageinfo.pageNo+2
+                  if n===pageinfo.pageNo
+                    - var url = '/cars/list/' + n
+                    span.current(href=url)= n++
+                  else
+                    - var url = '/cars/list/' + n
+                    a(href=url)= n++        
+                if pageinfo.pageNo < pageinfo.maxPageNo-3
+                  a ...
+                if pageinfo.pageNo < pageinfo.maxPageNo-2
+                  - var url = '/cars/list/' + pageinfo.maxPageNo
+                  a(href=url) #{pageinfo.maxPageNo}
+              if pageinfo.pageNo===pageinfo.maxPageNo
+                - var url = '/cars/list/' + n
+                span.disabled(href='javascript:;') 下一页
+              else
+                - var url = '/cars/list/' + (pageinfo.pageNo+1)
+                a(href=url) 下一页
+          else
+            .pagination.clearfix
+              if pageinfo.pageNo===1
+                span.disabled(href='javascript:;') 上一页
+              else
+                a(href=pageinfo.pageNo-1) 上一页
+              if pageinfo.maxPageNo < 7
+                - var n = 1
+                while n <= pageinfo.maxPageNo
+                  if n===pageinfo.pageNo
+                    - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n
+                    span.current(href=url)= n++
+                  else
+                    - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n
+                    a(href=url)= n++     
+              else if pageinfo.pageNo <= 3
+                - var n = 1
+                while n <= 5
+                  if n===pageinfo.pageNo
+                    - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n
+                    span.current(href=url)= n++
+                  else
+                    - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n
+                    a(href=url)= n++
+                a ...
+                - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + pageinfo.maxPageNo
+                a(href=url) #{pageinfo.maxPageNo}
+              else if pageinfo.pageNo > pageinfo.maxPageNo-2
+                a(href='1') 1
+                a ...
+                - var n = pageinfo.pageNo-2
+                while n <= pageinfo.maxPageNo
+                  if n===pageinfo.pageNo
+                    - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n
+                    span.current(href=url)= n++
+                  else
+                    - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n
+                    a(href=url)= n++        
+              else
+                a(href='1') 1
+                if pageinfo.pageNo > 4
+                  a ...
+                - var n = pageinfo.pageNo-2
+                while n <= pageinfo.pageNo+2
+                  if n===pageinfo.pageNo
+                    - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n
+                    span.current(href=url)= n++
+                  else
+                    - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n
+                    a(href=url)= n++        
+                if pageinfo.pageNo < pageinfo.maxPageNo-3
+                  a ...
+                if pageinfo.pageNo < pageinfo.maxPageNo-2
+                  - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + pageinfo.maxPageNo
+                  a(href=url) #{pageinfo.maxPageNo}
+              if pageinfo.pageNo===pageinfo.maxPageNo
+                - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n
+                span.disabled(href='javascript:;') 下一页
+              else
+                - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + (pageinfo.pageNo+1)
+                a(href=url) 下一页
       .content-right
         #showBar1.show-bar-sm
           mixin bar(bar)
@@ -277,13 +398,3 @@ block content
 
 append script
   script(src='http://ev.cpkso.com/style/js/lib/enter.js')
-  script(src='http://ev.cpkso.com/style/js/lib/jquery.page.js')
-  script.
-    $('.pagination').Mpage({
-      pageCount: #{pageinfo.maxPageNo},
-      current: #{pageinfo.pageNo},
-      mclick: function(p){
-        //- console.log(p);
-      }
-    });
-
