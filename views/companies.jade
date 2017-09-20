@@ -5,8 +5,8 @@ block title
   meta(name="keywords", content="新能源电动车零部件企业,电动汽车零部件厂家,电动汽车零部件供应商,新能源汽车整车企业厂家,新能源电动车厂商")
   meta(name="description", content="产品快搜新能源电动车企业库提供新能源电动汽车生产企业名录,新能源汽车厂商分布,新能源电动车配件厂家，微型电动车厂家,新能源电动车厂家等。")
 append link
-  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/index.css")
-  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/enterprise.css")
+  link(rel="stylesheet", href="/css/index.css")
+  link(rel="stylesheet", href="/css/companies.css")
 block content
   .product-head-nav
     ol.breadcrumb
@@ -110,44 +110,37 @@ block content
           a(href='/companies/search/#{ids[0]}-2') 配件
     .content-container.car-search-result
       .content-left
-        table#Companytable
+        ul#com-list
           each company in companies
-            tr.inforow
-              td(style='width:100px;')
-                .jinshanlogo
-                  a(href='/companies/#{company.id}')
-                    if company.logo
-                      img(src='http://ev.cpkso.com/uploadPath/#{company.logo}')
-                    else
-                      img(src='http://ev.cpkso.com/style/image1/logo.png')
-              td.content(style='width:900px;margin:0 20px;')
-                p
-                  a(href='/companies/#{company.id}')
-                    b #{company.name}
-                  if company.vip==='1'
+            li.com
+              .com-logo
+                a(href='/companies/#{company.id}')
+                  if company.logo
+                    img(src='http://ev.cpkso.com/uploadPath/#{company.logo}')
+                  else
+                    img(src='http://ev.cpkso.com/style/image1/logo.png')
+              .com-detail
+                h4
+                  a.title(href='/companies/#{company.id}') #{company.name}
+                  if company.vip===1
                     span.approve-icon
-                p
-                  span
-                    b 企业类型：
-                    if company.company_ct==='0'
-                      span 生产型
-                    else if company.company_ct==='1'
-                      span 销售型
-                    else
-                      span #{company.company_ct}
-                  span
-                    b 注册地址：
-                    span #{company.province}
-                  span
-                    b 联系人：
-                    span #{company.charge}
-                p.brief
-                  span
-                    b 企业简介：
-                    span #{company.brief}
-              td.certify
-                div
-                  a(href='/companies/#{company.id}',target='_blank') 企业官网
+                dl
+                  dt.title 企业类型：
+                  if company.company_ct==='0'
+                    dd 生产型
+                  else if company.company_ct==='1'
+                    dd 销售型
+                  else
+                    dd #{company.company_ct}
+                  dt.title 注册地址：
+                  dd #{company.province}
+                  dt.title 联系人：
+                  dd #{company.charge}
+                .com-brief
+                  span.title 企业简介：
+                  span.brief #{company.brief}
+              .com-site
+                a(href='/companies/#{company.id}',target='_blank') 企业官网
                     
         .page-wrapper
           .pagination

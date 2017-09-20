@@ -1,6 +1,38 @@
+/* common */
 .header .header-left img {
 	height: 110px;
 }
 .main-body {
 	display: flex;
 }
+.com-title {
+	display: inline-block;
+	width: 120px;
+	padding: 6px 0 0 0;
+	font-size: 16px;
+	text-align: center;
+	background-color: #db2242;
+	color: #fff;
+}
+.com-title:after {
+	content: ' ';
+	display: block;
+	margin-top: 6px;
+	height: 1px;
+	width: 920px;
+	background-color: #db2242;
+}
+
+/* com-intro */
+.intro .brief {
+	line-height: 1.8;
+	font-size: 14px;
+	color: #999;
+	text-indent: 2em;
+	text-align: justify;
+}
+
+/* com-trend */
+
+/* com-cnt */
+
