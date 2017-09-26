@@ -43,8 +43,8 @@
 	display: inline;
 }
 #com-list .com-detail dd {
-	display: inline;
-	margin-right: 80px;
+	display: inline-block;
+	width: 140px;
 }
 #com-list .com-detail .com-brief {
 	display: flex;

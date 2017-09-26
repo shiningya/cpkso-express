@@ -35,8 +35,8 @@ router.get('/:id/', function(req, res, next) {
         var data = {};
         data.id = id;
         data.company = company.data.response.data.Company;
-        data.comProds = comProds.data.response.data.Cars?comProds.data.response.data.Cars:comProds.data.response.data.Partss;
-        data.comNews = comNews.data.response.data.Article;
+        data.prodsData = comProds.data.response.data;
+        data.comNews = comNews.data.response.data.Articles;
         res.render('company', data);
     }));
 });
@@ -57,7 +57,7 @@ router.get('/:id/products', function(req, res, next) {
         var data = {};
         data.id = id;
         data.company = company.data.response.data.Company;
-        data.comProds = comProds.data.response.data.Cars?comProds.data.response.data.Cars:comProds.data.response.data.Partss;
+        data.prodsData = comProds.data.response.data;
         res.render('products', data);
     }));
 });
@@ -68,30 +68,30 @@ router.get('/:id/trend', function(req, res, next) {
         var data = {};
         data.id = id;
         data.company = company.data.response.data.Company;
-        data.comNews = comNews.data.response.data.Article;
+        data.comNews = comNews.data.response.data.Articles;
         res.render('trend', data);
     }));
 });
 
 /* 获取企业库数据 */
 function getCompanies(args) {
-    var url = 'http://ev.cpkso.com/ev/company_search' + args;
+    var url = 'http://localhost:8080/ev/company_search' + args;
     return axios.get(url);
 }   
 
 /* 获取企业首页数据 */
 function getCompany(id) {
-    var url = 'http://ev.cpkso.com/ev/company_singleById?company.id=' + id;
+    var url = 'http://localhost:8080/ev/company_singleById?company.id=' + id;
     return axios.get(url);
 }
 
 function getComProds(id) {
-    var url = 'http://ev.cpkso.com/ev/car_findByCompanyIdF?company_id=' + id;
+    var url = 'http://localhost:8080/ev/car_findByCompanyIdF?company_id=' + id;
     return axios.get(url);
 }
 
 function getComNews(id) {
-    var url = 'http://ev.cpkso.com/ev/article_findByCompanyId?company_id=' + id;
+    var url = 'http://localhost:8080/ev/article_findByCompanyId?company_id=' + id;
     return axios.get(url);
 }
 

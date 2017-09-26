@@ -271,50 +271,50 @@ router.get('/pinpai/:page', function(req, res, next) {
 
 
 function getBanner() {
-    return axios.get('http://ev.cpkso.com/ev/placeArt_findByAdsUniqueId?ads_unique_id=Z01');
+    return axios.get('http://localhost:8080/ev/placeArt_findByAdsUniqueId?ads_unique_id=Z01');
 }
 /* 获取新闻列表数据 */
 function getNews() {
-    return axios.get('http://ev.cpkso.com/ev/article_search');
+    return axios.get('http://localhost:8080/ev/article_search');
 }
 
 /* 获取各个分类新闻的数据 */
 function getNews2(id) {
-    var url = 'http://ev.cpkso.com/ev/article_search?articleCondition.artCt.id=' + id;
+    var url = 'http://localhost:8080/ev/article_search?articleCondition.artCt.id=' + id;
     return axios.get(url);
 }
 
 /* 获取跳页的数据 */
 function getNews3(page) {
-    var url = 'http://localhost:8080/cpkso/ev/article_search?articleCondition.pageNo=' + page;
+    var url = 'http://localhost:8080/ev/article_search?articleCondition.pageNo=' + page;
     return axios.get(url);
 }
 
 /* 获取各个分类跳页的数据 */
 function getNews4(id,page) {
-    var url = 'http://localhost:8080/cpkso/ev/article_search?articleCondition.artCt.id=' + id + '&articleCondition.pageNo=' + page;
+    var url = 'http://localhost:8080/ev/article_search?articleCondition.artCt.id=' + id + '&articleCondition.pageNo=' + page;
     return axios.get(url);
 }
 
 /* 获取右侧各个广告位的数据 */
 function getPromo1() {
-    return axios.get('http://ev.cpkso.com/ev/placeCar_findByAdsUniqueId?ads_unique_id=Z02');
+    return axios.get('http://localhost:8080/ev/placeCar_findByAdsUniqueId?ads_unique_id=Z02');
 }
 
 function getPromo2() {
-    return axios.get('http://ev.cpkso.com/ev/placeArt_findByAdsUniqueId?ads_unique_id=Z06');
+    return axios.get('http://localhost:8080/ev/placeArt_findByAdsUniqueId?ads_unique_id=Z06');
 }
 
 function getPromo3() {
-    return axios.get('http://ev.cpkso.com/ev/placeCar_findByAdsUniqueId?ads_unique_id=Z03');
+    return axios.get('http://localhost:8080/ev/placeCar_findByAdsUniqueId?ads_unique_id=Z03');
 }
 
 function getPromo4() {
-    return axios.get('http://ev.cpkso.com/ev/placeCar_findByAdsUniqueId?ads_unique_id=Z05');
+    return axios.get('http://localhost:8080/ev/placeCar_findByAdsUniqueId?ads_unique_id=Z05');
 }
 
 function getPromo5() {
-    return axios.get('http://ev.cpkso.com/ev/placeCar_findByAdsUniqueId?ads_unique_id=Z04');
+    return axios.get('http://localhost:8080/ev/placeCar_findByAdsUniqueId?ads_unique_id=Z04');
 }
 
 

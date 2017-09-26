@@ -1,2 +1,8 @@
 .trend
-  h4.com-title 企业动态
+  h4.com-title 最新动态
+  .com-news
+    ul.c-news-list
+      each news in comNews
+        li.c-news-item
+          a.c-news-title(href='/news/#{news.content}') #{news.title}
+          span.c-news-date #{news.publish_time}

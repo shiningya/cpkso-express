@@ -45,22 +45,22 @@ router.get('/:id', function(req, res, next) {
 
 /* 获取供求信息数据 */
 function getInfos(args) {
-    var url = 'http://ev.cpkso.com/ev/require_search' + args;
+    var url = 'http://localhost:8080/ev/require_search' + args;
     return axios.get(url);
 }   
 
 function getPromo() {
-    return axios.get('http://ev.cpkso.com/ev/placeCar_findByAdsUniqueId?ads_unique_id=RQU');
+    return axios.get('http://localhost:8080/ev/placeCar_findByAdsUniqueId?ads_unique_id=RQU');
 }   
 
 /* 获取企业首页数据 */
 function getInfo(id) {
-    var url = 'http://ev.cpkso.com/ev/require_singleById?require.id=' + id;
+    var url = 'http://localhost:8080/ev/require_singleById?require.id=' + id;
     return axios.get(url);
 }
 
 function getOffers(id) {
-    var url = 'http://ev.cpkso.com/ev/offer_findByRequire?require_id=' + id;
+    var url = 'http://localhost:8080/ev/offer_findByRequire?require_id=' + id;
     return axios.get(url);
 }
 

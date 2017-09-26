@@ -120,17 +120,17 @@ block content
             case index
               when 0
                 .item.active
-                  a(href='/cars/#{slider.car.id}')
-                    img(src='http://ev.cpkso.com/adsPath/#{slider.pic}',style='width:924px;height:410px;')
+                  a(href='/cars/#{slider.entity_id}')
+                    img(src='http://localhost:8080/ev/adsPath/#{slider.pic}',style='width:924px;height:410px;')
               default
                 .item
-                  a(href='/cars/#{slider.car.id}')
-                    img(src='http://ev.cpkso.com/adsPath/#{slider.pic}',style='width:924px;height:410px;')
+                  a(href='/cars/#{slider.entity_id}')
+                    img(src='http://localhost:8080/ev/adsPath/#{slider.pic}',style='width:924px;height:410px;')
         .banner-sm
           -for (var i = 0; i < banners.length; ++i )
             .banner
-              a(href='/cars/#{banners[i].car.id}')
-                img(src='http://ev.cpkso.com/adsPath/#{banners[i].pic}')
+              a(href='/cars/#{banners[i].entity_id}')
+                img(src='http://localhost:8080/ev/adsPath/#{banners[i].pic}')
     .news
       ul.nav.nav-tabs
         li.active
@@ -150,11 +150,10 @@ block content
           .tab-pane.active#guide
             .owl-lg.owl-carousel
               each news in newsG
-                a.item(href='/news/#{news.article.content}',title='#{news.article.title}')
-                  img(src='http://ev.cpkso.com/adsPath/#{news.pic}',style='width:280px;height:180px;')
-                  p.title #{news.article.title}
-      
-    .products            
+                a.item(href='/news/#{news.content}',title='#{news.title}')
+                  img(src='http://localhost:8080/ev/adsPath/#{news.pic}',style='width:280px;height:180px;')
+                  p.title #{news.title}
+    .products
       .content-left
         ul.nav.nav-tabs
           li.active
@@ -174,12 +173,12 @@ block content
                   each car in cars
                     li.list-item
                       .detail
-                        h3.title #{car.car.name}
-                        p.desc #{car.car.brief}
-                      a(href='/cars/#{car.car.id}')
-                        img(src='http://ev.cpkso.com/adsPath/#{car.pic}')
+                        h3.title #{car.title}
+                        p.desc #{car.describe}
+                      a(href='/cars/#{car.entity_id}')
+                        img(src='http://localhost:8080/ev/adsPath/#{car.pic}')
                       .car-logo
-                        img(src='http://ev.cpkso.com/brandPath/#{car.car.brand.pic}')
+                        img(src='http://localhost:8080/ev/brandPath/#{car.logo}')
             +car(newCar)
           .tab-pane#hot-car
             +car(hotCar)
@@ -199,7 +198,7 @@ block content
                   mixin require(reqs)
                     each req in reqs
                       a.item(href='/infos/#{req.id}')
-                        img(src='http://ev.cpkso.com/requirePath/#{req.pic_thumb}')
+                        img(src='http://localhost:8080/ev/requirePath/#{req.pic_thumb}')
                   +require(carReq)
             p.slogan 整车求购
             #needCarMsg.msg
@@ -210,8 +209,8 @@ block content
                       a(href='/infos/#{req.id}') #{req.title}
               +requireList(carReqPic)
     #companyBar1.company-bar
-      a(href='/companies/#{promo1[0].company.id}')
-        img(src='http://ev.cpkso.com/adsPath/#{promo1[0].pic}')
+      a(href='/companies/#{promo1[0].entity_id}')
+        img(src='http://localhost:8080/ev/adsPath/#{promo1[0].pic}')
     .products
       .content-left
         .tab-container
@@ -245,10 +244,10 @@ block content
                     each part in parts
                       li.list-item
                         .detail
-                          h3.title #{part.parts.name}
-                          p.desc #{part.parts.brief}
-                        a(href='/parts/#{part.parts.id}')
-                          img(src='http://ev.cpkso.com/adsPath/#{part.pic}')
+                          h3.title #{part.name}
+                          p.desc #{part.brief}
+                        a(href='/parts/#{part.entity_id}')
+                          img(src='http://localhost:8080/ev/adsPath/#{part.pic}')
               +parts(newParts)
             #hot-product.tab-pane    
               +parts(hotParts)
@@ -282,8 +281,8 @@ block content
             #needPartsMsg.msg
               +requireList(partsReqPic)
     #companyBar2.company-bar
-      a(href='/companies/#{promo2[0].company.id}')
-        img(src='http://ev.cpkso.com/adsPath/#{promo2[0].pic}')
+      a(href='/companies/#{promo2[0].entity_id}')
+        img(src='http://localhost:8080/ev/adsPath/#{promo2[0].pic}')
     .company-show
       .title
         .line
@@ -293,19 +292,18 @@ block content
         ul.show-list
           each show in shows
             li.show-pics
-              h3.title #{show.company.name}
+              h3.title #{show.title}
               .pics
                 each pic in show.pics
                   .pic
-                    a(href='/companies/#{show.company.id}')
-                      img(src='http://ev.cpkso.com/adsPath/#{pic}')
+                    a(href='/companies/#{show.entity_id}')
+                      img(src='http://localhost:8080/ev/adsPath/#{pic}')
     #companyBar3.company-bar
-      a(href='/companies/#{promo3[0].company.id}')
-        img(src='http://ev.cpkso.com/adsPath/#{promo3[0].pic}')
+      a(href='/companies/#{promo3[0].entity_id}')
+        img(src='http://localhost:8080/ev/adsPath/#{promo3[0].pic}')
     .cut-line
 append script
   script(src='js/owl.carousel.min.js')
-  //- script(src='http://ev.cpkso.com/ev/require_search')
   script.
     $(function(){
       $('.owl-lg').owlCarousel({
@@ -319,12 +317,5 @@ append script
         responsive: false
       });
     });
-    $.ajax({
-      url: 'http://192.168.1.154:8080/ev/require_search',
-      type: 'POST',
-      dataType: 'json'
-    }).done(function(data){
-      console.log(data);
-    })
 
 

@@ -5,7 +5,7 @@ block title
   meta(name="keywords", content="低速电动车、电动乘用车、电动三轮车、电动客车、新能源电动车分类、新能源电动车品牌、新能源电动车价格、新能源电动车续航里程")
   meta(name="description", content="产品快搜新能源电动车车型库为您提供各种型号的新能源电动车，囊括了的参数、型号、图片、价格、厂家等信息，是的专业平台，带给您最准确的信息。")
 append link
-  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/searchresult.css")
+  link(rel="stylesheet", href="/css/searchresult.css")
 block content
   .product-head-nav
     ol.breadcrumb
@@ -160,25 +160,25 @@ block content
           dt.title 类型：
           dd.category-item
             a.choose-all.choose-on(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-#{ids[5]}-1') 不限
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-纯电动-#{ids[5]}-1') 纯电动
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-插电式-#{ids[5]}-1') 插电式
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-增程式-#{ids[5]}-1') 增程式
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-混合动力-#{ids[5]}-1') 混合动力
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-燃料电池-#{ids[5]}-1') 燃料电池
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-1-#{ids[5]}-1') 纯电动
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-2-#{ids[5]}-1') 插电式
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-3-#{ids[5]}-1') 增程式
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-4-#{ids[5]}-1') 混合动力
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-5-#{ids[5]}-1') 燃料电池
         dl#categoryLevel.category-list.clearfix
           dt.title 级别：
           dd.category-item
             a.choose-all.choose-on(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-0-1') 不限
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-微型-1') 微型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-小型-1') 小型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-紧凑型-1') 紧凑型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-中型-1') 中型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-中大型-1') 中大型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-豪华型-1') 豪华型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-SUV-1') SUV
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-MPV-1') MPV
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-跑车-1') 跑车
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-商用-1') 商用
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-1-1') 微型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-2-1') 小型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-3-1') 紧凑型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-4-1') 中型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-5-1') 中大型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-6-1') 豪华型
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-7-1') SUV
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-8-1') MPV
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-9-1') 跑车
+            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-10-1') 商用
     .content-container.car-search-result
       .content-left
         #car-result.search-result.product-container
@@ -186,49 +186,49 @@ block content
             each car in cars
               li.list-item
                 .figure
-                  a(href='/cars/#{car.car.id}')
-                    if car.car.prompt===1
+                  a(href='/cars/#{car.id}')
+                    if car.prompt===1
                       span.recommend-icon
-                    img(src='http://ev.cpkso.com/uploadPath/#{car.car.pic_thumbs[0]}')
+                    img(src='http://localhost:8080/ev/uploadPath/#{car.pic}')
                   a.car-logo(href='javascript:;')
-                    if car.car.brand
-                      img(src='http://ev.cpkso.com/brandPath/#{car.car.brand.pic}')
+                    if car.brand
+                      img(src='http://localhost:8080/ev/brandPath/#{car.brand}')
                   .car-info
                     .info-wrapper
-                      a(href='/cars/#{car.car.id}') 详情
+                      a(href='/cars/#{car.id}') 详情
                       a.cus-service(href='javascript:;') 客服
-                      a(href='/companys/#{car.car.company.id}',target='_blank') 官网
+                      a(href='/companys/#{car.company_id}',target='_blank') 官网
                     .car-detail
                       ul.detail-list
-                        if car.car.params[0]&&car.car.params[0].mile
+                        if car.mile
                           li
                             p 纯电续航：
-                              span #{car.car.params[0].mile}km
-                        if car.car.params[0]&&car.car.params[0].max_speed
+                              span #{car.mile}km
+                        if car.max_speed
                           li
                             p 最高时速：
-                              span #{car.car.params[0].max_speed}km
-                        if car.car.params[0]&&car.car.params[0].charge_time
+                              span #{car.max_speed}km
+                        if car.charge_time
                           li
                             p 充电时间：
-                              span #{car.car.params[0].charge_time}h
-                        if car.car.params[0]&&car.car.params[0].accelerate
+                              span #{car.charge_time}h
+                        if car.accelerate
                           li
                             p 百公里加速：
-                              span #{car.car.params[0].accelerate}s
+                              span #{car.accelerate}s
                 .detail
-                  if car.car.w1===1
-                    a.desc(href='/cars/#{car.car.id}',style='text-indent:26px;') #{car.car.name}
+                  if car.w1===1
+                    a.desc(href='/cars/#{car.id}',style='text-indent:26px;') #{car.name}
                       span.hot-icon
                   else
-                    a.desc(href='/cars/#{car.car.id}') #{car.car.name}
+                    a.desc(href='/cars/#{car.id}') #{car.name}
                   .company-detail
-                    a.company-name(href='/companies/#{car.car.company.id}',target='_blank') #{car.car.company.name}
-                      if car.car.company.vip===1
+                    a.company-name(href='/companies/#{car.company_id}',target='_blank') #{car.company_name}
+                      if car.vip===1
                         span.approve-icon
                   .msg
-                    if car.car.params[0]&&car.car.params[0].price
-                      p.price ￥#{car.car.params[0].price}万
+                    if car.price
+                      p.price ￥#{car.price}万
                     else
                       p.price 暂无价格
                     if car.hot
@@ -359,8 +359,8 @@ block content
       .content-right
         #showBar1.show-bar-sm
           mixin bar(bar)
-            a(href='/cars/#{bar[0].(car).id}')
-              img(src='http://ev.cpkso.com/adsPath/#{bar[0].pic}')
+            a(href='/cars/#{bar[0].entity_id}')
+              img(src='http://localhost:8080/ev/adsPath/#{bar[0].pic}')
           +bar(promo1)
         .info-container
           ul.nav.nav-tabs
@@ -374,8 +374,8 @@ block content
                 ul.msg-list
                   each news in newsdata
                     li.side-list-item
-                      a(href='/news/#{news.article.content}') #{news.article.title}
-                      span.date #{news.article.publish_time}
+                      a(href='/news/#{news.uri}') #{news.title}
+                      span.date #{news.date}
               +news(promo2)
             #policy.tab-pane
               +news(promo3)
@@ -397,4 +397,4 @@ block content
     .cut-line
 
 append script
-  script(src='http://ev.cpkso.com/style/js/lib/enter.js')
+  script(src='/js/enter.js')

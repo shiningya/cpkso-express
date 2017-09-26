@@ -116,9 +116,9 @@ block content
               .com-logo
                 a(href='/companies/#{company.id}')
                   if company.logo
-                    img(src='http://ev.cpkso.com/uploadPath/#{company.logo}')
+                    img(src='http://localhost:8080/ev/uploadPath/#{company.logo}')
                   else
-                    img(src='http://ev.cpkso.com/style/image1/logo.png')
+                    img(src='/img/com-logo.png')
               .com-detail
                 h4
                   a.title(href='/companies/#{company.id}') #{company.name}
@@ -133,9 +133,15 @@ block content
                   else
                     dd #{company.company_ct}
                   dt.title 注册地址：
-                  dd #{company.province}
+                  if company.province
+                    dd #{company.province}
+                  else
+                    dd 暂无信息
                   dt.title 联系人：
-                  dd #{company.charge}
+                  if company.charge
+                    dd #{company.charge}
+                  else
+                    dd 暂无信息
                 .com-brief
                   span.title 企业简介：
                   span.brief #{company.brief}
@@ -148,14 +154,4 @@ block content
     .cut-line
 
 append script
-  script(src='http://ev.cpkso.com/style/js/lib/enter.js')
-  script(src='http://ev.cpkso.com/style/js/lib/jquery.page.js')
-  script.
-    $('.pagination').Mpage({
-      pageCount: #{pageinfo.maxPageNo},
-      current: #{pageinfo.pageNo},
-      mclick: function(p){
-        //- console.log(p);
-      }
-    });
-
+  script(src='/js/enter.js')

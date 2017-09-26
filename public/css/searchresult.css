@@ -104,6 +104,7 @@
 .search-result .msg .price{
 	color: #da3a4d;
 	font-size: 12px;
+	line-height: 26px;;
 }
 .search-result .msg .price span{
 	font-size: 18px;

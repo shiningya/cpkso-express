@@ -5,10 +5,10 @@ block title
   meta(name="keywords", content="整车、配件、采购信息、企业求购、供求信息")
   meta(name="description", content="产品快搜新能源电动车供求信息里有新能源电动汽车产业链企业的采购求购信息汇总,企业可以发布供求信息、有助于企业找到最合适的供应商,采购到满意的产品。")
 append link
-  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/index.css")
-  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/needmsg.css")
-  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/style.css")
-  link(rel="stylesheet", href="http://ev.cpkso.com/style/css/searchresult.css")
+  link(rel="stylesheet", href="/css/index.css")
+  link(rel="stylesheet", href="/css/needmsg.css")
+  link(rel="stylesheet", href="/css/style.css")
+  link(rel="stylesheet", href="/css/searchresult.css")
 block content
   .product-head-nav
     ol.breadcrumb
@@ -214,16 +214,16 @@ block content
           .form-group.clearfix
             .col-sm-offset-3.col-sm-8
               button.release-btn(type='submit',onClick='return check()') 发布需求
-        img(src='http://ev.cpkso.com/style/img/icon/release.png')
+        img(src='/img/icon/release.png')
       .product-release-list
         ul
         each info in infos
           li.list-item
             a(href='/infos/#{info.id}')
               if info.pic_thumb
-                img(src='http://ev.cpkso.com/requirePath/#{info.pic_thumb}')
+                img(src='http://localhost:8080/ev/requirePath/#{info.pic_thumb}')
               else
-                img(src='http://ev.cpkso.com/style/img/no.jpg')
+                img(src='http://localhost:8080/ev/img/no.jpg')
             .product-detail
               a.desc(href='/infos/#{info.id}') #{info.title}
               ul
@@ -250,22 +250,12 @@ block content
       .page-wrapper
         .pagination
     #bar.ad-bar(style='margin-top:50px;')
-      a(href='/cars/#{promo[0].car.id}')
-        img(src='http://ev.cpkso.com/adsPath/#{promo[0].pic}')
+      a(href='/cars/#{promo[0].entity_id}')
+        img(src='http://localhost:8080/ev/adsPath/#{promo[0].pic}')
               
             
     .cut-line
 
 append script
-  script(src='http://ev.cpkso.com/style/js/lib/enter.js')
-  script(src='http://ev.cpkso.com/style/js/lib/jquery.page.js')
-  script(src='http://ev.cpkso.com/style/lib/My97DatePicker/4.8/WdatePicker.js')
-  script.
-    $('.pagination').Mpage({
-      pageCount: #{pageinfo.maxPageNo},
-      current: #{pageinfo.pageNo},
-      mclick: function(p){
-        //- console.log(p);
-      }
-    });
- 
+  script(src='/js/enter.js')
+  script(src='/js/WdatePicker.js')

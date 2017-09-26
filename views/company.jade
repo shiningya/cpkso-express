@@ -2,11 +2,15 @@ extends com-layout
 
 block content
   .banner
-    img(src='/img/index.jpg')
+    if company.main_pic
+      img(src='http://localhost:8080/ev/uploadPath/#{company.main_pic}')
+    else
+      img(src='/img/index.jpg')
   .main-body
     .content-left
       include includes/com-intro.jade
-      include includes/com-trend.jade
+      if comNews.length!==0
+        include includes/com-trend.jade
       include includes/com-prods.jade
     .content-right
       include includes/com-cnt.jade
