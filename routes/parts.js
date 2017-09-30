@@ -51,8 +51,7 @@ router.get('/search/:str', function (req, res, next) {
       args += '&partsCondition.ct2=' + ids[1];
     }
   }
-  console.log(args);
-  axios.all([getParts(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6()]).then(axios.spread(function (parts, promo1, promo2, promo3, promo4, promo5, promo6) {
+  axios.all([getPage(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6()]).then(axios.spread(function (parts, promo1, promo2, promo3, promo4, promo5, promo6) {
     var data = {};
     data.id = id;
     data.ids = ids;

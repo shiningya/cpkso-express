@@ -6,26 +6,26 @@ if prodsData.Cars
         each prod in prodsData.Cars
           li.list-item
             .figure
-              a(href='/cars/#{prod.car.id}')
-                if prod.car.prompt===1
+              a(href='/cars/#{prod.id}')
+                if prod.prompt===1
                   span.recommend-icon
-                img(src='http://localhost:8080/ev/uploadPath/#{prod.car.pic_thumbs[0]}')
+                img(src='#{prod.pic}')
               a.car-logo(href='javascript:;')
-                if prod.car.brand
-                  img(src='http://localhost:8080/ev/brandPath/#{prod.car.brand.pic}')
+                if prod.brand
+                  img(src='http://localhost:8080/ev/brandPath/#{prod.brand}')
             .detail
-              if prod.car.w1===1
-                a.desc(href='/cars/#{prod.car.id}',style='text-indent:26px;') #{prod.car.name}
+              if prod.w1===1
+                a.desc(href='/cars/#{prod.id}',style='text-indent:26px;') #{prod.name}
                   span.hot-icon
               else
-                a.desc(href='/cars/#{prod.car.id}') #{prod.car.name}
+                a.desc(href='/cars/#{prod.id}') #{prod.name}
               .company-detail
-                a.company-name(href='/company/#{prod.car.company.id}',target='_blank') #{prod.car.company.name}
-                  if prod.car.company.vip===1
+                a.company-name(href='/company/#{prod.company_id}',target='_blank') #{prod.company_name}
+                  if prod.vip===1
                     span.approve-icon
               .msg
-                if prod.car.params[0]&&prod.car.params[0].price
-                  p.price ￥#{prod.car.params[0].price}万
+                if prod.price
+                  p.price ￥#{prod.price}万
                 else
                   p.price 暂无价格
                 //- if car.hot
@@ -41,7 +41,7 @@ else if prodsData.Partss
               a(href='/parts/#{prod.parts.id}')
                 if prod.parts.prompt===1
                   span.recommend-icon
-                img(src='http://localhost:8080/ev/uploadPath/#{prod.parts.pic_thumbs[0]}')
+                img(src='#{prod.parts.pic_thumbs[0]}')
               .car-info
                 .info-wrapper
                   a(href='/parts/#{prod.parts.id}') 详情

@@ -3,7 +3,7 @@ extends com-layout
 block content
   .banner
     if company.main_pic
-      img(src='http://localhost:8080/ev/uploadPath/#{company.main_pic}')
+      img(src='#{company.main_pic}')
     else
       img(src='/img/index.jpg')
   .main-body

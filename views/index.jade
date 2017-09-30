@@ -5,9 +5,9 @@ block title
   meta(name="keywords", content="产品快搜新能源电动车、老年代步车、电动车、电动车求购、电动车配件、产品快搜网")
   meta(name="description", content="产品快搜新能源电动车网是国内最专业的新能源电动车咨询网站，拥有最全的电动车库、电动车配件库，提供权威的新能源电动车政策新闻、新能源电动车报价、新能源电动车配件等服务信息。是新能源电动车企业产品推广、品牌宣传、拓展市场、网络推广的第一选择。为你购买新能源电动车整车和配件提供专业的、有效的价值信息。")
 append link
-  link(rel="stylesheet", href="css/index.css")
-  link(rel="stylesheet", href="css/owl.carousel.min.css")
-  link(rel="stylesheet", href="css/owl.theme.css")
+  link(rel="stylesheet", href="http://ev.cpkso.com/css/index.css")
+  link(rel="stylesheet", href="http://ev.cpkso.com/css/owl.carousel.min.css")
+  link(rel="stylesheet", href="http://ev.cpkso.com/css/owl.theme.css")
 block content
   .main-body
     .banner-wrapper
@@ -38,25 +38,25 @@ block content
                       ul#brand.type-list.brand
                         li
                           a(title='特斯拉', href='/cars/search/0-99-0-0-0-0')
-                            img(src='img/icon/logo-1.png')
+                            img(src='img/icon/logo-1.png',alt='特斯拉')
                         li
                           a(title='比亚迪', href='/cars/search/0-99-0-0-0-0')
-                            img(src='img/icon/logo-2.png')
+                            img(src='img/icon/logo-2.png',alt='比亚迪')
                         li
                           a(title='雷克萨斯', href='/cars/search/0-60-0-0-0-0')
-                            img(src='img/icon/logo-3.png')
+                            img(src='img/icon/logo-3.png',alt='雷克萨斯')
                         li
                           a(title='北汽新能源', href='/cars/search/0-8-0-0-0-0')
-                            img(src='img/icon/logo-4.png')
+                            img(src='img/icon/logo-4.png',alt='北汽新能源')
                         li
                           a(title='福特', href='/cars/search/0-34-0-0-0-0')
-                            img(src='img/icon/logo-5.png')
+                            img(src='img/icon/logo-5.png',alt='福特')
                         li
                           a(title='日产', href='/cars/search/0-88-0-0-0-0')
-                            img(src='img/icon/logo-6.png')
+                            img(src='img/icon/logo-6.png',alt='日产')
                         li
                           a(title='雪佛兰', href='/cars/search/0-107-0-0-0-0')
-                            img(src='img/icon/logo-7.png')
+                            img(src='img/icon/logo-7.png',alt='雪佛兰')
                     li.filter-type
                       h3.title 价格
                       ul#brand.type-list.price
@@ -120,17 +120,17 @@ block content
             case index
               when 0
                 .item.active
-                  a(href='/cars/#{slider.entity_id}')
-                    img(src='http://localhost:8080/ev/adsPath/#{slider.pic}',style='width:924px;height:410px;')
+                  a(href='/cars/#{slider.entity_id}',title='#{slider.title}')
+                    img(src='#{slider.pic}',style='width:924px;height:410px;',alt='#{slider.title}')
               default
                 .item
-                  a(href='/cars/#{slider.entity_id}')
-                    img(src='http://localhost:8080/ev/adsPath/#{slider.pic}',style='width:924px;height:410px;')
+                  a(href='/cars/#{slider.entity_id}',title='#{slider.title}')
+                    img(src='#{slider.pic}',style='width:924px;height:410px;',alt='#{slider.title}')
         .banner-sm
           -for (var i = 0; i < banners.length; ++i )
             .banner
               a(href='/cars/#{banners[i].entity_id}')
-                img(src='http://localhost:8080/ev/adsPath/#{banners[i].pic}')
+                img(src='#{banners[i].pic}')
     .news
       ul.nav.nav-tabs
         li.active
@@ -151,7 +151,7 @@ block content
             .owl-lg.owl-carousel
               each news in newsG
                 a.item(href='/news/#{news.content}',title='#{news.title}')
-                  img(src='http://localhost:8080/ev/adsPath/#{news.pic}',style='width:280px;height:180px;')
+                  img(src='#{news.pic}',style='width:280px;height:180px;',alt='#{news.title}')
                   p.title #{news.title}
     .products
       .content-left
@@ -175,10 +175,10 @@ block content
                       .detail
                         h3.title #{car.title}
                         p.desc #{car.describe}
-                      a(href='/cars/#{car.entity_id}')
-                        img(src='http://localhost:8080/ev/adsPath/#{car.pic}')
+                      a(href='/cars/#{car.entity_id}',title='#{car.title}')
+                        img(src='#{car.pic}',alt='#{car.title}')
                       .car-logo
-                        img(src='http://localhost:8080/ev/brandPath/#{car.logo}')
+                        img(src='http://localhost:8080/ev/brandPath/#{car.logo}',alt='#{car.title}')
             +car(newCar)
           .tab-pane#hot-car
             +car(hotCar)
@@ -197,8 +197,8 @@ block content
                 #slider-sm-1.owl-carousel
                   mixin require(reqs)
                     each req in reqs
-                      a.item(href='/infos/#{req.id}')
-                        img(src='http://localhost:8080/ev/requirePath/#{req.pic_thumb}')
+                      a.item(href='/infos/#{req.id}',title='#{req.title}')
+                        img(src='http://localhost:8080/ev/requirePath/#{req.pic_thumb}',alt='#{req.title}')
                   +require(carReq)
             p.slogan 整车求购
             #needCarMsg.msg
@@ -206,11 +206,11 @@ block content
                 ul
                   each req in reqs
                     li
-                      a(href='/infos/#{req.id}') #{req.title}
+                      a(href='/infos/#{req.id}',title='#{req.title}') #{req.title}
               +requireList(carReqPic)
     #companyBar1.company-bar
-      a(href='/companies/#{promo1[0].entity_id}')
-        img(src='http://localhost:8080/ev/adsPath/#{promo1[0].pic}')
+      a(href='/companies/#{promo1[0].entity_id}',title='#{promo1[0].title}')
+        img(src='#{promo1[0].pic}',alt='#{promo1[0].title}')
     .products
       .content-left
         .tab-container
@@ -244,10 +244,10 @@ block content
                     each part in parts
                       li.list-item
                         .detail
-                          h3.title #{part.name}
+                          h3.title #{part.title}
                           p.desc #{part.brief}
-                        a(href='/parts/#{part.entity_id}')
-                          img(src='http://localhost:8080/ev/adsPath/#{part.pic}')
+                        a(href='/parts/#{part.entity_id}',title='#{part.title}')
+                          img(src='#{part.pic}',alt='#{part.title}')
               +parts(newParts)
             #hot-product.tab-pane    
               +parts(hotParts)
@@ -281,8 +281,8 @@ block content
             #needPartsMsg.msg
               +requireList(partsReqPic)
     #companyBar2.company-bar
-      a(href='/companies/#{promo2[0].entity_id}')
-        img(src='http://localhost:8080/ev/adsPath/#{promo2[0].pic}')
+      a(href='/companies/#{promo2[0].entity_id}',title='#{promo2[0].title}')
+        img(src='#{promo2[0].pic}',alt='#{promo2[0].title}')
     .company-show
       .title
         .line
@@ -296,11 +296,11 @@ block content
               .pics
                 each pic in show.pics
                   .pic
-                    a(href='/companies/#{show.entity_id}')
-                      img(src='http://localhost:8080/ev/adsPath/#{pic}')
+                    a(href='/companies/#{show.entity_id}',title='#{show.title}')
+                      img(src='#{pic}',alt='#{show.title}')
     #companyBar3.company-bar
-      a(href='/companies/#{promo3[0].entity_id}')
-        img(src='http://localhost:8080/ev/adsPath/#{promo3[0].pic}')
+      a(href='/companies/#{promo3[0].entity_id}',title='#{promo3[0].title}')
+        img(src='#{promo3[0].pic}',alt='#{promo3[0].title}')
     .cut-line
 append script
   script(src='js/owl.carousel.min.js')

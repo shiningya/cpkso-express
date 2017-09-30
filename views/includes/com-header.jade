@@ -1,7 +1,7 @@
 header.header
   .header-left
     if company.logo
-      img(src='http://localhost:8080/ev/uploadPath/#{company.logo}', alt='logo')
+      img(src='#{company.logo}', alt='logo')
     else
       img(src='/img/com-logo.png', alt='logo')
   .header-right

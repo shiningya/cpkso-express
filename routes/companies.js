@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
     var args = '';
     axios.all([getCompanies(args)]).then(axios.spread(function(companies) {
         var data = {};
+        data.list = true;
         data.ids = ids;
         data.pageinfo = companies.data.response.data.Company_condition;
         data.companies = companies.data.response.data.Companys;
@@ -15,11 +16,31 @@ router.get('/', function(req, res, next) {
     }));
 });
 
+router.get('/list/:page', function (req, res, next) {
+    var page = req.params.page;
+    var ids = ['0','0'];
+    var args = '?companyCondition.pageNo=' + page;
+    axios.all([getPage(args)]).then(axios.spread(function(companies) {
+        var data = {};
+        data.list = true;
+        data.ids = ids;
+        data.pageinfo = companies.data.response.data.Company_condition;
+        data.companies = companies.data.response.data.Companys;
+        res.render('companies', data);
+    }));
+});  
+
 /* 筛选企业列表 */
-router.get('/companies/search/:str', function(req, res, next) {
+router.get('/search/:str', function(req, res, next) {
     var ids = req.params.str.split('-');
-    var args = '';
-    axios.all([getCompanies(args)]).then(axios.spread(function(companies) {
+    var args = '?companyCondition.pageNo=' + ids[2];
+    if (ids[0] !== '0') {
+        args += '&companyCondition.province=' + ids[0];
+    }
+    if (ids[1]!=='0') {
+        args += '&companyCondition.category_id=' + ids[1];
+    }
+    axios.all([getPage(args)]).then(axios.spread(function(companies) {
         var data = {};
         data.ids = ids;
         data.pageinfo = companies.data.response.data.Company_condition;
@@ -40,7 +61,7 @@ router.get('/:id/', function(req, res, next) {
         res.render('company', data);
     }));
 });
-
+/* 企业介绍 */
 router.get('/:id/intro', function(req, res, next) {
     var id = req.params.id;
     axios.all([getCompany(id)]).then(axios.spread(function(company) {
@@ -50,7 +71,7 @@ router.get('/:id/intro', function(req, res, next) {
         res.render('intro', data);
     }));
 });
-
+/* 供应产品 */
 router.get('/:id/products', function(req, res, next) {
     var id = req.params.id;
     axios.all([getCompany(id), getComProds(id)]).then(axios.spread(function(company, comProds) {
@@ -61,7 +82,7 @@ router.get('/:id/products', function(req, res, next) {
         res.render('products', data);
     }));
 });
-
+/* 企业动态 */
 router.get('/:id/trend', function(req, res, next) {
     var id = req.params.id;
     axios.all([getCompany(id), getComNews(id)]).then(axios.spread(function(company, comNews) {
@@ -85,6 +106,11 @@ function getCompany(id) {
     return axios.get(url);
 }
 
+function getPage(args) {
+    var url = 'http://localhost:8080/ev/company_skipPage' + args;
+    return axios.get(url);
+}
+  
 function getComProds(id) {
     var url = 'http://localhost:8080/ev/car_findByCompanyIdF?company_id=' + id;
     return axios.get(url);

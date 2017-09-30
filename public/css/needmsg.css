@@ -45,24 +45,29 @@
 	color: #da3a4d;
 	cursor: pointer;
 }
-.product-release-list .product-detail ul{
+.product-release-list .product-detail dl{
 	display: flex;
 	flex-wrap: wrap;
 	color: #9d9d9d;
+	margin-bottom: 0;
 }
-.product-release-list .product-detail li{
+.product-release-list .product-detail{
 	width: 200px;
 }
-.product-release-list .product-detail li dt,
-.product-release-list .product-detail li dd,
-.product-release-list .product-detail li a{
+.product-release-list .product-detail dt,
+.product-release-list .product-detail dd,
+.product-release-list .product-detail a{
 	display: inline-block;
 	height: 30px;
-	line-height: 30px;
 	font-weight: 400;
 }
-.product-release-list .product-detail li a{
-	margin-left: 30px;
+.product-release-list .product-detail dt{
+	width: 70px;
+}
+.product-release-list .product-detail dd{
+	width: 160px;
+}
+.product-release-list .product-detail a{
 	color: #da3a4d;
 }
 .product-release .release-btn{

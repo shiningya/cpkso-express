@@ -6,11 +6,11 @@ head
     meta(name="keywords", content="#{part.name}-标准件、辅助件、车身系统、电气系统、转向系统、底盘系统、密封系统、内饰系统、新能源电动车电池、新能源汽车电机,新能源汽车控制系统,电动汽车零部件有哪些,电动车相关零部件")
     meta(name="description", content="#{part.name}-产品快搜新能源电动车配件库为您提供新能源汽车零部件大全,新能源电动车能源系统,驱动及控制系统,新能源汽车配套设施,电动车原材料信息")
   append link
-    link(rel="stylesheet", href="/css/searchresult.css")
-    link(rel="stylesheet", href="/css/cardetail.css")
-    link(rel="stylesheet", href="/css/partsdetail.css")
-    link(rel="stylesheet", href="/css/news.css")
-    link(rel="stylesheet", href="/css/owl.carousel.min.css")
+    link(rel='stylesheet', href="http://ev.cpkso.com/css/searchresult.css")
+    link(rel='stylesheet', href="http://ev.cpkso.com/css/cardetail.css")
+    link(rel='stylesheet', href="http://ev.cpkso.com/css/partsdetail.css")
+    link(rel='stylesheet', href="http://ev.cpkso.com/css/news.css")
+    link(rel='stylesheet', href="http://ev.cpkso.com/css/owl.carousel.min.css")
 body(data-spy='scroll',data-target='.myScrollspy')
   block content
     .product-head-nav
@@ -26,13 +26,13 @@ body(data-spy='scroll',data-target='.myScrollspy')
         .preview-wrapper
           .preview
             .main-img.picZoomer
-              img(src='http://localhost:8080/ev/uploadPath/#{part.pics[0]}')
+              img(src='#{part.pics[0]}')
             .spec-list
               .spec-items.J-img-list
                 ul#owl-sm.owl-carousel
                   each pic in part.pics
                     li.item
-                      img(src='http://localhost:8080/ev/uploadPath/#{pic}')
+                      img(src='#{pic}')
         .item-info-wrapper
           .header-wrapper.clearfix
             .product-name #{part.name}
@@ -103,15 +103,15 @@ body(data-spy='scroll',data-target='.myScrollspy')
               each part in promo8
                 li.site-rank-list-item
                   a(href='/parts/#{part.entity_id}')
-                    img(src='http://localhost:8080/ev/adsPath/#{part.pic}')
+                    img(src='#{part.pic}')
                   .product-info
                     a.desc(href='/parts/#{part.entity_id}') #{part.title}
                     .msg
                       p.price #{part.price}
                 
   append script                          
-    script(src='/js/jquery.form.js')
-    script(src='/js/owl.carousel.min.js')
+    script(src='http://ev.cpkso.com/js/jquery.form.js')
+    script(src='http://ev.cpkso.com/js/owl.carousel.min.js')
     script.
       $('#owl-sm').owlCarousel({
         items: 5,

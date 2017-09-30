@@ -5,7 +5,7 @@ block title
   meta(name="keywords", content="低速电动车、电动乘用车、电动三轮车、电动客车、新能源电动车分类、新能源电动车品牌、新能源电动车价格、新能源电动车续航里程")
   meta(name="description", content="产品快搜新能源电动车车型库为您提供各种型号的新能源电动车，囊括了的参数、型号、图片、价格、厂家等信息，是的专业平台，带给您最准确的信息。")
 append link
-  link(rel="stylesheet", href="/css/searchresult.css")
+  link(rel='stylesheet', href="http://ev.cpkso.com/css/searchresult.css")
 block content
   .product-head-nav
     ol.breadcrumb
@@ -85,7 +85,7 @@ block content
           #brandA.tab-pane.brand-list.active
             mixin brands(brands)
               each brand in brands
-                a(href='/cars/search/#{ids[0]}-#{brand.id}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1') #{brand.brand}
+                a(href='/cars/search/#{ids[0]}-#{brand.id}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1',title='#{brand.brand}') #{brand.brand}
             +brands(brands.a)
           #brandB.tab-pane.brand-list
             +brands(brands.b)
@@ -186,18 +186,18 @@ block content
             each car in cars
               li.list-item
                 .figure
-                  a(href='/cars/#{car.id}')
+                  a(href='/cars/#{car.id}',title='#{car.name}')
                     if car.prompt===1
                       span.recommend-icon
-                    img(src='http://localhost:8080/ev/uploadPath/#{car.pic}')
-                  a.car-logo(href='javascript:;')
+                    img(src='#{car.pic}',alt='#{car.name}')
+                  a.car-logo(href='javascript:;',title='#{car.name}')
                     if car.brand
-                      img(src='http://localhost:8080/ev/brandPath/#{car.brand}')
+                      img(src='http://localhost:8080/ev/brandPath/#{car.brand}',alt='#{car.name}')
                   .car-info
                     .info-wrapper
-                      a(href='/cars/#{car.id}') 详情
+                      a(href='/cars/#{car.id}',title='#{car.name}') 详情
                       a.cus-service(href='javascript:;') 客服
-                      a(href='/companys/#{car.company_id}',target='_blank') 官网
+                      a(href='/companys/#{car.company_id}',target='_blank',title='#{car.company_name}') 官网
                     .car-detail
                       ul.detail-list
                         if car.mile
@@ -218,12 +218,12 @@ block content
                               span #{car.accelerate}s
                 .detail
                   if car.w1===1
-                    a.desc(href='/cars/#{car.id}',style='text-indent:26px;') #{car.name}
+                    a.desc(href='/cars/#{car.id}',style='text-indent:26px;',title='#{car.name}') #{car.name}
                       span.hot-icon
                   else
-                    a.desc(href='/cars/#{car.id}') #{car.name}
+                    a.desc(href='/cars/#{car.id}',title='#{car.name}') #{car.name}
                   .company-detail
-                    a.company-name(href='/companies/#{car.company_id}',target='_blank') #{car.company_name}
+                    a.company-name(href='/companies/#{car.company_id}',target='_blank',title='#{car.company_name}') #{car.company_name}
                       if car.vip===1
                         span.approve-icon
                   .msg
@@ -359,22 +359,22 @@ block content
       .content-right
         #showBar1.show-bar-sm
           mixin bar(bar)
-            a(href='/cars/#{bar[0].entity_id}')
-              img(src='http://localhost:8080/ev/adsPath/#{bar[0].pic}')
+            a(href='/cars/#{bar[0].entity_id}',title='#{bar[0].title}')
+              img(src='#{bar[0].pic}',alt='#{bar[0].title}')
           +bar(promo1)
         .info-container
           ul.nav.nav-tabs
             li.active
-              a(href='#car-news',data-toggle='tab') 行业新闻
+              a(href='#car-news',data-toggle='tab',title='行业新闻') 行业新闻
             li
-              a(href='#policy',data-toggle='tab') 政策法规
+              a(href='#policy',data-toggle='tab',title='政策法规') 政策法规
           .tab-content
             #car-news.tab-pane.active
               mixin news(newsdata)
                 ul.msg-list
                   each news in newsdata
                     li.side-list-item
-                      a(href='/news/#{news.uri}') #{news.title}
+                      a(href='/news/#{news.uri}',title='#{news.title}') #{news.title}
                       span.date #{news.date}
               +news(promo2)
             #policy.tab-pane
@@ -384,17 +384,17 @@ block content
         .info-container
           ul.nav.nav-tabs
             li.active
-              a(href='#guide',data-toggle='tab') 车辆导购
+              a(href='#guide',data-toggle='tab',title='车辆导购') 车辆导购
             li
-              a(href='#tips',data-toggle='tab') 用车贴士
+              a(href='#tips',data-toggle='tab',title='用车贴士') 用车贴士
           .tab-content
             #guide.tab-pane.active
               +news(promo5)
             #tips.tab-pane
               +news(promo6)
         #showBar3.show-bar-sm
-          +bar(promo6)
+          +bar(promo7)
     .cut-line
 
 append script
-  script(src='/js/enter.js')
+  script(src='http://ev.cpkso.com/js/enter.js')

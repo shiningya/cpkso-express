@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
     var args = '';
     axios.all([getInfos(args),getPromo()]).then(axios.spread(function(infos,promo) {
         var data = {};
+        data.list = true;
         data.ids = ids;
         data.pageinfo = infos.data.response.data.Require_condition;
         data.infos = infos.data.response.data.Requires;
@@ -16,11 +17,32 @@ router.get('/', function(req, res, next) {
     }));
 });
 
+router.get('/list/:page', function (req, res, next) {
+    var page = req.params.page;
+    var ids = ['0','0'];
+    var args = '?requireCondition.pageNo=' + page;
+    axios.all([getPage(args),getPromo()]).then(axios.spread(function(infos,promo) {
+        var data = {};
+        data.list = true;
+        data.ids = ids;
+        data.pageinfo = infos.data.response.data.Require_condition;
+        data.infos = infos.data.response.data.Requires;
+        data.promo = promo.data.response.data.PlaceCars;
+        res.render('infos', data);
+    }));
+});  
+
 /* 筛选供求信息列表 */
-router.get('/infos/search/:str', function(req, res, next) {
+router.get('/search/:str', function(req, res, next) {
     var ids = req.params.str.split('-');
-    var args = '';
-    axios.all([getInfos(args),getPromo()]).then(axios.spread(function(infos,promo) {
+    var args = '?requireCondition.pageNo=' + ids[2];
+    if (ids[0] !== '0') {
+        args += '&province=' + ids[0];
+    }
+    if (ids[1]!=='0') {
+        args += '&require.category.type=' + ids[1];
+    }
+    axios.all([getPage(args),getPromo()]).then(axios.spread(function(infos,promo) {
         var data = {};
         data.ids = ids;
         data.pageinfo = infos.data.response.data.Require_condition;
@@ -49,7 +71,12 @@ function getInfos(args) {
     return axios.get(url);
 }   
 
-function getPromo() {
+function getPage(args) {
+    var url = 'http://localhost:8080/ev/require_skipPage' + args;
+    return axios.get(url);
+}
+  
+  function getPromo() {
     return axios.get('http://localhost:8080/ev/placeCar_findByAdsUniqueId?ads_unique_id=RQU');
 }   
 

@@ -5,7 +5,7 @@ block title
   meta(name="keywords", content="标准件、辅助件、车身系统、电气系统、转向系统、底盘系统、密封系统、内饰系统、新能源电动车电池、新能源汽车电机,新能源汽车控制系统,电动汽车零部件有哪些,电动车相关零部件")
   meta(name="description", content="产品快搜新能源电动车配件库为您提供新能源汽车零部件大全,新能源电动车能源系统,驱动及控制系统,新能源汽车配套设施,电动车原材料信息")
 append link
-  link(rel="stylesheet", href="/css/searchresult.css")
+  link(rel='stylesheet', href="http://ev.cpkso.com/css/searchresult.css")
 block content
   .product-head-nav
     ol.breadcrumb
@@ -19,14 +19,14 @@ block content
         dt.title 类型：
         dd.category-item
           a.choose-all.choose-on(href='/parts/search/0-0-1') 不限
-          a(href='/parts/search/6-0-1') 标准件
-          a(href='/parts/search/7-0-1') 辅助件
-          a(href='/parts/search/8-0-1') 车身系统
-          a(href='/parts/search/9-0-1') 电气系统
-          a(href='/parts/search/10-0-1') 转向系统
-          a(href='/parts/search/11-0-1') 底盘系统
-          a(href='/parts/search/12-0-1') 密封系统
-          a(href='/parts/search/13-0-1') 内饰系统
+          a(href='/parts/search/6-0-1',title='标准件') 标准件
+          a(href='/parts/search/7-0-1',title='辅助件') 辅助件
+          a(href='/parts/search/8-0-1',title='车身系统') 车身系统
+          a(href='/parts/search/9-0-1',title='电气系统') 电气系统
+          a(href='/parts/search/10-0-1',title='转向系统') 转向系统
+          a(href='/parts/search/11-0-1',title='底盘系统') 底盘系统
+          a(href='/parts/search/12-0-1',title='密封系统') 密封系统
+          a(href='/parts/search/13-0-1',title='内饰系统') 内饰系统
       if id&&id!=='0'
         dl#ct2.category-list.clearfix
           dt.title 分类：
@@ -142,15 +142,15 @@ block content
             each part in parts
               li.list-item
                 .figure
-                  a(href='/parts/#{part.id}')
+                  a(href='/parts/#{part.id}',title='#{part.name}')
                     if part.prompt===1
                       span.recommend-icon
-                    img(src='http://localhost:8080/ev/uploadPath/#{part.pic}')
+                    img(src='#{part.pic}',alt='#{part.name}')
                   .car-info
                     .info-wrapper
-                      a(href='/parts/#{part.id}') 详情
+                      a(href='/parts/#{part.id}',title='#{part.name}') 详情
                       a.cus-service(href='javascript:;') 客服
-                      a(href='/companys/#{part.company_id}',target='_blank') 官网
+                      a(href='/companys/#{part.company_id}',target='_blank',title='#{part.company_name}') 官网
                     .car-detail
                       p.parts-info 简介：#{part.brief}
                 .detail
@@ -158,9 +158,9 @@ block content
                     a.desc(href='/parts/#{part.id}',style='text-indent:26px;') #{part.name}
                       span.hot-icon
                   else
-                    a.desc(href='/parts/#{part.id}') #{part.name}
+                    a.desc(href='/parts/#{part.id}',title='#{part.name}') #{part.name}
                   .company-detail
-                    a.company-name(href='/company/#{part.company_id}',target='_blank') #{part.company_name}
+                    a.company-name(href='/company/#{part.company_id}',target='_blank',title='#{part.company_name}') #{part.company_name}
                       if part.vip===1
                         span.approve-icon
                   .msg
@@ -296,22 +296,22 @@ block content
       .content-right
         #showBar1.show-bar-sm
           mixin bar(bar)
-            a(href='/parts/#{bar[0].(part).id}')
-              img(src='http://localhost:8080/ev/adsPath/#{bar[0].pic}')
+            a(href='/parts/#{bar[0].entity_id}',title='#{bar[0].title}')
+              img(src='#{bar[0].pic}',alt='#{bar[0].title}')
           +bar(promo1)
         .info-container
           ul.nav.nav-tabs
             li.active
-              a(href='#car-news',data-toggle='tab') 行业新闻
+              a(href='#car-news',data-toggle='tab',title='行业新闻') 行业新闻
             li
-              a(href='#policy',data-toggle='tab') 政策法规
+              a(href='#policy',data-toggle='tab',title='政策法规') 政策法规
           .tab-content
             #car-news.tab-pane.active
               mixin news(newsdata)
                 ul.msg-list
                   each news in newsdata
                     li.side-list-item
-                      a(href='/news/#{news.uri}') #{news.title}
+                      a(href='/news/#{news.uri}',title='#{news.title}') #{news.title}
                       span.date #{news.date}
               +news(promo2)
             #policy.tab-pane
@@ -321,9 +321,9 @@ block content
         .info-container
           ul.nav.nav-tabs
             li.active
-              a(href='#guide',data-toggle='tab') 车辆导购
+              a(href='#guide',data-toggle='tab',title='车辆导购') 车辆导购
             li
-              a(href='#tips',data-toggle='tab') 用车贴士
+              a(href='#tips',data-toggle='tab',title='用车贴士') 用车贴士
           .tab-content
             #guide.tab-pane.active
               +news(promo5)
