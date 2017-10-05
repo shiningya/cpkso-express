@@ -182,7 +182,7 @@ block content
           .form-group.clearfix
             label.col-sm-3.control-label(for='ECalendar_case1') 截止日期
             .col-sm-8
-              input.input-text.Wdate(type='text',name='require.expire_date',onfocus='WdatePiker()')
+              input.input-text.Wdate(type='text',name='require.expire_date',onclick='WdatePicker()')
           .form-group.clearfix
             label.col-sm-3.control-label 需求数量
             .col-sm-4
@@ -228,14 +228,9 @@ block content
                 a.desc(href='/infos/#{info.id}',title='#{info.title}') #{info.title}
                 dl
                   dt 类型：
-                  dd #{info.category.name}
+                  dd #{info.category}
                   dt 采购数量：
-                  if info.buyerType==='ENTERPRISE'
-                    dd 【企业采购】#{info.number}台
-                  else if info.buyerType==='PERSONAL'
-                    dd 【个人采购】#{info.number}台
-                  else
-                    dd
+                  dd 【#{info.buyerType}】#{info.number}台
                   dt 联系人：
                   dd #{info.name}
                   dt 所在地：
@@ -369,10 +364,177 @@ block content
     #bar.ad-bar(style='margin-top:50px;')
       a(href='/cars/#{promo[0].entity_id}',title='#{promo[0].title}')
         img(src='#{promo[0].pic}',alt='#{promo[0].title}')
-              
-            
-    .cut-line
-
 append script
+  script(src='http://ev.cpkso.com/js/jquery.validate.js')
   script(src='http://ev.cpkso.com/js/enter.js')
+  script(src='http://ev.cpkso.com/js/area.js')
   script(src='http://ev.cpkso.com/js/WdatePicker.js')
+  script.
+    function check() {
+      var title = document.forms["needForm"]["require.title"].value;
+      var phone = document.forms["needForm"]["require.tel"].value;
+      var brief = document.forms["needForm"]["require.brief"].value;
+      var name = document.forms["needForm"]["require.name"].value;
+      var wechat = document.forms["needForm"]["require.wechat"].value;
+      var qq = document.forms["needForm"]["require.qq"].value;
+      var email = document.forms["needForm"]["require.email"].value;
+      var reg = /^[a-zA-Z\u4e00-\u9fa5-_]+$/;
+      var reg2 = /^[a-zA-Z0-9\u4e00-\u9fa5-_]+$/;
+      var sreg = /^[a-zA-Z0-9.,:;。，\u4e00-\u9fa5-_]+$/;
+      var qreg = /^[1-9]\d{4,12}$/;
+      var preg = /^[1][34587]\d{9}$/;
+      var ereg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if (title == "" || title == null) {
+        alert("产品名称不能为空");
+        return false;
+      }
+      if (name == "" || name == null) {
+        alert("联系人不能为空");
+        return false;
+      }
+
+      if (phone == "" || phone == null) {
+        alert("手机号码不能为空");
+        return false;
+      }
+      if (phone != "" && !preg.test(phone)) {
+        alert("手机号码格式不正确");
+        return false;
+      }
+      if (name != "" && !reg.test(name)) {
+        alert('联系人不能包含数字和特殊字符！');
+        return false;
+      }
+      if (brief != "" && !sreg.test(brief)) {
+        alert('说明内容不能是特殊的字符！');
+        return false;
+      }
+      if (title != "" && !reg2.test(title)) {
+        alert('产品名称不能是特殊的字符！');
+        return false;
+      }
+      if (wechat != "" && !reg2.test(wechat)) {
+        alert('微信号不能是特殊的字符！');
+        return false;
+      }
+      if (qq != "" && !qreg.test(qq)) {
+        alert('qq号不合法！');
+        return false;
+      }
+      if (email != "" && !ereg.test(email)) {
+        alert('邮箱格式不正确！');
+        return false;
+      }
+    }
+    //- $(function() {
+    //-   $("#ECalendar_case1").ECalendar({
+    //-     type: "date",
+    //-     skin: "#233",
+    //-     offset: [0, 2]
+    //-   });
+    //-   $(".release-btn").validate();
+    //- })
+    $(document).ready(function() {
+      $('#needForm').validate({
+        rules: {
+          "require.title": {
+            required: true,
+            maxlength: 100
+          },
+          "require.tel": {
+            maxlength: 30
+          },
+          "require.qq": {
+            maxlength: 30
+          },
+          "require.wechat": {
+            maxlength: 30
+          },
+          "require.email": {
+            maxlength: 40
+          },
+          "require.province": {
+            maxlength: 20
+          },
+          "require.city": {
+            maxlength: 20
+          }
+        },
+        messages: {
+          "require.title": {
+            maxlength: '长度不能超过100个字符'
+          },
+          "require.tel": {
+            maxlength: '长度不能超过30个字符'
+          },
+          "require.qq": {
+            maxlength: '长度不能超过30个字符'
+          },
+          "require.wechat": {
+            maxlength: '长度不能超过30个字符'
+          },
+          "require.email": {
+            maxlength: '长度不能超过40个字符'
+          },
+          "require.province": {
+            maxlength: '长度不能超过20个字符'
+          },
+          "require.city": {
+            maxlength: '长度不能超过20个字符'
+          }
+        }
+      })
+    })
+    $('#s_main').change(function() {
+      var s_main = document.getElementById("s_main");
+      var s_index = s_main.selectedIndex;
+      var s_text = s_main.options[s_index].text;
+      var s_value = s_main.options[s_index].value;
+      var f_options = $('<option value="3">电动乘用车</option><option value="4">电动客车</option><option value="5">微型电动车</option>');
+      var s_options = $('<option value="6">标准件</option><option value="7">辅助件</option><option value="8">车身系统</option><option value="9">电气系统</option><option value="10">转向系统</option><option value="11">底盘系统</option><option value="12">内饰系统</option><option value="13">密封系统</option>');
+      var obj = $('#s_sub');
+      obj.html("");
+      if (s_value == 1) {
+        obj.html(f_options);
+        f_options.appendTo(obj);
+      } else {
+        obj.html(s_options);
+      }
+    })
+    function getCity(currProvince) {
+      var currProvincecurrProvince = currProvince;
+      var i, j, k;
+      for (var i = document.getElementById("city").childNodes.length - 1; i > 0; i--) {
+        document.getElementById("city").remove(i);
+      }
+      for (i = 0; i < cityArray.length; i++) {
+        if (cityArray[i][0] == currProvince) {
+          tmpcityArray = cityArray[i][1].split("|")
+          for (j = 0; j < tmpcityArray.length; j++) {
+            var newoption = document.createElement("option");
+            newoption.innerText = tmpcityArray[j];
+            newoption.value = tmpcityArray[j];
+            document.getElementById("city").appendChild(newoption);
+          }
+          document.getElementById("city").selectedIndex = 0;
+        }
+      }
+    }
+    $('#needForm').submit(function(event) {
+      event.preventDefault();
+      var form = $(this);
+      $.ajax({
+        type: 'post',
+        async: false,
+        url: form.attr("action"),
+        data: form.serialize(),
+        success: function(data) {
+          var res = data.response;
+          if (res.msg.success == true) {
+            location.href = "needmsg.html";
+          } else {
+            alert('需求发布失败，请重试');
+          }
+        }
+      });
+    });
