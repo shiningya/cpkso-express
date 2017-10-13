@@ -291,6 +291,9 @@
 	font-size: 0;
 	overflow: hidden;
 }
+.owl-wrapper-outer {
+	overflow: hidden;
+}
 .owl-lg {
     width: 1160px;
     margin-left: auto;

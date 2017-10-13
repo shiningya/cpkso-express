@@ -7,21 +7,29 @@ head
     meta(name="description", content="#{car.car.name}-产品快搜新能源电动车车型库为您提供各种型号的新能源电动车，囊括了的参数、型号、图片、价格、厂家等信息，是的专业平台，带给您最准确的信息。")
   append link
     link(rel='stylesheet', href="http://ev.cpkso.com/css/searchresult.css")
-    link(rel='stylesheet', href="http://ev.cpkso.com/css/cardetail.css")
+    link(rel='stylesheet', href="http://ev.cpkso.com/css/detail.css")
     link(rel='stylesheet', href="http://ev.cpkso.com/css/news.css")
     link(rel='stylesheet', href="http://ev.cpkso.com/css/owl.carousel.min.css")
     link(rel='stylesheet', href="http://ev.cpkso.com/css/param_detail.css")
 block body
   body(data-spy='scroll',data-target='.myScrollspy')
-    include includes/header.jade
+    header.header
+      .header-left
+        img(src='/img/search-logo.png', alt='logo')
+      block hright
+        .header-right
+          .search
+            input#car-input.search-input(onkeydown="entersearch(1);" type="text" placeholder="请输入车型名称" autocomplete="off" value='#{keyword}')
+            a#car-search-btn.search-btn
+    include includes/nav.jade
     block content
       .product-head-nav
         ol.breadcrumb
           span.location 当前位置：
           li
-              a(href='/') 首页
+              a(href='/',target='_blank') 首页
           li
-              a(href='/cars/') 车型库
+              a(href='/cars/',target='_blank') 车型库
           li.active #{car.car.name}
       .main-body
         #pdetail.product-intro.clearfix
@@ -36,7 +44,7 @@ block body
                       li.item
                         img(src='#{pic}')
           .item-info-wrapper
-            .header-wrapper.clearfix
+            .header-wrapper
               .product-name #{car.car.name}
             .guide-price
               .dt 新车指导价：
@@ -49,39 +57,39 @@ block body
                 人浏览
             .company.li
               .dt 公司
-              .dd #{car.company_name}
+              .dd #{car.car.company.name}
                 if car.vip===1
                   span
-            .choose-type.li.clearfix
-              .dt.clearfix 车型配置
+            .choose-type.li
+              .dt 车型配置
               #choose.dd
-              ul.clearfix
-                each param,index in car.car.params
-                  if index===0
-                    li.selected
-                      a(href='javascript:;') #{param.car_model}
-                  else
-                    li
-                      a(href='javascript:;') #{param.car_model}
+                ul
+                  each param,index in car.car.params
+                    if index===0
+                      li.selected(data-price='#{param.price}')
+                        a(href='javascript:;') #{param.car_model}
+                    else
+                      li(data-price='#{param.price}')
+                        a(href='javascript:;') #{param.car_model}
             .contact.li
               .dt 联系人
-              if car.charge
-                .dd #{car.charge}
+              if car.car.company.charge
+                .dd #{car.car.company.charge}
               else
                 .dd 暂无
             .address.li
               .dt 地址
-              if car.address
-                .dd #{car.address}
+              if car.car.company.address
+                .dd #{car.car.company.address}
               else
                 .dd 暂无
             .service
-              if car.url
-                a.span.website(href='#{car.url}',rel='nofollow',target='_blank') 官网
-              a.span.home(href='/companies/#{car.id}',target='_blank') 企业库
-              if car.contact||car.contact2
+              if car.car.company.url
+                a.span.website(href='#{car.car.company.url}',rel='nofollow',target='_blank') 官网
+              a.span.home(href='/companies/#{car.car.company.id}',target='_blank') 企业库
+              if car.car.company.contact||car.car.company.contact2
                 a.span.tel(href='javascript:;') 联系方式
-                  span #{car.contact}  #{car.contact2}
+                  span #{car.car.company.contact}  #{car.car.company.contact2}
         .content-container
           .content-left
             .product-container
@@ -218,8 +226,6 @@ block body
             async: false
           })
           .done(function(data) {
-
-
             var modelData = data.response.data.Car.car;
             var filterTpl = '{{#params}}<label><input class="car-type" name="param_ids" type="checkbox" value="{{id}}">{{car_model}}</label>{{/params}}';
             var filterHtml = Mustache.render(filterTpl, modelData);
@@ -244,57 +250,35 @@ block body
               }
             });
 
-
-
-            $('#choose li:first-child').addClass('selected');
             $('#choose li').click(function() {
-              var index = $(this).index();
-              $(this).siblings().removeClass('selected');
-              $(this).addClass('selected');
-              $('#pdetail .price').html('¥ ' + carPrices[index] + '万');
+              var $this = $(this);
+              var price = $this.attr('data-price');
+              $this.siblings().removeClass('selected');
+              $this.addClass('selected');
+              $('#pdetail .price').html('¥ ' + price + '万');
             })
           });
         });
-
-
-
-
         $(window).load(function() {
           $('#filter').submit(function() {
             $(this).ajaxSubmit({
               success: function(data) {
                 var headerTpl = '<tbody><tr><td class="first-td"><div class="param-detail-head"><div class="param-detail-data clearfix"><p><i class="icon-large">●</i> 标配</p><p><i class="icon-large">○</i> 选配</p><p><i class="icon-large">-</i> 无</p></div></div></td>{{#Params}}<td><div class="select-box-active"><div class="select-info"><p class="car-name">{{param_table.car_model}}</p><p class="car-price">{{#param_table.price}}参考价：¥ {{/param_table.price}}{{param_table.price}}{{#param_table.price}}万{{/param_table.price}}</p></div></div></td>{{/Params}}</tr></tbody>';
-
                 var priceTpl = '<tbody><tr class="param-same-tr"><td class="first-td">厂商报价(万)</td>{{#Params}}<td>{{param_table.price}}</td>{{/Params}}</tr><tr><td class="first-td">补贴后参考价(万)</td>{{#Params}}<td>{{param_table.after_subsidy}}</td>{{/Params}}</tr><tr><td class="first-td">国家补贴(万)</td>{{#Params}}<td>{{param_table.subsidy}}</td>{{/Params}}</tr><tr><td class="first-td">地方补贴(万)</td>{{#Params}}<td>{{param_table.subsidy_local}}</td>{{/Params}}</tr><tr><td class="first-td">厂商补贴(万)</td>{{#Params}}<td>{{param_table.subsidy_factory}}</td>{{/Params}}</tr><tr><td class="first-td">总补贴(万)</td>{{#Params}}<td>{{param_table.subsidy_total}}</td>{{/Params}}</tr></tbody>';
-
                 var baseTpl = '<tbody><tr class="param-same-tr"><td class="first-td">厂商</td>{{#Params}}<td>{{厂商}}</td>{{/Params}}</tr><tr><td class="first-td">品牌</td>{{#Params}}<td>{{品牌}}</td>{{/Params}}</tr><tr><td class="first-td">级别</td>{{#Params}}<td>{{级别}}</td>{{/Params}}</tr><tr><td class="first-td">车型分类</td>{{#Params}}<td>{{车型分类}}</td>{{/Params}}</tr><tr><td class="first-td">长*宽*高(mm)</td>{{#Params}}<td>{{长*宽*高mm}}</td>{{/Params}}</tr><tr><td class="first-td">系统总功率(kW)</td>{{#Params}}<td>{{param_table.max_power}}</td>{{/Params}}</tr><tr><td class="first-td">系统总扭矩(N·m)</td>{{#Params}}<td>{{系统总扭矩Nm}}</td>{{/Params}}</tr><tr><td class="first-td">纯电续航km</td>{{#Params}}<td>{{纯电续航km}}</td>{{/Params}}</tr><tr><td class="first-td">慢充时间(h)</td>{{#Params}}<td>{{慢充时间h}}</td>{{/Params}}</tr><tr><td class="first-td">快充时间(h)</td>{{#Params}}<td>{{快充时间h}}</td>{{/Params}}</tr><tr><td class="first-td">工信部综合油耗(L/100km)</td>{{#Params}}<td>{{工信部综合油耗L/100km}}</td>{{/Params}}</tr><tr><td class="first-td">最高车速(km/h)</td>{{#Params}}<td>{{param_table.max_speed}}</td>{{/Params}}</tr><tr><td class="first-td">官方0-100Km加速时间(s)</td>{{#Params}}<td>{{param_table.accelerate}}</td>{{/Params}}</tr><tr><td class="first-td">实测续航里程(km)</td>{{#Params}}<td>{{param_table.mile}}</td>{{/Params}}</tr><tr><td class="first-td">实测满电时间(h)</td>{{#Params}}<td>{{实测满电时间h}}</td>{{/Params}}</tr><tr><td class="first-td">实测0-100Km/h加速时间(s)</td>{{#Params}}<td>{{param_table.accelerate}}</td>{{/Params}}</tr><tr><td class="first-td">实测100Km/h-0制动距离(m)</td>{{#Params}}<td>{{实测100Km/h-0制动距离m}}</td>{{/Params}}</tr><tr><td class="first-td">整车质保</td>{{#Params}}<td>{{整车质保}}</td>{{/Params}}</tr><tr><td class="first-td">电池质保</td>{{#Params}}<td>{{电池质保}}</td>{{/Params}}</tr><tr><td class="first-td">保养周期(月/公里)</td>{{#Params}}<td>{{保养周期月/公里}}</td>{{/Params}}</tr><tr><td class="first-td">首保里程(km)</td>{{#Params}}<td>{{首保里程km}}</td>{{/Params}}</tr><tr><td class="first-td">免费保养政策</td>{{#Params}}<td>{{免费保养政策}}</td>{{/Params}}</tr></tbody>';
-
                 var bodyTpl = '<tbody><tr><td class="first-td">长(mm)</td>{{#Params}}<td>{{长mm}}</td>{{/Params}}</tr><tr><td class="first-td">宽(mm)</td>{{#Params}}<td>{{宽mm}}</td>{{/Params}}</tr><tr><td class="first-td">高(mm)</td>{{#Params}}<td>{{高mm}}</td>{{/Params}}</tr><tr><td class="first-td">轴距(mm)</td>{{#Params}}<td>{{轴距mm}}</td>{{/Params}}</tr><tr><td class="first-td">前轮距(mm)</td>{{#Params}}<td>{{前轮距mm}}</td>{{/Params}}</tr><tr><td class="first-td">后轮距(mm)</td>{{#Params}}<td>{{后轮距mm}}</td>{{/Params}}</tr><tr><td class="first-td">整备质量(kg)</td>{{#Params}}<td>{{整备质量kg}}</td>{{/Params}}</tr><tr><td class="first-td">最小转弯半径(m)</td>{{#Params}}<td>{{最小转弯半径m}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">最大爬坡角(°)</td>{{#Params}}<td>{{最大爬坡角}}</td>{{/Params}}</tr><tr><td class="first-td">最小离地间隙(mm)</td>{{#Params}}<td>{{最小离地间隙mm}}</td>{{/Params}}</tr><tr><td class="first-td">车身结构</td>{{#Params}}<td>{{车身结构}}</td>{{/Params}}</tr><tr><td class="first-td">车门数</td>{{#Params}}<td>{{车门数}}</td>{{/Params}}</tr><tr><td class="first-td">座位数</td>{{#Params}}<td>{{座位数}}</td>{{/Params}}</tr><tr><td class="first-td">油箱容积(L)</td>{{#Params}}<td>{{油箱容积L}}</td>{{/Params}}</tr><tr><td class="first-td">行李箱容积(L)</td>{{#Params}}<td>{{行李箱容积L}}</td>{{/Params}}</tr></tbody>';
-
                 var motorTpl = '<tbody><tr class="advantage-big param-same-tr"><td class="first-td">发动机排量(ml)</td>{{#Params}}<td>{{发动机排量ml}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">工作方式</td>{{#Params}}<td>{{工作方式}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">气缸排列结构</td>{{#Params}}<td>{{气缸排列结构}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">气缸数</td>{{#Params}}<td>{{气缸数}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">每气缸气门数(个)</td>{{#Params}}<td>{{每气缸气门数个}}</td>{{/Params}}</tr><tr><td class="first-td">压缩比</td>{{#Params}}<td>{{压缩比}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">气门结构</td>{{#Params}}<td>{{气门结构}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">最大马力(Ps)</td>{{#Params}}<td>{{最大马力Ps}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">最大功率(Kw)</td>{{#Params}}<td>{{最大功率Kw}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">最大功率转速(rpm)</td>{{#Params}}<td>{{最大功率转速rpm}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">最大扭矩(Nm)</td>{{#Params}}<td>{{最大扭矩Nm}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">最大扭矩转速(rpm)</td>{{#Params}}<td>{{最大扭矩转速rpm}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">环保标准</td>{{#Params}}<td>{{环保标准}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">燃油标号</td>{{#Params}}<td>{{燃油标号}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">供油方式</td>{{#Params}}<td>{{供油方式}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">缸体材料</td>{{#Params}}<td>{{缸体材料}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">自动启停</td>{{#Params}}<td>{{自动启停}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">动能回收</td>{{#Params}}<td>{{动能回收}}</td>{{/Params}}</tr></tbody>';
-
                 var batteryTpl = '<tbody><tr class="param-same-tr"><td class="first-td">电机类型</td>{{#Params}}<td>{{电机类型}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">电动机最大功率(kW)</td>{{#Params}}<td>{{电动机最大功率kW}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">电动机最大扭矩(N·m)</td>{{#Params}}<td>{{电动机最大扭矩Nm}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">前电机最大功率(kW)</td>{{#Params}}<td>{{config.gui}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">前电机最大扭矩(N·m)</td>{{#Params}}<td>{{前电机最大扭矩Nm}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后电机最大功率(kW)</td>{{#Params}}<td>{{后电机最大功率kW}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后电机最大扭矩(N·m)</td>{{#Params}}<td>{{后电机最大扭矩Nm}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">驱动电机个数</td>{{#Params}}<td>{{驱动电机个数}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">电机布局</td>{{#Params}}<td>{{电机布局}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">混动方式</td>{{#Params}}<td>{{混动方式}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">驱动模式</td>{{#Params}}<td>{{驱动模式}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">电池类型</td>{{#Params}}<td>{{电池类型}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">电池容量(kW·h)</td>{{#Params}}<td>{{param_table.battery_capacity}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">续航里程(Km)</td>{{#Params}}<td>{{续航里程Km}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">快充电量(%)</td>{{#Params}}<td>{{快充电量%}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">百公里耗电量(KWh/100km)</td>{{#Params}}<td>{{百公里耗电量KWh/100km}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">支持家用电压充电</td>{{#Params}}<td>{{支持家用电压充电}}</td>{{/Params}}</tr></tbody>';
-
                 var boxTpl = '<tbody><tr class="param-same-tr"><td class="first-td">变速箱类型</td>{{#Params}}<td>{{变速箱类型}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">档位数</td>{{#Params}}<td>{{档位数}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">驾驶模式</td>{{#Params}}<td>{{驾驶模式}}</td>{{/Params}}</tr></tbody>';
-
                 var underpanTpl = '<tbody><tr class="param-same-tr"><td class="first-td">驱动形式</td>{{#Params}}<td>{{驱动形式}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">助力形式</td>{{#Params}}<td>{{助力形式}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">前悬挂类型</td>{{#Params}}<td>{{前悬挂类型}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后悬挂类型</td>{{#Params}}<td>{{后悬挂类型}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">车身结构(底盘方向)</td>{{#Params}}<td>{{车身结构底盘方向}}</td>{{/Params}}</tr></tbody>';
-
                 var wheelTpl = '<tbody><tr class="param-same-tr"><td class="first-td">前轮制动装置</td>{{#Params}}<td>{{前轮制动装置}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后轮制动装置</td>{{#Params}}<td>{{后轮制动装置}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">驻车制动器</td>{{#Params}}<td>{{驻车制动器}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">前轮胎规格</td>{{#Params}}<td>{{前轮胎规格}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后轮胎规格</td>{{#Params}}<td>{{后轮胎规格}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">轮毂材质</td>{{#Params}}<td>{{轮毂材质}}</td>{{/Params}}</tr></tbody>';
-
                 var safeTpl = '<tbody><tr class="param-same-tr"><td class="first-td">主/副驾驶座安全气囊</td>{{#Params}}<td>{{主/副驾驶座安全气囊}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">前/后排头部安全气囊</td>{{#Params}}<td>{{前/后排头部安全气囊}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">前/后排侧气囊</td>{{#Params}}<td>{{前/后排侧气囊}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">膝部气囊</td>{{#Params}}<td>{{膝部气囊}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">行人保护气囊</td>{{#Params}}<td>{{行人保护气囊}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">副驾气囊开关</td>{{#Params}}<td>{{副驾气囊开关}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">胎压监测</td>{{#Params}}<td>{{胎压监测}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">主/副驾驶座安全带未系提醒</td>{{#Params}}<td>{{主/副驾驶座安全带未系提醒}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">燃爆式安全带</td>{{#Params}}<td>{{燃爆式安全带}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">后排气囊安全带</td>{{#Params}}<td>{{后排气囊安全带}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">车内中控锁</td>{{#Params}}<td>{{车内中控锁}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">ISOFIX儿童安全座椅接口</td>{{#Params}}<td>{{ISOFIX儿童安全座椅接口}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">LATCH儿童安全座椅接口</td>{{#Params}}<td>{{LATCH儿童安全座椅接口}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">前排主动头枕</td>{{#Params}}<td>{{前排主动头枕}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">前/后驻车雷达</td>{{#Params}}<td>{{前/后驻车雷达}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">倒车影像</td>{{#Params}}<td>{{倒车影像}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">全景摄像头</td>{{#Params}}<td>{{全景摄像头}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">行李箱逃逸功能</td>{{#Params}}<td>{{行李箱逃逸功能}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">ABS防抱死</td>{{#Params}}<td>{{ABS防抱死}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">制动力分配(EBD/CBC等)</td>{{#Params}}<td>{{制动力分配EBD/CBC等}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">刹车辅助(EBA/BAS/BA等)</td>{{#Params}}<td>{{刹车辅助EBA/BAS/BA等}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">牵引力控制(ASR/TCS等)</td>{{#Params}}<td>{{牵引力控制ASR/TCS等}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">车身稳定控制(ESP/ESC/DSC等)</td>{{#Params}}<td>{{车身稳定控制ESP/ESC/DSC等}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">自动驻车</td>{{#Params}}<td>{{自动驻车}}{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">上坡辅助</td>{{#Params}}<td>{{上坡辅助}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">陡坡缓降</td>{{#Params}}<td>{{陡坡缓降}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">主动转向系统</td>{{#Params}}<td>{{主动转向系统}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">主动防侧倾系统</td>{{#Params}}<td>{{主动防侧倾系统}}</td>{{/Params}}</tr></tbody>';
-
                 var outlookTpl = '<tbody><tr class="param-same-tr"><td class="first-td">电动天窗</td>{{#Params}}<td>{{电动天窗}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">全景天窗</td>{{#Params}}<td>{{全景天窗}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">前/后电动车窗</td>{{#Params}}<td>{{前/后电动车窗}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">防紫外线玻璃</td>{{#Params}}<td>{{防紫外线玻璃}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">隔热玻璃</td>{{#Params}}<td>{{隔热玻璃}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">车窗防夹功能</td>{{#Params}}<td>{{车窗防夹功能}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后窗遮阳帘</td>{{#Params}}<td>{{后窗遮阳帘}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后风挡遮阳帘</td>{{#Params}}<td>{{后风挡遮阳帘}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后风挡加热</td>{{#Params}}<td>{{后风挡加热}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后排隐私玻璃</td>{{#Params}}<td>{{后排隐私玻璃}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">感应雨刷</td>{{#Params}}<td>{{感应雨刷}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后雨刷</td>{{#Params}}<td>{{后雨刷}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">运动外观套件</td>{{#Params}}<td>{{运动外观套件}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">电动吸合门</td>{{#Params}}<td>{{电动吸合门}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">行李架</td>{{#Params}}<td>{{行李架}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后视镜电动调节</td>{{#Params}}<td>{{后视镜电动调节}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">后视镜加热</td>{{#Params}}<td>{{后视镜加热}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后视镜电动折叠</td>{{#Params}}<td>{{后视镜电动折叠}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">后视镜记忆</td>{{#Params}}<td>{{后视镜记忆}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">外后视镜自动防眩目</td>{{#Params}}<td>{{外后视镜自动防眩目}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">卤素大灯</td>{{#Params}}<td>{{卤素大灯}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">氙气大灯</td>{{#Params}}<td>{{氙气大灯}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">激光大灯</td>{{#Params}}<td>{{激光大灯}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">LED前大灯</td>{{#Params}}<td>{{LED前大灯}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">自适应远近光</td>{{#Params}}<td>{{自适应远近光}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">自动头灯</td>{{#Params}}<td>{{自动头灯}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">延迟关闭</td>{{#Params}}<td>{{延迟关闭}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">转向辅助灯</td>{{#Params}}<td>{{转向辅助灯}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">大灯随动转向</td>{{#Params}}<td>{{大灯随动转向}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">日间行车灯</td>{{#Params}}<td>{{日间行车灯}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">大灯高度可调</td>{{#Params}}<td>{{大灯高度可调}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">大灯清洗装置</td>{{#Params}}<td>{{大灯清洗装置}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">前雾灯</td>{{#Params}}<td>{{前雾灯}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">LED尾灯</td>{{#Params}}<td>{{LED尾灯}}</td>{{/Params}}</tr></tbody>';
-
                 var decorationTpl = '<tbody><tr class="param-same-tr"><td class="first-td">真皮方向盘</td>{{#Params}}<td>{{真皮方向盘}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">方向盘电动调节</td>{{#Params}}<td>{{方向盘电动调节}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">方向盘上下/前后调节</td>{{#Params}}<td>{{方向盘上下/前后调节}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">多功能方向盘</td>{{#Params}}<td>{{多功能方向盘}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">换挡拨片</td>{{#Params}}<td>{{换挡拨片}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">方向盘加热</td>{{#Params}}<td>{{方向盘加热}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">无钥匙进入</td>{{#Params}}<td>{{无钥匙进入}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">无钥匙启动</td>{{#Params}}<td>{{无钥匙启动}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">遮阳板化妆镜</td>{{#Params}}<td>{{遮阳板化妆镜}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">化妆镜照明</td>{{#Params}}<td>{{化妆镜照明}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后排化妆镜</td>{{#Params}}<td>{{后排化妆镜}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">定速巡航</td>{{#Params}}<td>{{定速巡航}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">行车电脑显示屏</td>{{#Params}}<td>{{行车电脑显示屏}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">HUD抬头显示</td>{{#Params}}<td>{{HUD抬头显示}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">全液晶仪表盘</td>{{#Params}}<td>{{全液晶仪表盘}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">自动空调</td>{{#Params}}<td>{{自动空调}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">温度分区控制</td>{{#Params}}<td>{{温度分区控制}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后排独立空调</td>{{#Params}}<td>{{后排独立空调}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后排出风口</td>{{#Params}}<td>{{后排出风口}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">空气净化/花粉过滤</td>{{#Params}}<td>{{空气净化/花粉过滤}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">内后视镜自动防眩目</td>{{#Params}}<td>{{内后视镜自动防眩目}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">车内氛围灯</td>{{#Params}}<td>{{车内氛围灯}}</td>{{/Params}}</tr></tbody>';
-
                 var chairTpl = '<tbody><tr class="param-same-tr"><td class="first-td">皮质座椅</td>{{#Params}}<td>{{皮质座椅}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">运动座椅</td>{{#Params}}<td>{{运动座椅}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">前排座椅靠背角度调节</td>{{#Params}}<td>{{前排座椅靠背角度调节}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">腰部支撑调节</td>{{#Params}}<td>{{腰部支撑调节}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">肩部支撑调节</td>{{#Params}}<td>{{肩部支撑调节}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">主/副驾驶座电动调节</td>{{#Params}}<td>{{主/副驾驶座电动调节}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">第二排座椅靠背角度调节</td>{{#Params}}<td>{{第二排座椅靠背角度调节}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">第二排座椅移动</td>{{#Params}}<td>{{第二排座椅移动}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">第二排座椅电动调节</td>{{#Params}}<td>{{第二排座椅电动调节}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">主驾电动座椅记忆</td>{{#Params}}<td>{{主驾电动座椅记忆}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">前/后排座椅加热</td>{{#Params}}<td>{{前/后排座椅加热}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">前/后排座椅通风</td>{{#Params}}<td>{{前/后排座椅通风}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">前后排座椅按摩</td>{{#Params}}<td>{{前后排座椅按摩}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后排座椅放倒</td>{{#Params}}<td>{{后排座椅放倒}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">前/后排腿部支撑</td>{{#Params}}<td>{{前/后排腿部支撑}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">一体式儿童安全座椅</td>{{#Params}}<td>{{一体式儿童安全座椅}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">前/后排中央扶手</td>{{#Params}}<td>{{前/后排中央扶手}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">后排杯架</td>{{#Params}}<td>{{后排杯架}}</td>{{/Params}}</tr><tr class="param-diff-tr"><td class="first-td">一体式前排头枕</td>{{#Params}}<td>{{一体式前排头枕}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">第二排中央头枕</td>{{#Params}}<td>{{第二排中央头枕}}</td>{{/Params}}</tr></tbody>';
-
                 var mediaTpl = '<tbody><tr class="param-same-tr"><td class="first-td">扬声器品牌</td>{{#Params}}<td>{{扬声器品牌}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">扬声器数量(个)</td>{{#Params}}<td>{{扬声器数量}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">单碟CD</td>{{#Params}}<td>{{单碟CD}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">多碟CD</td>{{#Params}}<td>{{多碟CD}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">中控彩色屏幕</td>{{#Params}}<td>{{中控彩色屏幕}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">GPS导航</td>{{#Params}}<td>{{GPS导航}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">蓝牙/车载电话</td>{{#Params}}<td>{{蓝牙/车载电话}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">车载电视</td>{{#Params}}<td>{{车载电视}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">内置硬盘</td>{{#Params}}<td>{{内置硬盘}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">后排液晶屏</td>{{#Params}}<td>{{后排液晶屏}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">音频接口</td>{{#Params}}<td>{{音频接口}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">DVD系统</td>{{#Params}}<td>{{DVD系统}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">车载电源220v</td>{{#Params}}<td>{{车载电源220v}}</td>{{/Params}}</tr></tbody>';
-
                 var interactiveTpl = '<tbody><tr class="param-same-tr"><td class="first-td">系统名称</td>{{#Params}}<td>{{系统名称}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">远程救援</td>{{#Params}}<td>{{远程救援}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">语音控制</td>{{#Params}}<td>{{语音控制}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">无线上网/WIFI热点</td>{{#Params}}<td>{{无线上网/WIFI热点}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">手机控制</td>{{#Params}}<td>{{手机控制}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">定位防盗</td>{{#Params}}<td>{{定位防盗}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">人工导航</td>{{#Params}}<td>{{人工导航}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">车辆检测</td>{{#Params}}<td>{{车辆检测}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">特有功能</td>{{#Params}}<td>{{特有功能}}</td>{{/Params}}</tr></tbody>';
-
                 var techTpl = '<tbody><tr class="param-same-tr"><td class="first-td">自动泊车入位</td>{{#Params}}<td>{{自动泊车入位}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">并线辅助</td>{{#Params}}<td>{{并线辅助}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">车道偏离预警系统</td>{{#Params}}<td>{{车道偏离预警系统}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">主动刹车</td>{{#Params}}<td>{{主动刹车}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">整体主动转向系统</td>{{#Params}}<td>{{整体主动转向系统}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">夜视系统</td>{{#Params}}<td>{{夜视系统}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">中控液晶屏多屏显示</td>{{#Params}}<td>{{中控液晶屏多屏显示}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">自适应巡航</td>{{#Params}}<td>{{自适应巡航}}</td>{{/Params}}</tr><tr class="param-same-tr"><td class="first-td">右前方盲区监测</td>{{#Params}}<td>{{右前方盲区监测}}</td>{{/Params}}</tr></tbody>';
-
                 var colorTpl = '<tbody><tr class="param-same-tr"><td class="first-td">外观颜色</td>{{#Params}}<td>{{color_name}}</td>{{/Params}}</tr></tbody>';
 
                 tableRender(headerTpl, data, $('#headerTable'));
@@ -320,31 +304,41 @@ block body
           });
           $('#filter').submit();
           $('input.car-type').change(function() {
-              $('#filter').submit();
+            $('#filter').submit();
           })
         })
 
         function tableRender(tpl, data, el) {
           var data = data.response.data;
           var emptyParams = []
-          if (data.Params === null) {
-              data.Params = emptyParams;
-          }
-
           var empty = {};
+          if (data.Params === null) {
+            data.Params = emptyParams;
+          }
           while (data.Params.length < 3) {
-              data.Params.push(empty);
+            data.Params.push(empty);
           };
           for (var i = 0; i < data.Params.length; i++) {
-              data.Params[i].color_name = data.Params[i].param_table ? data.Params[i].param_table.car.color_name : '';
-              // data.Params[i].price = data.Param[i].param_table.price?'¥ '+data.Params[i].param_table.price+'万':'暂无价格'
+            data.Params[i].color_name = data.Params[i].param_table ? data.Params[i].param_table.car.color_name : '';
           }
           var content = Mustache.render(tpl, data);
           el.html(content);
         }
-
         function tplRender(tpl, data, el) {
           var data = data.response.data;
           var content = Mustache.render(tpl, data);
           el.html(content);
+        }
+        $('#car-search-btn').click(function(){
+          var word = $('#car-input').val();
+          var url = word ? '/cars/search/0-0-0-0-0-0-1?word=' + word : '/cars/search/0-0-0-0-0-0-1';
+          window.open(url);
+        })
+        function entersearch(id){
+          var event = window.event || arguments.callee.caller.arguments[0];
+          if (event.keyCode == 13 && id === 1) {
+            $('#car-search-btn').trigger('click');
+          } else if (event.keyCode == 13 && id === 2) {
+            $('#part-search-btn').trigger('click');
+          }
         }

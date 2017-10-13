@@ -12,7 +12,7 @@ block content
     ol.breadcrumb
       span.location 当前位置：
       li
-        a(href='/') 首页
+        a(href='/',target='_blank') 首页
       li.active 企业库
   .main-body
     #filter.category
@@ -114,14 +114,14 @@ block content
           each company in companies
             li.com
               .com-logo
-                a(href='/companies/#{company.id}',title='#{company.name}')
+                a(href='/companies/#{company.id}',title='#{company.name}',target='_blank')
                   if company.logo
                     img(src='#{company.logo}',alt='#{company.name}')
                   else
                     img(src='/img/com-logo.png',alt='#{company.name}')
               .com-detail
                 h4
-                  a.title(href='/companies/#{company.id}',title='#{company.name}') #{company.name}
+                  a.title(href='/companies/#{company.id}',title='#{company.name}',target='_blank') #{company.name}
                   if company.vip===1
                     span.approve-icon
                 dl
@@ -214,61 +214,58 @@ block content
               if pageinfo.pageNo===1
                 span.disabled(href='javascript:;') 上一页
               else
-                a(href=pageinfo.pageNo-1) 上一页
+                - var url = keyword ? ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo-1) + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo-1)
+                a(href=url) 上一页
               if pageinfo.maxPageNo < 7
                 - var n = 1
                 while n <= pageinfo.maxPageNo
                   if n===pageinfo.pageNo
-                    - var url = ids[0] + '-' + ids[1] + '-' + n
                     span.current(href=url)= n++
                   else
-                    - var url = ids[0] + '-' + ids[1] + '-' + n
                     a(href=url)= n++     
               else if pageinfo.pageNo <= 3
                 - var n = 1
                 while n <= 5
                   if n===pageinfo.pageNo
-                    - var url = ids[0] + '-' + ids[1] + '-' + n
                     span.current(href=url)= n++
                   else
-                    - var url = ids[0] + '-' + ids[1] + '-' + n
+                    - var url = keyword ? ids[0] + '-' + ids[1] + '-' + n + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + n
                     a(href=url)= n++
                 a ...
-                - var url = ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo
+                - var url = keyword ? ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo
                 a(href=url) #{pageinfo.maxPageNo}
               else if pageinfo.pageNo > pageinfo.maxPageNo-2
-                a(href='1') 1
+                - var url = keyword ? ids[0] + '-' + ids[1] + '-1' + '?word=' + keyword : ids[0] + '-' + ids[1] + '-1'
+                a(href=url) 1
                 a ...
                 - var n = pageinfo.pageNo-2
                 while n <= pageinfo.maxPageNo
                   if n===pageinfo.pageNo
-                    - var url = ids[0] + '-' + ids[1] + '-' + n
                     span.current(href=url)= n++
                   else
-                    - var url = ids[0] + '-' + ids[1] + '-' + n
+                    - var url = keyword ? ids[0] + '-' + ids[1] + '-' + n + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + n
                     a(href=url)= n++        
               else
-                a(href='1') 1
+                - var url = keyword ? ids[0] + '-' + ids[1] + '-1' + '?word=' + keyword : ids[0] + '-' + ids[1] + '-1'
+                a(href=url) 1
                 if pageinfo.pageNo > 4
                   a ...
                 - var n = pageinfo.pageNo-2
                 while n <= pageinfo.pageNo+2
                   if n===pageinfo.pageNo
-                    - var url = ids[0] + '-' + ids[1] + '-' + n
                     span.current(href=url)= n++
                   else
-                    - var url = ids[0] + '-' + ids[1] + '-' + n
+                    - var url = keyword ? ids[0] + '-' + ids[1] + '-' + n + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + n
                     a(href=url)= n++        
                 if pageinfo.pageNo < pageinfo.maxPageNo-3
                   a ...
                 if pageinfo.pageNo < pageinfo.maxPageNo-2
-                  - var url = ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo
+                  - var url = keyword ? ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo
                   a(href=url) #{pageinfo.maxPageNo}
               if pageinfo.pageNo===pageinfo.maxPageNo
-                - var url = ids[0] + '-' + ids[1] + '-' + n
                 span.disabled(href='javascript:;') 下一页
               else
-                - var url = ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo+1)
+                - var url = keyword ? ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo+1) + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo+1)
                 a(href=url) 下一页
       .content-right
 

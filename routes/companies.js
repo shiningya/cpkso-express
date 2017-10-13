@@ -33,6 +33,7 @@ router.get('/list/:page', function (req, res, next) {
 /* 筛选企业列表 */
 router.get('/search/:str', function(req, res, next) {
     var ids = req.params.str.split('-');
+    var keyword = req.query.word;
     var args = '?companyCondition.pageNo=' + ids[2];
     if (ids[0] !== '0') {
         args += '&companyCondition.province=' + ids[0];
@@ -40,8 +41,13 @@ router.get('/search/:str', function(req, res, next) {
     if (ids[1]!=='0') {
         args += '&companyCondition.category_id=' + ids[1];
     }
+    if (keyword) {
+        var codeword = encodeURI(keyword);
+        args += '&companyCondition.name=' + codeword;
+    };
     axios.all([getPage(args)]).then(axios.spread(function(companies) {
         var data = {};
+        data.keyword = keyword;
         data.ids = ids;
         data.pageinfo = companies.data.response.data.Company_condition;
         data.companies = companies.data.response.data.Companys;
@@ -56,7 +62,8 @@ router.get('/:id/', function(req, res, next) {
         var data = {};
         data.id = id;
         data.company = company.data.response.data.Company;
-        data.prodsData = comProds.data.response.data;
+        data.products = comProds.data.response.data.Products;
+        console.log(data.products);
         data.comNews = comNews.data.response.data.Articles;
         res.render('company', data);
     }));
@@ -78,7 +85,7 @@ router.get('/:id/products', function(req, res, next) {
         var data = {};
         data.id = id;
         data.company = company.data.response.data.Company;
-        data.prodsData = comProds.data.response.data;
+        data.products = comProds.data.response.data.Products;
         res.render('products', data);
     }));
 });
@@ -100,24 +107,24 @@ function getCompanies(args) {
     return axios.get(url);
 }   
 
-/* 获取企业首页数据 */
-function getCompany(id) {
-    var url = 'http://localhost:8080/ev/company_singleById?company.id=' + id;
-    return axios.get(url);
-}
-
 function getPage(args) {
     var url = 'http://localhost:8080/ev/company_skipPage' + args;
     return axios.get(url);
 }
+
+/* 获取企业首页数据 */
+function getCompany(id) {
+    var url = 'http://localhost:8080/ev/company_single?comp=' + id;
+    return axios.get(url);
+}
   
 function getComProds(id) {
-    var url = 'http://localhost:8080/ev/car_findByCompanyIdF?company_id=' + id;
+    var url = 'http://localhost:8080/ev/product_findByCompany?company=' + id;
     return axios.get(url);
 }
 
 function getComNews(id) {
-    var url = 'http://localhost:8080/ev/article_findByCompanyId?company_id=' + id;
+    var url = 'http://localhost:8080/ev/article_findByCompany?company=' + id;
     return axios.get(url);
 }
 

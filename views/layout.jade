@@ -13,7 +13,13 @@ html
       link(rel='stylesheet', href='http://ev.cpkso.com/css/bootstrap.min.css')
       link(rel='stylesheet', href='http://ev.cpkso.com/css/base.css')
   block body
-    include includes/header.jade    
+    header.header
+      .header-left
+        img(src='/img/search-logo.png', alt='logo')
+      block hright
+        .header-right
+          img(src='/img/2017.png')
+    include includes/nav.jade
     block content
     include includes/footer.jade
     block script

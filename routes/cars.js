@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
     axios.all([getBrandList(), getCars(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6(), getPromo7()]).then(axios.spread(function(brands, cars, promo1, promo2, promo3, promo4, promo5, promo6, promo7) {
         var data = {};
         data.ids = ids;
+        data.keyword = '';
         data.list = true;
         data.brands = brands.data.response.data;
         data.cars = cars.data.response.data.Cars;
@@ -31,6 +32,7 @@ router.get('/list/:page', function(req, res, next) {
     axios.all([getBrandList(), getPage(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6(), getPromo7()]).then(axios.spread(function(brands, cars, promo1, promo2, promo3, promo4, promo5, promo6, promo7) {
         var data = {};
         data.list = true;
+        data.keyword = '';
         data.ids = ids;
         data.brands = brands.data.response.data;
         data.cars = cars.data.response.data.Cars;
@@ -49,6 +51,7 @@ router.get('/list/:page', function(req, res, next) {
 /* 筛选车型列表 */
 router.get('/search/:str', function(req, res, next) {
     var ids = req.params.str.split('-');
+    var keyword = req.query.word || '';
     var args = '?carCondition.pageNo=' + ids[6] + '&';
     if (ids[0] !== '0') {
         args += 'carCondition.category_id=' + ids[0] + '&';
@@ -66,12 +69,16 @@ router.get('/search/:str', function(req, res, next) {
         args += 'carCondition.energy_type=' + ids[4] + '&';
     };
     if (ids[5] !== '0') {
-        args += 'carCondition.level=' + ids[5];
+        args += 'carCondition.level=' + ids[5] + '&';
     };
-    console.log(args);
+    if (keyword) {
+        var codeword = encodeURI(keyword);
+        args += 'carCondition.car_name=' + codeword;
+    };
     axios.all([getBrandList(), getPage(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6(), getPromo7()]).then(axios.spread(function(brands, cars, promo1, promo2, promo3, promo4, promo5, promo6, promo7) {
         var data = {};
         data.ids = ids;
+        data.keyword = keyword;
         data.brands = brands.data.response.data;
         data.cars = cars.data.response.data.Cars;
         data.pageinfo = cars.data.response.data.Car_condition;
@@ -92,6 +99,7 @@ router.get('/:id', function(req, res, next) {
     axios.all([getCar(id), getParams(), getPromo8()]).then(axios.spread(function(car, params, promo8) {
         var data = {};
         data.id = id;
+        data.keyword = '';
         data.car = car.data.response.data.Car;
         data.promo8 = promo8.data.response.data.PlaceCars;
         res.render('car', data);
@@ -110,6 +118,7 @@ function getCars(args) {
 
 function getPage(args) {
     var url = 'http://localhost:8080/ev/car_skipPage' + args;
+    console.log(url);
     return axios.get(url);
 }
 

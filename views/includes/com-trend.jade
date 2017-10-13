@@ -4,5 +4,5 @@
     ul.c-news-list
       each news in comNews
         li.c-news-item
-          a.c-news-title(href='/news/#{news.content}') #{news.title}
+          a.c-news-title(href='/news/#{news.content}',target='_blank') #{news.title}
           span.c-news-date #{news.publish_time}

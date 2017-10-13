@@ -80,7 +80,7 @@ function getPage(args) {
     return axios.get('http://localhost:8080/ev/placeCar_findByAdsUniqueId?ads_unique_id=RQU');
 }   
 
-/* 获取企业首页数据 */
+/* 获取供求信息详情数据 */
 function getInfo(id) {
     var url = 'http://localhost:8080/ev/require_singleById?require.id=' + id;
     return axios.get(url);

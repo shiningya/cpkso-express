@@ -11,6 +11,7 @@ var cars = require('./routes/cars');
 var parts = require('./routes/parts');
 var infos = require('./routes/infos');
 var companies = require('./routes/companies');
+var domain = require('./routes/domain');
 // var company = require('./routes/company');
 
 var app = express();
@@ -33,7 +34,7 @@ app.use('/cars', cars);
 app.use('/parts', parts);
 app.use('/infos', infos);
 app.use('/companies', companies);
-// app.use('/company', company);
+app.use('/domain', domain);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

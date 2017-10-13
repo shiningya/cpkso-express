@@ -1,69 +1,38 @@
-if prodsData.Cars
+if products
   .products
     h4.com-title 供应产品
     #car-result.search-result.product-container
       ul.list-content
-        each prod in prodsData.Cars
+        each prod in products
+          if prod.type === 1
+            - var url = '/cars/' + prod.id
+            - var price = '￥' + prod.price + '万'
+          if prod.type === 2
+            - var url = '/parts/' + prod.id
+            - var price = prod.price      
           li.list-item
             .figure
-              a(href='/cars/#{prod.id}')
+              a(href=url,target='_blank')
                 if prod.prompt===1
                   span.recommend-icon
                 img(src='#{prod.pic}')
               a.car-logo(href='javascript:;')
                 if prod.brand
-                  img(src='http://localhost:8080/ev/brandPath/#{prod.brand}')
+                  img(src='/brandPath/#{prod.brand}')
             .detail
               if prod.w1===1
-                a.desc(href='/cars/#{prod.id}',style='text-indent:26px;') #{prod.name}
+                a.desc(href=url,style='text-indent:26px;',target='_blank') #{prod.name}
                   span.hot-icon
               else
-                a.desc(href='/cars/#{prod.id}') #{prod.name}
+                a.desc(href=url,target='_blank') #{prod.name}
               .company-detail
-                a.company-name(href='/company/#{prod.company_id}',target='_blank') #{prod.company_name}
+                a.company-name #{prod.company_name}
                   if prod.vip===1
                     span.approve-icon
               .msg
                 if prod.price
-                  p.price ￥#{prod.price}万
+                  p.price #{price}
                 else
                   p.price 暂无价格
-                //- if car.hot
-                //-   p.view-count 已浏览#{car.hot}
-else if prodsData.Partss
-  .products
-    h4.com-title 供应产品
-    #parts-result.search-result.product-container
-      ul.list-content
-        each prod in prodsData.Partss
-          li.list-item
-            .figure
-              a(href='/parts/#{prod.parts.id}')
-                if prod.parts.prompt===1
-                  span.recommend-icon
-                img(src='#{prod.parts.pic_thumbs[0]}')
-              .car-info
-                .info-wrapper
-                  a(href='/parts/#{prod.parts.id}') 详情
-                  a.cus-service(href='javascript:;') 客服
-                  a(href='/companys/#{prod.parts.company.id}',target='_blank') 官网
-                .car-detail
-                  p.parts-info 简介：#{prod.parts.brief}
-            .detail
-              if prod.parts.w1===1
-                a.desc(href='/parts/#{prod.parts.id}',style='text-indent:26px;') #{prod.parts.name}
-                  span.hot-icon
-              else
-                a.desc(href='/parts/#{prod.parts.id}') #{prod.parts.name}
-              .company-detail
-                a.company-name(href='/company/#{prod.parts.company.id}',target='_blank') #{prod.parts.company.name}
-                  if prod.parts.company.vip===1
-                    span.approve-icon
-              .msg
-                if prod.parts.price
-                  p.price #{prod.parts.price}
-                else
-                  p.price 暂无价格
-                if prod.parts.hot
-                  p.view-count 已浏览#{prod.parts.hot}
-
+                if prod.hot
+                  p.view-count 已浏览#{prod.hot}

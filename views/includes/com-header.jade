@@ -9,13 +9,25 @@ header.header
     span #{company.contact}
 nav.nav-wrapper
   ul.nav-list
-    li
-      a(href='/', title='返回主站') 返回主站
-    li
-      a(href='/companies/#{company.id}/', title='首页') 首页
-    li
-      a(href='/companies/#{company.id}/intro', title='公司介绍') 公司介绍
-    li
-      a(href='/companies/#{company.id}/products', title='供应产品') 供应产品
-    li
-      a(href='/companies/#{company.id}/trend', title='公司动态') 公司动态
+    if domain
+      li
+        a(href='http://ev.cpkso.com', title='返回主站',target='_blank') 返回主站
+      li
+        a(href='/', title='首页',target='_blank') 首页
+      li
+        a(href='/intro', title='公司介绍',target='_blank') 公司介绍
+      li
+        a(href='/products', title='供应产品',target='_blank') 供应产品
+      li
+        a(href='/trend', title='公司动态',target='_blank') 公司动态
+    else
+      li
+        a(href='/', title='返回主站',target='_blank') 返回主站
+      li
+        a(href='/companies/#{company.id}/', title='首页',target='_blank') 首页
+      li
+        a(href='/companies/#{company.id}/intro', title='公司介绍',target='_blank') 公司介绍
+      li
+        a(href='/companies/#{company.id}/products', title='供应产品',target='_blank') 供应产品
+      li
+        a(href='/companies/#{company.id}/trend', title='公司动态',target='_blank') 公司动态
