@@ -23,123 +23,29 @@ block content
       dl#categoryType.category-list.clearfix
         dt.title 类型：
         dd.category-item
-          a.choose-all.choose-on(href='/parts/search/0-0-1') 不限
-          a(href='/parts/search/6-0-1',title='标准件') 标准件
-          a(href='/parts/search/7-0-1',title='辅助件') 辅助件
-          a(href='/parts/search/8-0-1',title='车身系统') 车身系统
-          a(href='/parts/search/9-0-1',title='电气系统') 电气系统
-          a(href='/parts/search/10-0-1',title='转向系统') 转向系统
-          a(href='/parts/search/11-0-1',title='底盘系统') 底盘系统
-          a(href='/parts/search/12-0-1',title='密封系统') 密封系统
-          a(href='/parts/search/13-0-1',title='内饰系统') 内饰系统
+          if ids[0] === '0'
+            a.choose-all.choose-on(href='javascript:;') 不限
+          else
+            a.choose-all(href='/parts/search/0-0-1') 不限
+          each ct in ct2
+            if ct.id === +ids[0]
+              a.choose-on(href='javescript:;',title='#{ct.name}') #{ct.name}
+            else
+              a(href='/parts/search/#{ct.id}-0-1',title='#{ct.name}') #{ct.name}
       if id&&id!=='0'
         dl#ct2.category-list.clearfix
           dt.title 分类：
           dd.category-item
-            a.choose-all.choose-on(href='/parts/search/#{id}-0-1') 不限
-            if id==='6'
-              .ct2-list
-                a(href='/parts/search/6-1-1') 拉铆螺母
-                a(href='/parts/search/6-2-1') U型丝
-                a(href='/parts/search/6-3-1') 车门合页
-                a(href='/parts/search/6-4-1') 螺旋式插销扎带
-                a(href='/parts/search/6-5-1') 车标车牌
-                a(href='/parts/search/6-6-1') 装饰条
-                a(href='/parts/search/6-7-1') 其他
-            if id==='7'
-              .ct2-list
-                a(href='/parts/search/7-1-1') 刹车油
-                a(href='/parts/search/7-2-1') 齿轮油
-                a(href='/parts/search/7-3-1') 充电桩
-                a(href='/parts/search/7-4-1') 安装垫片
-                a(href='/parts/search/7-5-1') 比例阀
-                a(href='/parts/search/7-6-1') 地毯毛垫
-                a(href='/parts/search/7-7-1') 胶套支架
-                a(href='/parts/search/7-8-1') 千斤顶
-                a(href='/parts/search/7-9-1') 安装卡扣
-                a(href='/parts/search/7-10-1') 其他
-            if id==='8'
-              .ct2-list
-                a(href='/parts/search/8-1-1') 桥箱
-                a(href='/parts/search/8-2-1') 车架
-                a(href='/parts/search/8-3-1') 门框
-                a(href='/parts/search/8-4-1') 车门锁
-                a(href='/parts/search/8-5-1') 倒车镜后视镜
-                a(href='/parts/search/8-6-1') 全车玻璃
-                a(href='/parts/search/8-7-1') 挂档器
-                a(href='/parts/search/8-8-1') 护罩
-                a(href='/parts/search/8-9-1') 脚踏板
-                a(href='/parts/search/8-10-1') 安全带
-                a(href='/parts/search/8-11-1') 保险杠
-                a(href='/parts/search/8-12-1') 车门配件
-                a(href='/parts/search/8-13-1') 护板
-                a(href='/parts/search/8-14-1') 玻璃组件
-                a(href='/parts/search/8-15-1') 驻车把手
-                a(href='/parts/search/8-16-1') 遮阳板
-                a(href='/parts/search/8-17-1') 其他
-            if id==='9'
-              .ct2-list
-                a(href='/parts/search/9-1-1') 电池
-                a(href='/parts/search/9-2-1') 电机
-                a(href='/parts/search/9-3-1') 控制器
-                a(href='/parts/search/9-4-1') 灯光系统
-                a(href='/parts/search/9-5-1') 雨刮
-                a(href='/parts/search/9-6-1') 电瓶连线
-                a(href='/parts/search/9-7-1') 音响喇叭
-                a(href='/parts/search/9-8-1') 暖风机
-                a(href='/parts/search/9-9-1') 电容
-                a(href='/parts/search/9-10-1') 增程器
-                a(href='/parts/search/9-11-1') 空调
-                a(href='/parts/search/9-12-1') 天线
-                a(href='/parts/search/9-13-1') 倒车影像
-                a(href='/parts/search/9-14-1') 车窗电动升降
-                a(href='/parts/search/9-15-1') 电源开关
-                a(href='/parts/search/9-16-1') 遥控钥匙
-                a(href='/parts/search/9-18-1') 车载仪表
-                a(href='/parts/search/9-19-1') DC转换器
-                a(href='/parts/search/9-17-1') 其他
-            if id==='10'
-              .ct2-list
-                a(href='/parts/search/10-1-1') 方向盘
-                a(href='/parts/search/10-2-1') 方向机总成
-                a(href='/parts/search/10-3-1') 组合开关
-                a(href='/parts/search/10-4-1') 变速箱
-                a(href='/parts/search/10-5-1') 转向器
-                a(href='/parts/search/10-7-1') 其他
-            if id==='11'
-              .ct2-list
-                a(href='/parts/search/11-1-1') 后桥
-                a(href='/parts/search/11-2-1') 轮胎
-                a(href='/parts/search/11-3-1') 轮毂
-                a(href='/parts/search/11-4-1') 制动系统
-                a(href='/parts/search/11-5-1') 刹车系统
-                a(href='/parts/search/11-6-1') 减震系统
-                a(href='/parts/search/11-7-1') 点火开关
-                a(href='/parts/search/11-8-1') 加速器
-                a(href='/parts/search/11-9-1') 车用轴承
-                a(href='/parts/search/11-10-1') 交流电机
-                a(href='/parts/search/11-11-1') 电机控制器
-                a(href='/parts/search/11-12-1') 排气管
-                a(href='/parts/search/11-13-1') 平衡杆
-                a(href='/parts/search/11-14-1') 洗涤器
-                a(href='/parts/search/11-17-1') 其他
-            if id==='12'
-              .ct2-list
-                a(href='/parts/search/12-1-1') 线套
-                a(href='/parts/search/12-2-1') 中央电器盒
-                a(href='/parts/search/12-3-1') 玻璃扣
-                a(href='/parts/search/12-4-1') 后门铰链密封件
-                a(href='/parts/search/12-5-1') 胶套
-                a(href='/parts/search/12-6-1') 胶条
-                a(href='/parts/search/12-7-1') 其他
-            if id==='13'
-              .ct2-list
-                a(href='/parts/search/13-1-1') 座椅
-                a(href='/parts/search/13-2-1') 内视镜
-                a(href='/parts/search/13-3-1') 内拉手
-                a(href='/parts/search/13-4-1') 反光贴
-                a(href='/parts/search/13-5-1') 铝板
-                a(href='/parts/search/13-7-1') 其他
+            if ids[1] === '0'
+              a.choose-all.choose-on(href='javescript:;') 不限
+            else
+              a.choose-all(href='/parts/search/#{id}-0-1') 不限
+            .ct2-list
+              each ct in ct3
+                if ct.id === +ids[1]
+                  a.choose-on(href='javescript:;') #{ct.name}
+                else
+                  a(href='/parts/search/#{ct.parent_id}-#{ct.id}-1') #{ct.name}
     .content-container.parts-search-result
       .content-left
         #parts-result.search-result.product-container

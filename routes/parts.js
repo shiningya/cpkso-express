@@ -1,6 +1,58 @@
 var express = require('express');
 var axios = require('axios');
 var router = express.Router();
+var ct2 = [
+  {
+    "id": 6,
+    "level": 2,
+    "name": "标准件",
+    "type": 2
+  },
+  {
+    "id": 7,
+    "level": 2,
+    "name": "辅助件",
+    "type": 2
+  },
+  {
+    "id": 8,
+    "level": 2,
+    "name": "车身系统",
+    "type": 2
+  },
+  {
+    "id": 9,
+    "level": 2,
+    "name": "电气系统",
+    "type": 2
+  },
+  {
+    "id": 10,
+    "level": 2,
+    "name": "转向系统",
+    "type": 2
+  },
+  {
+    "id": 11,
+    "level": 2,
+    "name": "底盘系统",
+    "type": 2
+  },
+  {
+    "id": 12,
+    "level": 2,
+    "name": "密封系统",
+    "type": 2
+  },
+  {
+    "id": 13,
+    "level": 2,
+    "name": "内饰系统",
+    "type": 2
+  },
+]
+
+
 
 /* 配件列表 */
 router.get('/', function (req, res, next) {
@@ -10,6 +62,7 @@ router.get('/', function (req, res, next) {
     data.ids = ['0','0'];
     data.keyword = '';
     data.list = true;
+    data.ct2 = ct2;
     data.pageinfo = parts.data.response.data.Parts_condition;
     data.parts = parts.data.response.data.Partss;
     data.promo1 = promo1.data.response.data.PlacePartss;
@@ -29,6 +82,7 @@ router.get('/list/:page', function (req, res, next) {
     var data = {};
     data.keyword = '';
     data.list = true;
+    data.ct2 = ct2;
     data.pageinfo = parts.data.response.data.Parts_condition;
     data.parts = parts.data.response.data.Partss;
     data.promo1 = promo1.data.response.data.PlacePartss;
@@ -46,7 +100,6 @@ router.get('/search/:str', function (req, res, next) {
   var ids = req.params.str.split('-');
   var keyword = req.query.word || '';
   var id = ids[0];
-  console.log(ids);
   var args = '?partsCondition.pageNo=' + ids[2] + '&';
   if (ids[0] !== '0') {
     args += 'partsCondition.category_id=' + ids[0] + '&';
@@ -58,11 +111,13 @@ router.get('/search/:str', function (req, res, next) {
     var codeword = encodeURI(keyword);
     args += 'partsCondition.name=' + codeword;
   };
-axios.all([getPage(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6()]).then(axios.spread(function (parts, promo1, promo2, promo3, promo4, promo5, promo6) {
+axios.all([getCt3(id), getPage(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6()]).then(axios.spread(function (ct3, parts, promo1, promo2, promo3, promo4, promo5, promo6) {
     var data = {};
     data.id = id;
     data.keyword = keyword;
     data.ids = ids;
+    data.ct2 = ct2;
+    data.ct3 = id === '0' ? null : ct3.data.response.data.Categorys;
     data.pageinfo = parts.data.response.data.Parts_condition;
     data.parts = parts.data.response.data.Partss;
     data.promo1 = promo1.data.response.data.PlacePartss;
@@ -89,6 +144,11 @@ router.get('/:id', function (req, res, next) {
 });
 
 /* 获取配件库数据 */
+function getCt3(id) {
+  var url = 'http://localhost:8080/ev/category_listByParent?category.id=' + id;
+  return axios.get(url);
+}
+
 function getParts(args) {
   var url = 'http://localhost:8080/ev/parts_search' + args;
   return axios.get(url);
@@ -96,7 +156,6 @@ function getParts(args) {
 
 function getPage(args) {
   var url = 'http://localhost:8080/ev/parts_skipPage' + args;
-  console.log(url);
   return axios.get(url);
 }
 

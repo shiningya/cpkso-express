@@ -20,7 +20,10 @@ block content
     #filter.category
       #category.category-list.clearfix
         dt.title 省市：
-        a.choose-all.choose-on(href='/infos/search/0-#{ids[1]}-1') 不限
+        if ids[0] === '0'
+          a.choose-all.choose-on(href='/infos/search/0-#{ids[1]}-1') 不限
+        else
+          a.choose-all(href='/infos/search/0-#{ids[1]}-1') 不限
         #firstLetters.brand-ident
           ul
             li.active
@@ -56,60 +59,56 @@ block content
             li
         #tabcontent.tab-content
           #brandA.tab-pane.brand-list.active
-            a(href='/infos/search/1-#{ids[1]}-1') 安徽
-            a(href='/infos/search/2-#{ids[1]}-1') 澳门
+            mixin provinces(provinces)
+              each province in provinces
+                if province.id === +ids[0]
+                  a.choose-on(href='javascript:;') #{province.name}
+                else
+                  a(href='/infos/search/#{province.id}-#{ids[1]}-1') #{province.name}
+            +provinces(provinces.a)
           #brandB.tab-pane.brand-list
-            a(href='/infos/search/3-#{ids[1]}-1') 北京
+            +provinces(provinces.b)
           #brandC.tab-pane.brand-list
-            a(href='/infos/search/4-#{ids[1]}-1') 重庆
+            +provinces(provinces.c)
           #brandF.tab-pane.brand-list
-            a(href='/infos/search/5-#{ids[1]}-1') 福建
+            +provinces(provinces.f)
           #brandG.tab-pane.brand-list
-            a(href='/infos/search/6-#{ids[1]}-1') 广东
-            a(href='/infos/search/7-#{ids[1]}-1') 广西
-            a(href='/infos/search/8-#{ids[1]}-1') 贵州
-            a(href='/infos/search/9-#{ids[1]}-1') 甘肃
+            +provinces(provinces.g)
           #brandH.tab-pane.brand-list
-            a(href='/infos/search/10-#{ids[1]}-1') 河南
-            a(href='/infos/search/11-#{ids[1]}-1') 河北
-            a(href='/infos/search/12-#{ids[1]}-1') 黑龙江
-            a(href='/infos/search/13-#{ids[1]}-1') 海南
-            a(href='/infos/search/14-#{ids[1]}-1') 湖南
-            a(href='/infos/search/15-#{ids[1]}-1') 湖北
+            +provinces(provinces.h)
           #brandJ.tab-pane.brand-list
-            a(href='/infos/search/16-#{ids[1]}-1') 江西
-            a(href='/infos/search/17-#{ids[1]}-1') 江苏
-            a(href='/infos/search/18-#{ids[1]}-1') 吉林
+            +provinces(provinces.j)
           #brandL.tab-pane.brand-list
-            a(href='/infos/search/19-#{ids[1]}-1') 辽宁
+            +provinces(provinces.l)
           #brandN.tab-pane.brand-list
-            a(href='/infos/search/20-#{ids[1]}-1') 内蒙古
-            a(href='/infos/search/21-#{ids[1]}-1') 宁夏
+            +provinces(provinces.n)
           #brandQ.tab-pane.brand-list
-            a(href='/infos/search/22-#{ids[1]}-1') 青海
+            +provinces(provinces.q)
           #brandS.tab-pane.brand-list
-            a(href='/infos/search/23-#{ids[1]}-1') 山东
-            a(href='/infos/search/24-#{ids[1]}-1') 山西
-            a(href='/infos/search/25-#{ids[1]}-1') 陕西
-            a(href='/infos/search/26-#{ids[1]}-1') 四川
-            a(href='/infos/search/27-#{ids[1]}-1') 上海
+            +provinces(provinces.s)
           #brandT.tab-pane.brand-list
-            a(href='/infos/search/28-#{ids[1]}-1') 台湾
-            a(href='/infos/search/29-#{ids[1]}-1') 天津
+            +provinces(provinces.t)
           #brandX.tab-pane.brand-list
-            a(href='/infos/search/30-#{ids[1]}-1') 新疆
-            a(href='/infos/search/31-#{ids[1]}-1') 西藏
-            a(href='/infos/search/32-#{ids[1]}-1') 香港
+            +provinces(provinces.x)
           #brandY.tab-pane.brand-list
-            a(href='/infos/search/33-#{ids[1]}-1') 云南
+            +provinces(provinces.y)
           #brandZ.tab-pane.brand-list
-            a(href='/infos/search/34-#{ids[1]}-1') 浙江
+            +provinces(provinces.z)
       dl.category-list.clearfix
         dt.title 分类：
         dd.category-item
-          a.choose-all.choose-on(href='/infos/search/#{ids[0]}-0-1') 不限
-          a(href='/infos/search/#{ids[0]}-1-1') 整车
-          a(href='/infos/search/#{ids[0]}-2-1') 配件
+          if ids[1] === '0'
+            a.choose-all.choose-on(href='javascript:;') 不限
+          else
+            a.choose-all(href='/infos/search/#{ids[0]}-0-1') 不限
+          if ids[1] === '1'
+            a.choose-on(href='javascript:;') 整车
+          else
+            a(href='/infos/search/#{ids[0]}-1-1') 整车
+          if ids[1] === '2'
+            a.choose-on(href='javascript:;') 配件
+          else
+            a(href='/infos/search/#{ids[0]}-2-1') 配件
     .product-release.clearfix
       .form-wrapper
         form#needForm.form-horizontal(name='needForm' action='http://ev.cpkso.com/admin/require_add' method='post' enctype='multipart/form-data')

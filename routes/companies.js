@@ -6,10 +6,11 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     var ids = ['0','0'];
     var args = '';
-    axios.all([getCompanies(args)]).then(axios.spread(function(companies) {
+    axios.all([getProvinces(), getCompanies(args)]).then(axios.spread(function(provinces, companies) {
         var data = {};
         data.list = true;
         data.ids = ids;
+        data.provinces = provinces.data.response.data;
         data.pageinfo = companies.data.response.data.Company_condition;
         data.companies = companies.data.response.data.Companys;
         res.render('companies', data);
@@ -20,10 +21,11 @@ router.get('/list/:page', function (req, res, next) {
     var page = req.params.page;
     var ids = ['0','0'];
     var args = '?companyCondition.pageNo=' + page;
-    axios.all([getPage(args)]).then(axios.spread(function(companies) {
+    axios.all([getProvinces(), getPage(args)]).then(axios.spread(function(provinces, companies) {
         var data = {};
         data.list = true;
         data.ids = ids;
+        data.provinces = provinces.data.response.data;
         data.pageinfo = companies.data.response.data.Company_condition;
         data.companies = companies.data.response.data.Companys;
         res.render('companies', data);
@@ -45,10 +47,11 @@ router.get('/search/:str', function(req, res, next) {
         var codeword = encodeURI(keyword);
         args += '&companyCondition.name=' + codeword;
     };
-    axios.all([getPage(args)]).then(axios.spread(function(companies) {
+    axios.all([getProvinces(), getPage(args)]).then(axios.spread(function(provinces, companies) {
         var data = {};
         data.keyword = keyword;
         data.ids = ids;
+        data.provinces = provinces.data.response.data;
         data.pageinfo = companies.data.response.data.Company_condition;
         data.companies = companies.data.response.data.Companys;
         res.render('companies', data);
@@ -106,6 +109,11 @@ function getCompanies(args) {
     var url = 'http://localhost:8080/ev/company_search' + args;
     return axios.get(url);
 }   
+
+function getProvinces() {
+    var url = 'http://localhost:8080/ev/province_listByInitial';
+    return axios.get(url);
+}
 
 function getPage(args) {
     var url = 'http://localhost:8080/ev/company_skipPage' + args;

@@ -6,10 +6,11 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     var ids = ['0','0'];
     var args = '';
-    axios.all([getInfos(args),getPromo()]).then(axios.spread(function(infos,promo) {
+    axios.all([getProvinces(),getInfos(args),getPromo()]).then(axios.spread(function(provinces,infos,promo) {
         var data = {};
         data.list = true;
         data.ids = ids;
+        data.provinces = provinces.data.response.data;
         data.pageinfo = infos.data.response.data.Require_condition;
         data.infos = infos.data.response.data.Requires;
         data.promo = promo.data.response.data.PlaceCars;
@@ -21,10 +22,11 @@ router.get('/list/:page', function (req, res, next) {
     var page = req.params.page;
     var ids = ['0','0'];
     var args = '?requireCondition.pageNo=' + page;
-    axios.all([getPage(args),getPromo()]).then(axios.spread(function(infos,promo) {
+    axios.all([getProvinces(),getPage(args),getPromo()]).then(axios.spread(function(provinces,infos,promo) {
         var data = {};
         data.list = true;
         data.ids = ids;
+        data.provinces = provinces.data.response.data;
         data.pageinfo = infos.data.response.data.Require_condition;
         data.infos = infos.data.response.data.Requires;
         data.promo = promo.data.response.data.PlaceCars;
@@ -42,9 +44,10 @@ router.get('/search/:str', function(req, res, next) {
     if (ids[1]!=='0') {
         args += '&require.category.type=' + ids[1];
     }
-    axios.all([getPage(args),getPromo()]).then(axios.spread(function(infos,promo) {
+    axios.all([getProvinces(),getPage(args),getPromo()]).then(axios.spread(function(provinces,infos,promo) {
         var data = {};
         data.ids = ids;
+        data.provinces = provinces.data.response.data;
         data.pageinfo = infos.data.response.data.Require_condition;
         data.infos = infos.data.response.data.Requires;
         data.promo = promo.data.response.data.PlaceCars;
@@ -70,6 +73,11 @@ function getInfos(args) {
     var url = 'http://localhost:8080/ev/require_search' + args;
     return axios.get(url);
 }   
+
+function getProvinces() {
+    var url = 'http://localhost:8080/ev/province_listByInitial';
+    return axios.get(url);
+}
 
 function getPage(args) {
     var url = 'http://localhost:8080/ev/require_skipPage' + args;

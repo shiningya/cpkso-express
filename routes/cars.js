@@ -1,6 +1,202 @@
 var express = require('express');
 var axios = require('axios');
 var router = express.Router();
+var letters = [
+    {
+        "lower": "a",
+        "upper": "A"
+    },
+    {
+        "lower": "b",
+        "upper": "B"
+    },
+    {
+        "lower": "c",
+        "upper": "C"
+    },
+    {
+        "lower": "d",
+        "upper": "D"
+    },
+    {
+        "lower": "e",
+        "upper": "E"
+    },
+    {
+        "lower": "f",
+        "upper": "F"
+    },
+    {
+        "lower": "g",
+        "upper": "G"
+    },
+    {
+        "lower": "h",
+        "upper": "H"
+    },
+    {
+        "lower": "j",
+        "upper": "J"
+    },
+    {
+        "lower": "l",
+        "upper": "L"
+    },
+    {
+        "lower": "n",
+        "upper": "N"
+    },
+    {
+        "lower": "q",
+        "upper": "Q"
+    },
+    {
+        "lower": "s",
+        "upper": "S"
+    },
+    {
+        "lower": "t",
+        "upper": "T"
+    },
+    {
+        "lower": "x",
+        "upper": "X"
+    },
+    {
+        "lower": "y",
+        "upper": "Y"
+    },
+    {
+        "lower": "z",
+        "upper": "Z"
+    }
+];
+var ct2 = [
+    {
+        "id": 15,
+        "name": "低速电动车"
+    },
+    {
+        "id": 3,
+        "name": "电动乘用车"
+    },
+    {
+        "id": 14,
+        "name": "电动三轮车"
+    },
+    {
+        "id": 4,
+        "name": "电动客车"
+    }
+];
+var prices = [
+    {
+        "id": 1,
+        "name": "10万以下"
+    },
+    {
+        "id": 2,
+        "name": "10-20万"
+    },
+    {
+        "id": 3,
+        "name": "20-30万"
+    },
+    {
+        "id": 4,
+        "name": "30-50万"
+    },
+    {
+        "id": 5,
+        "name": "50万以上"
+    }
+];
+var miles = [
+    {
+        "id": 1,
+        "name": "100公里以下"
+    },
+    {
+        "id": 2,
+        "name": "100-200公里"
+    },
+    {
+        "id": 3,
+        "name": "200-300公里"
+    },
+    {
+        "id": 4,
+        "name": "300-400公里"
+    },
+    {
+        "id": 5,
+        "name": "400公里以上"
+    }
+];
+var types = [
+    {
+        "id": 1,
+        "name": "纯电动"
+    },
+    {
+        "id": 2,
+        "name": "插电式"
+    },
+    {
+        "id": 3,
+        "name": "增程式"
+    },
+    {
+        "id": 4,
+        "name": "混合动力"
+    },
+    {
+        "id": 5,
+        "name": "燃料电池"
+    }
+];
+var levels = [
+    {
+        "id": 1,
+        "name": "微型"
+    },
+    {
+        "id": 2,
+        "name": "小型"
+    },
+    {
+        "id": 3,
+        "name": "紧凑型"
+    },
+    {
+        "id": 4,
+        "name": "中型"
+    },
+    {
+        "id": 5,
+        "name": "中大型"
+    },
+    {
+        "id": 6,
+        "name": "豪华型"
+    },
+    {
+        "id": 7,
+        "name": "SUV"
+    },
+    {
+        "id": 8,
+        "name": "MPV"
+    },
+    {
+        "id": 9,
+        "name": "跑车"
+    },
+    {
+        "id": 10,
+        "name": "商用"
+    }
+];
 
 /* 车型列表 */
 router.get('/', function(req, res, next) {
@@ -11,7 +207,13 @@ router.get('/', function(req, res, next) {
         data.ids = ids;
         data.keyword = '';
         data.list = true;
+        data.letters = letters;
+        data.ct2 = ct2;
         data.brands = brands.data.response.data;
+        data.prices = prices;
+        data.miles = miles;
+        data.types = types;
+        data.levels = levels;
         data.cars = cars.data.response.data.Cars;
         data.pageinfo = cars.data.response.data.Car_condition;
         data.promo1 = promo1.data.response.data.PlaceCars;
@@ -34,7 +236,13 @@ router.get('/list/:page', function(req, res, next) {
         data.list = true;
         data.keyword = '';
         data.ids = ids;
+        data.letters = letters;
+        data.ct2 = ct2;
         data.brands = brands.data.response.data;
+        data.prices = prices;
+        data.miles = miles;
+        data.types = types;
+        data.levels = levels;
         data.cars = cars.data.response.data.Cars;
         data.pageinfo = cars.data.response.data.Car_condition;
         data.promo1 = promo1.data.response.data.PlaceCars;
@@ -79,7 +287,13 @@ router.get('/search/:str', function(req, res, next) {
         var data = {};
         data.ids = ids;
         data.keyword = keyword;
+        data.letters = letters;
+        data.ct2 = ct2;
         data.brands = brands.data.response.data;
+        data.prices = prices;
+        data.miles = miles;
+        data.types = types;
+        data.levels = levels;
         data.cars = cars.data.response.data.Cars;
         data.pageinfo = cars.data.response.data.Car_condition;
         data.promo1 = promo1.data.response.data.PlaceCars;

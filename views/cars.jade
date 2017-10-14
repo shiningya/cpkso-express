@@ -23,74 +23,31 @@ block content
       dl#category.category-list.clearfix
         dt.title 分类：
         .category-item
-          a.choose-all.choose-on(href='/cars/search/0-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0-1?word=#{keyword}') 不限
-          a(href='/cars/search/15-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0-1?word=#{keyword}') 低速电动车
-          a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 电动乘用车
-          a(href='/cars/search/14-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0-1?word=#{keyword}') 电动三轮车
-          a(href='/cars/search/4-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0-1?word=#{keyword}') 电动客车
+          if ids[0] === '0'
+            a.choose-all.choose-on(href='javascript:;') 不限
+          else
+            a.choose-all(href='/cars/search/0-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0-1?word=#{keyword}') 不限
+          each ct in ct2
+            if ct.id === +ids[0]
+              a.choose-on(href='javascript:;') #{ct.name}
+            else
+              a(href='/cars/search/#{ct.id}-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0-1?word=#{keyword}') #{ct.name}
       #categoryBrand.category-list.clearfix
         dt.title 品牌：
-        a.choose-all.choose-on(href='/cars/search/#{ids[0]}-0-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 不限
+        a.choose-all.choose-on(href='javascript:;') 不限
         #firstLetters.brand-ident
           ul
-            li.active
-              a(href='#brandA',data-toggle='enter',onclick='return false;') A
-            li
-              a(href='#brandB',data-toggle='enter',onclick='return false;') B
-            li
-              a(href='#brandC',data-toggle='enter',onclick='return false;') C
-            li
-              a(href='#brandD',data-toggle='enter',onclick='return false;') D
-            li
-              a(href='#brandE',data-toggle='enter',onclick='return false;') E
-            li
-              a(href='#brandF',data-toggle='enter',onclick='return false;') F
-            li
-              a(href='#brandG',data-toggle='enter',onclick='return false;') G
-            li
-              a(href='#brandH',data-toggle='enter',onclick='return false;') H
-            li
-              a(href='#brandI',data-toggle='enter',onclick='return false;') I
-            li
-              a(href='#brandJ',data-toggle='enter',onclick='return false;') J
-            li
-              a(href='#brandK',data-toggle='enter',onclick='return false;') K
-            li
-              a(href='#brandL',data-toggle='enter',onclick='return false;') L
-            li
-              a(href='#brandM',data-toggle='enter',onclick='return false;') M
-            li
-              a(href='#brandN',data-toggle='enter',onclick='return false;') N
-            li
-              a(href='#brandO',data-toggle='enter',onclick='return false;') O
-            li
-              a(href='#brandP',data-toggle='enter',onclick='return false;') P
-            li
-              a(href='#brandQ',data-toggle='enter',onclick='return false;') Q
-            li
-              a(href='#brandR',data-toggle='enter',onclick='return false;') R
-            li
-              a(href='#brandS',data-toggle='enter',onclick='return false;') S
-            li
-              a(href='#brandT',data-toggle='enter',onclick='return false;') T
-            li
-              a(href='#brandU',data-toggle='enter',onclick='return false;') U
-            li
-              a(href='#brandV',data-toggle='enter',onclick='return false;') V
-            li
-              a(href='#brandW',data-toggle='enter',onclick='return false;') W
-            li
-              a(href='#brandX',data-toggle='enter',onclick='return false;') X
-            li
-              a(href='#brandY',data-toggle='enter',onclick='return false;') Y
-            li
-              a(href='#brandZ',data-toggle='enter',onclick='return false;') Z
-            li
+            each letter in letters
+              li
+                a(href='#brand#{letter.upper}',data-toggle='enter',onclick='return false;') #{letter.upper}
         #tabcontent.tab-content
           #brandA.tab-pane.brand-list.active
             mixin brands(brands)
               each brand in brands
-                a(href='/cars/search/#{ids[0]}-#{brand.id}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}',title='#{brand.brand}') #{brand.brand}
+                if brand.id === +ids[1]
+                  a.choose-on(href='javascript:;',title='#{brand.brand}') #{brand.brand}
+                else
+                  a(href='/cars/search/#{ids[0]}-#{brand.id}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}',title='#{brand.brand}') #{brand.brand}
             +brands(brands.a)
           #brandB.tab-pane.brand-list
             +brands(brands.b)
@@ -145,45 +102,52 @@ block content
       dl#categoryPrice.category-list.clearfix
         dt.title 价格：
         dd.category-item
-          a.choose-all.choose-on(href='/cars/search/#{ids[0]}-#{ids[1]}-0-#{ids[3]}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 不限
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-1-#{ids[3]}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 10万以下
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-2-#{ids[3]}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 10-20万
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-3-#{ids[3]}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 20-30万
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-4-#{ids[3]}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 30-50万
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-5-#{ids[3]}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 50万以上
+          if ids[2] === '0'
+            a.choose-all.choose-on(href='javascript:;') 不限
+          else
+            a.choose-all(href='/cars/search/#{ids[0]}-#{ids[1]}-0-#{ids[3]}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 不限
+          each price in prices
+            if price.id === +ids[2]
+              a.choose-on(href='javascript:;') #{price.name}
+            else
+              a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{price.id}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') #{price.name}
       dl#categoryMile.category-list.clearfix
         dt.title 续航：
         dd.category-item
-          a.choose-all.choose-on(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-0-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 不限
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-1-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 100公里以下
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-2-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 100-200公里
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-3-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 200-300公里
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-4-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 300-400公里
-          a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-5-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 400公里以上
+          if ids[3] === '0'
+            a.choose-all.choose-on(href='javascript:;') 不限
+          else
+            a.choose-all(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-0-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 不限
+          each mile in miles
+            if mile.id === +ids[3]
+              a.choose-on(href='javascript:;') #{mile.name}
+            else
+              a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{mile.id}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') #{mile.name}
       if ids[0] === '3'
         dl#categoryType.category-list.clearfix
           dt.title 类型：
           dd.category-item
-            a.choose-all.choose-on(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-#{ids[5]}-1?word=#{keyword}') 不限
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-1-#{ids[5]}-1?word=#{keyword}') 纯电动
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-2-#{ids[5]}-1?word=#{keyword}') 插电式
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-3-#{ids[5]}-1?word=#{keyword}') 增程式
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-4-#{ids[5]}-1?word=#{keyword}') 混合动力
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-5-#{ids[5]}-1?word=#{keyword}') 燃料电池
+            if ids[4] === '0'
+              a.choose-all.choose-on(href='javascript:;') 不限
+            else
+              a.choose-all(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-#{ids[5]}-1?word=#{keyword}') 不限
+            each tp in types
+              if tp.id === +ids[4]
+                a.choose-on(href='javascript:;') #{tp.name}
+              else
+                a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{tp.id}-#{ids[5]}-1?word=#{keyword}') #{tp.name}
         dl#categoryLevel.category-list.clearfix
           dt.title 级别：
           dd.category-item
-            a.choose-all.choose-on(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-0-1?word=#{keyword}') 不限
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-1-1?word=#{keyword}') 微型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-2-1?word=#{keyword}') 小型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-3-1?word=#{keyword}') 紧凑型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-4-1?word=#{keyword}') 中型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-5-1?word=#{keyword}') 中大型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-6-1?word=#{keyword}') 豪华型
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-7-1?word=#{keyword}') SUV
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-8-1?word=#{keyword}') MPV
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-9-1?word=#{keyword}') 跑车
-            a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-10-1?word=#{keyword}') 商用
+            if ids[5] === '0'
+              a.choose-all.choose-on(href='javascript:;') 不限
+            else
+              a.choose-all(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-0-1?word=#{keyword}') 不限
+            each level in levels
+              if level.id === +ids[5]
+                a.choose-on(href='javascript:;') #{level.name}
+              else
+                a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{level.id}-1?word=#{keyword}') #{level.name}
     .content-container.car-search-result
       .content-left
         #car-result.search-result.product-container
