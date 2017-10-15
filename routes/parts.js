@@ -50,7 +50,7 @@ var ct2 = [
     "name": "内饰系统",
     "type": 2
   },
-]
+];
 
 
 
@@ -61,6 +61,7 @@ router.get('/', function (req, res, next) {
     var data = {};
     data.ids = ['0','0'];
     data.keyword = '';
+    data.querystr = '';
     data.list = true;
     data.ct2 = ct2;
     data.pageinfo = parts.data.response.data.Parts_condition;
@@ -80,7 +81,9 @@ router.get('/list/:page', function (req, res, next) {
   var args = '?partsCondition.pageNo=' + page;
   axios.all([getPage(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6()]).then(axios.spread(function (parts, promo1, promo2, promo3, promo4, promo5, promo6) {
     var data = {};
+    data.ids = ['0','0'];
     data.keyword = '';
+    data.querystr = '';
     data.list = true;
     data.ct2 = ct2;
     data.pageinfo = parts.data.response.data.Parts_condition;
@@ -109,12 +112,14 @@ router.get('/search/:str', function (req, res, next) {
   };
   if (keyword) {
     var codeword = encodeURI(keyword);
+    var querystr = '?word=' + keyword;
     args += 'partsCondition.name=' + codeword;
   };
 axios.all([getCt3(id), getPage(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6()]).then(axios.spread(function (ct3, parts, promo1, promo2, promo3, promo4, promo5, promo6) {
     var data = {};
     data.id = id;
-    data.keyword = keyword;
+    data.keyword = keyword || '';
+    data.querystr = querystr || '';
     data.ids = ids;
     data.ct2 = ct2;
     data.ct3 = id === '0' ? null : ct3.data.response.data.Categorys;

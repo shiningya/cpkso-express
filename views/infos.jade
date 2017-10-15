@@ -26,74 +26,23 @@ block content
           a.choose-all(href='/infos/search/0-#{ids[1]}-1') 不限
         #firstLetters.brand-ident
           ul
-            li.active
-              a(href='#brandA',data-toggle='enter',onclick='return false;') A
-            li
-              a(href='#brandB',data-toggle='enter',onclick='return false;') B
-            li
-              a(href='#brandC',data-toggle='enter',onclick='return false;') C
-            li
-              a(href='#brandF',data-toggle='enter',onclick='return false;') F
-            li
-              a(href='#brandG',data-toggle='enter',onclick='return false;') G
-            li
-              a(href='#brandH',data-toggle='enter',onclick='return false;') H
-            li
-              a(href='#brandJ',data-toggle='enter',onclick='return false;') J
-            li
-              a(href='#brandL',data-toggle='enter',onclick='return false;') L
-            li
-              a(href='#brandN',data-toggle='enter',onclick='return false;') N
-            li
-              a(href='#brandQ',data-toggle='enter',onclick='return false;') Q
-            li
-              a(href='#brandS',data-toggle='enter',onclick='return false;') S
-            li
-              a(href='#brandT',data-toggle='enter',onclick='return false;') T
-            li
-              a(href='#brandX',data-toggle='enter',onclick='return false;') X
-            li
-              a(href='#brandY',data-toggle='enter',onclick='return false;') Y
-            li
-              a(href='#brandZ',data-toggle='enter',onclick='return false;') Z
-            li
+            each province,index in provinces
+              - var letter = provinces.letter
+              - var upper = province.initial.toUpperCase()
+              - var lower = province.initial
+              li(class={active: lower===letter || (!letter&&index===0)})
+                a(href='#brand'+upper,data-toggle='enter',onclick='return false;')=upper
         #tabcontent.tab-content
-          #brandA.tab-pane.brand-list.active
-            mixin provinces(provinces)
-              each province in provinces
-                if province.id === +ids[0]
-                  a.choose-on(href='javascript:;') #{province.name}
+          each province,index in provinces
+            - var letter = provinces.letter
+            - var upper = province.initial.toUpperCase()
+            - var lower = province.initial
+            .tab-pane.brand-list(id='brand'+upper,class={active: lower===letter || (!letter&&index===0)})
+              each pro in province.array
+                if pro.id === +ids[0]
+                  a.choose-on(href='javascript:;') #{pro.name}
                 else
-                  a(href='/infos/search/#{province.id}-#{ids[1]}-1') #{province.name}
-            +provinces(provinces.a)
-          #brandB.tab-pane.brand-list
-            +provinces(provinces.b)
-          #brandC.tab-pane.brand-list
-            +provinces(provinces.c)
-          #brandF.tab-pane.brand-list
-            +provinces(provinces.f)
-          #brandG.tab-pane.brand-list
-            +provinces(provinces.g)
-          #brandH.tab-pane.brand-list
-            +provinces(provinces.h)
-          #brandJ.tab-pane.brand-list
-            +provinces(provinces.j)
-          #brandL.tab-pane.brand-list
-            +provinces(provinces.l)
-          #brandN.tab-pane.brand-list
-            +provinces(provinces.n)
-          #brandQ.tab-pane.brand-list
-            +provinces(provinces.q)
-          #brandS.tab-pane.brand-list
-            +provinces(provinces.s)
-          #brandT.tab-pane.brand-list
-            +provinces(provinces.t)
-          #brandX.tab-pane.brand-list
-            +provinces(provinces.x)
-          #brandY.tab-pane.brand-list
-            +provinces(provinces.y)
-          #brandZ.tab-pane.brand-list
-            +provinces(provinces.z)
+                  a(href='/infos/search/#{pro.id}-#{ids[1]}-1') #{pro.name}
       dl.category-list.clearfix
         dt.title 分类：
         dd.category-item

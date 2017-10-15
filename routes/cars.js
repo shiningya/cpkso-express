@@ -1,76 +1,6 @@
 var express = require('express');
 var axios = require('axios');
 var router = express.Router();
-var letters = [
-    {
-        "lower": "a",
-        "upper": "A"
-    },
-    {
-        "lower": "b",
-        "upper": "B"
-    },
-    {
-        "lower": "c",
-        "upper": "C"
-    },
-    {
-        "lower": "d",
-        "upper": "D"
-    },
-    {
-        "lower": "e",
-        "upper": "E"
-    },
-    {
-        "lower": "f",
-        "upper": "F"
-    },
-    {
-        "lower": "g",
-        "upper": "G"
-    },
-    {
-        "lower": "h",
-        "upper": "H"
-    },
-    {
-        "lower": "j",
-        "upper": "J"
-    },
-    {
-        "lower": "l",
-        "upper": "L"
-    },
-    {
-        "lower": "n",
-        "upper": "N"
-    },
-    {
-        "lower": "q",
-        "upper": "Q"
-    },
-    {
-        "lower": "s",
-        "upper": "S"
-    },
-    {
-        "lower": "t",
-        "upper": "T"
-    },
-    {
-        "lower": "x",
-        "upper": "X"
-    },
-    {
-        "lower": "y",
-        "upper": "Y"
-    },
-    {
-        "lower": "z",
-        "upper": "Z"
-    }
-];
 var ct2 = [
     {
         "id": 15,
@@ -206,8 +136,8 @@ router.get('/', function(req, res, next) {
         var data = {};
         data.ids = ids;
         data.keyword = '';
+        data.querystr = '';
         data.list = true;
-        data.letters = letters;
         data.ct2 = ct2;
         data.brands = brands.data.response.data;
         data.prices = prices;
@@ -235,8 +165,8 @@ router.get('/list/:page', function(req, res, next) {
         var data = {};
         data.list = true;
         data.keyword = '';
+        data.querystr = '';
         data.ids = ids;
-        data.letters = letters;
         data.ct2 = ct2;
         data.brands = brands.data.response.data;
         data.prices = prices;
@@ -281,27 +211,33 @@ router.get('/search/:str', function(req, res, next) {
     };
     if (keyword) {
         var codeword = encodeURI(keyword);
+        var querystr = '?word=' + keyword;
         args += 'carCondition.car_name=' + codeword;
     };
     axios.all([getBrandList(), getPage(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6(), getPromo7()]).then(axios.spread(function(brands, cars, promo1, promo2, promo3, promo4, promo5, promo6, promo7) {
         var data = {};
         data.ids = ids;
-        data.keyword = keyword;
-        data.letters = letters;
+        data.keyword = keyword || '';
+        data.querystr = querystr || '';
         data.ct2 = ct2;
         data.brands = brands.data.response.data;
+        data.brands.letter = getCurLetter(data.brands, ids[1]);
         data.prices = prices;
         data.miles = miles;
         data.types = types;
         data.levels = levels;
+        console.log(1);
         data.cars = cars.data.response.data.Cars;
+        console.log(2);
         data.pageinfo = cars.data.response.data.Car_condition;
         data.promo1 = promo1.data.response.data.PlaceCars;
         data.promo2 = promo2.data.response.data.PlaceArts;
         data.promo3 = promo3.data.response.data.PlaceArts;
         data.promo4 = promo4.data.response.data.PlaceCars;
         data.promo5 = promo5.data.response.data.PlaceArts;
+        console.log(3);
         data.promo6 = promo6.data.response.data.PlaceArts;
+        console.log(4);
         data.promo7 = promo7.data.response.data.PlaceCars;
         res.render('cars', data);
     }));
@@ -322,7 +258,7 @@ router.get('/:id', function(req, res, next) {
 
 /* 获取车型库数据 */
 function getBrandList() {
-    return axios.get('http://localhost:8080/ev/brand_listByInital');
+    return axios.get('http://localhost:8080/ev/brand_listByInitial');
 }
 
 function getCars(args) {
@@ -376,6 +312,16 @@ function getParams() {
 
 function getPromo8() {
     return axios.get('http://localhost:8080/ev/placeCar_findByAdsUniqueId?ads_unique_id=CDET');
+}
+
+function getCurLetter(data, id) {
+    for (var i = 0; i < data.length; i++) {
+        for (var j = 0; j < data[i].array.length; j++) {
+            if (data[i].array[j].id === +id) {
+                return data[i].initial;
+            }
+        }
+    }
 }
 
 module.exports = router;

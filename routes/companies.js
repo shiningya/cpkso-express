@@ -10,6 +10,8 @@ router.get('/', function(req, res, next) {
         var data = {};
         data.list = true;
         data.ids = ids;
+        data.keyword = '';
+        data.querystr = '';
         data.provinces = provinces.data.response.data;
         data.pageinfo = companies.data.response.data.Company_condition;
         data.companies = companies.data.response.data.Companys;
@@ -25,6 +27,8 @@ router.get('/list/:page', function (req, res, next) {
         var data = {};
         data.list = true;
         data.ids = ids;
+        data.keyword = '';
+        data.querystr = '';
         data.provinces = provinces.data.response.data;
         data.pageinfo = companies.data.response.data.Company_condition;
         data.companies = companies.data.response.data.Companys;
@@ -45,13 +49,16 @@ router.get('/search/:str', function(req, res, next) {
     }
     if (keyword) {
         var codeword = encodeURI(keyword);
+        var querystr = '?word=' + keyword;
         args += '&companyCondition.name=' + codeword;
     };
     axios.all([getProvinces(), getPage(args)]).then(axios.spread(function(provinces, companies) {
         var data = {};
-        data.keyword = keyword;
+        data.keyword = keyword || '';
+        data.querystr = querystr || '';
         data.ids = ids;
         data.provinces = provinces.data.response.data;
+        data.provinces.letter = getCurLetter(data.provinces, data.ids[0]);
         data.pageinfo = companies.data.response.data.Company_condition;
         data.companies = companies.data.response.data.Companys;
         res.render('companies', data);
@@ -66,7 +73,6 @@ router.get('/:id/', function(req, res, next) {
         data.id = id;
         data.company = company.data.response.data.Company;
         data.products = comProds.data.response.data.Products;
-        console.log(data.products);
         data.comNews = comNews.data.response.data.Articles;
         res.render('company', data);
     }));
@@ -134,6 +140,16 @@ function getComProds(id) {
 function getComNews(id) {
     var url = 'http://localhost:8080/ev/article_findByCompany?company=' + id;
     return axios.get(url);
+}
+
+function getCurLetter(data, id) {
+    for (var i = 0; i < data.length; i++) {
+        for (var j = 0; j < data[i].array.length; j++) {
+            if (data[i].array[j].id === +id) {
+                return data[i].initial;
+            }
+        }
+    }
 }
 
 module.exports = router;

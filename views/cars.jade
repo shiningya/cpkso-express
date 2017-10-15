@@ -26,103 +26,58 @@ block content
           if ids[0] === '0'
             a.choose-all.choose-on(href='javascript:;') 不限
           else
-            a.choose-all(href='/cars/search/0-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0-1?word=#{keyword}') 不限
+            a.choose-all(href='/cars/search/0-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0-1#{querystr}') 不限
           each ct in ct2
             if ct.id === +ids[0]
               a.choose-on(href='javascript:;') #{ct.name}
             else
-              a(href='/cars/search/#{ct.id}-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0-1?word=#{keyword}') #{ct.name}
+              a(href='/cars/search/#{ct.id}-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0-1#{querystr}') #{ct.name}
       #categoryBrand.category-list.clearfix
         dt.title 品牌：
         a.choose-all.choose-on(href='javascript:;') 不限
         #firstLetters.brand-ident
           ul
-            each letter in letters
-              li
-                a(href='#brand#{letter.upper}',data-toggle='enter',onclick='return false;') #{letter.upper}
+            each brand,index in brands
+              - var letter = brands.letter
+              - var upper = brand.initial.toUpperCase()
+              - var lower = brand.initial
+              li(class={active: lower===letter || (!letter&&index===0)})
+                a(href='#brand'+upper,data-toggle='enter',onclick='return false;')=upper
         #tabcontent.tab-content
-          #brandA.tab-pane.brand-list.active
-            mixin brands(brands)
-              each brand in brands
-                if brand.id === +ids[1]
-                  a.choose-on(href='javascript:;',title='#{brand.brand}') #{brand.brand}
+          each brand,index in brands
+            - var letter = brands.letter
+            - var upper = brand.initial.toUpperCase()
+            - var lower = brand.initial
+            .tab-pane.brand-list(id='brand'+upper,class={active: lower===letter || (!letter&&index===0)})
+              each lbrand in brand.array
+                if lbrand.id === +ids[0]
+                  a.choose-on(href='javascript:;') #{lbrand.brand}
                 else
-                  a(href='/cars/search/#{ids[0]}-#{brand.id}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}',title='#{brand.brand}') #{brand.brand}
-            +brands(brands.a)
-          #brandB.tab-pane.brand-list
-            +brands(brands.b)
-          #brandC.tab-pane.brand-list
-            +brands(brands.c)
-          #brandD.tab-pane.brand-list
-            +brands(brands.d)
-          #brandE.tab-pane.brand-list
-            +brands(brands.e)
-          #brandF.tab-pane.brand-list
-            +brands(brands.f)
-          #brandG.tab-pane.brand-list
-            +brands(brands.g)
-          #brandH.tab-pane.brand-list
-            +brands(brands.h)
-          #brandI.tab-pane.brand-list
-            +brands(brands.i)
-          #brandJ.tab-pane.brand-list
-            +brands(brands.j)
-          #brandK.tab-pane.brand-list
-            +brands(brands.k)
-          #brandL.tab-pane.brand-list
-            +brands(brands.l)
-          #brandM.tab-pane.brand-list
-            +brands(brands.m)
-          #brandN.tab-pane.brand-list
-            +brands(brands.n)
-          #brandO.tab-pane.brand-list
-            +brands(brands.o)
-          #brandP.tab-pane.brand-list
-            +brands(brands.p)
-          #brandQ.tab-pane.brand-list
-            +brands(brands.q)
-          #brandR.tab-pane.brand-list
-            +brands(brands.r)
-          #brandS.tab-pane.brand-list
-            +brands(brands.s)
-          #brandT.tab-pane.brand-list
-            +brands(brands.t)
-          #brandU.tab-pane.brand-list
-            +brands(brands.u)
-          #brandV.tab-pane.brand-list
-            +brands(brands.v)
-          #brandW.tab-pane.brand-list
-            +brands(brands.w)
-          #brandX.tab-pane.brand-list
-            +brands(brands.x)
-          #brandY.tab-pane.brand-list
-            +brands(brands.y)
-          #brandZ.tab-pane.brand-list
-            +brands(brands.z)
+                  a(href='/cars/search/#{ids[0]}-#{lbrand.id}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1#{querystr}') #{lbrand.brand}
       dl#categoryPrice.category-list.clearfix
         dt.title 价格：
         dd.category-item
           if ids[2] === '0'
             a.choose-all.choose-on(href='javascript:;') 不限
           else
-            a.choose-all(href='/cars/search/#{ids[0]}-#{ids[1]}-0-#{ids[3]}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 不限
+            a.choose-all(href='/cars/search/#{ids[0]}-#{ids[1]}-0-#{ids[3]}-#{ids[4]}-#{ids[5]}-1#{querystr}') 不限
           each price in prices
             if price.id === +ids[2]
               a.choose-on(href='javascript:;') #{price.name}
             else
-              a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{price.id}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') #{price.name}
+              a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{price.id}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1#{querystr}') #{price.name}
       dl#categoryMile.category-list.clearfix
         dt.title 续航：
         dd.category-item
           if ids[3] === '0'
             a.choose-all.choose-on(href='javascript:;') 不限
           else
-            a.choose-all(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-0-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') 不限
+            a.choose-all(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-0-#{ids[4]}-#{ids[5]}-1#{querystr}') 不限
           each mile in miles
             if mile.id === +ids[3]
               a.choose-on(href='javascript:;') #{mile.name}
             else
-              a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{mile.id}-#{ids[4]}-#{ids[5]}-1?word=#{keyword}') #{mile.name}
+              a(href='/cars/search/#{ids[0]}-#{ids[1]}-#{ids[2]}-#{mile.id}-#{ids[4]}-#{ids[5]}-1#{querystr}') #{mile.name}
       if ids[0] === '3'
         dl#categoryType.category-list.clearfix
           dt.title 类型：
@@ -130,24 +85,24 @@ block content
             if ids[4] === '0'
               a.choose-all.choose-on(href='javascript:;') 不限
             else
-              a.choose-all(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-#{ids[5]}-1?word=#{keyword}') 不限
+              a.choose-all(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-#{ids[5]}-1#{querystr}') 不限
             each tp in types
               if tp.id === +ids[4]
                 a.choose-on(href='javascript:;') #{tp.name}
               else
-                a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{tp.id}-#{ids[5]}-1?word=#{keyword}') #{tp.name}
+                a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{tp.id}-#{ids[5]}-1#{querystr}') #{tp.name}
         dl#categoryLevel.category-list.clearfix
           dt.title 级别：
           dd.category-item
             if ids[5] === '0'
               a.choose-all.choose-on(href='javascript:;') 不限
             else
-              a.choose-all(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-0-1?word=#{keyword}') 不限
+              a.choose-all(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-0-1#{querystr}') 不限
             each level in levels
               if level.id === +ids[5]
                 a.choose-on(href='javascript:;') #{level.name}
               else
-                a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{level.id}-1?word=#{keyword}') #{level.name}
+                a(href='/cars/search/3-#{ids[1]}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{level.id}-1#{querystr}') #{level.name}
     .content-container.car-search-result
       .content-left
         #car-result.search-result.product-container
@@ -269,7 +224,7 @@ block content
               if pageinfo.pageNo===1
                 span.disabled(href='javascript:;') 上一页
               else
-                - var url = keyword ? ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + (pageinfo.pageNo-1) + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + (pageinfo.pageNo-1)
+                - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + (pageinfo.pageNo-1) + querystr
                 a(href=url) 上一页
               if pageinfo.maxPageNo < 7
                 - var n = 1
@@ -277,7 +232,7 @@ block content
                   if n===pageinfo.pageNo
                     span.current(href=url)= n++
                   else
-                    - var url = keyword ? ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n
+                    - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n + querystr
                     a(href=url)= n++     
               else if pageinfo.pageNo <= 3
                 - var n = 1
@@ -285,13 +240,13 @@ block content
                   if n===pageinfo.pageNo
                     span.current(href=url)= n++
                   else
-                    - var url = keyword ? ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n
+                    - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n + querystr
                     a(href=url)= n++
                 a ...
-                - var url = keyword ? ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + pageinfo.maxPageNo + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + pageinfo.maxPageNo
+                - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + pageinfo.maxPageNo + querystr
                 a(href=url) #{pageinfo.maxPageNo}
               else if pageinfo.pageNo > pageinfo.maxPageNo-2
-                - var url = keyword ? ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-1' + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-1'
+                - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-1' + querystr
                 a(href=url) 1
                 a ...
                 - var n = pageinfo.pageNo-2
@@ -299,10 +254,10 @@ block content
                   if n===pageinfo.pageNo
                     span.current(href=url)= n++
                   else
-                    - var url = keyword ? ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n
+                    - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n + querystr
                     a(href=url)= n++        
               else
-                - var url = keyword ? ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-1' + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-1'
+                - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-1' + querystr
                 a(href=url) 1
                 if pageinfo.pageNo > 4
                   a ...
@@ -311,17 +266,17 @@ block content
                   if n===pageinfo.pageNo
                     span.current(href=url)= n++
                   else
-                    - var url = keyword ? ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n
+                    - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + n + querystr
                     a(href=url)= n++        
                 if pageinfo.pageNo < pageinfo.maxPageNo-3
                   a ...
                 if pageinfo.pageNo < pageinfo.maxPageNo-2
-                  - var url = keyword ? ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + pageinfo.maxPageNo + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + pageinfo.maxPageNo
+                  - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + pageinfo.maxPageNo + querystr
                   a(href=url) #{pageinfo.maxPageNo}
               if pageinfo.pageNo===pageinfo.maxPageNo
                 span.disabled(href='javascript:;') 下一页
               else
-                - var url = keyword ? ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + (pageinfo.pageNo+1) + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + (pageinfo.pageNo+1)
+                - var url = ids[0] + '-' + ids[1] + '-' + ids[2] + '-' +ids[3] + '-' + ids[4] + '-' + ids[5] + '-' + (pageinfo.pageNo+1) + querystr
                 a(href=url) 下一页
       .content-right
         #showBar1.show-bar-sm

@@ -27,6 +27,7 @@ router.get('/list/:page', function (req, res, next) {
         data.list = true;
         data.ids = ids;
         data.provinces = provinces.data.response.data;
+        data.provinces.letter = getCurLetter(data.provinces, data.ids[0]);
         data.pageinfo = infos.data.response.data.Require_condition;
         data.infos = infos.data.response.data.Requires;
         data.promo = promo.data.response.data.PlaceCars;
@@ -36,7 +37,9 @@ router.get('/list/:page', function (req, res, next) {
 
 /* 筛选供求信息列表 */
 router.get('/search/:str', function(req, res, next) {
+    console.log(req.params.str);
     var ids = req.params.str.split('-');
+    console.log(ids);
     var args = '?requireCondition.pageNo=' + ids[2];
     if (ids[0] !== '0') {
         args += '&province=' + ids[0];
@@ -44,6 +47,7 @@ router.get('/search/:str', function(req, res, next) {
     if (ids[1]!=='0') {
         args += '&require.category.type=' + ids[1];
     }
+    console.log(args);
     axios.all([getProvinces(),getPage(args),getPromo()]).then(axios.spread(function(provinces,infos,promo) {
         var data = {};
         data.ids = ids;
@@ -80,7 +84,9 @@ function getProvinces() {
 }
 
 function getPage(args) {
+    console.log(args);
     var url = 'http://localhost:8080/ev/require_skipPage' + args;
+    console.log(url);
     return axios.get(url);
 }
   
@@ -97,6 +103,16 @@ function getInfo(id) {
 function getOffers(id) {
     var url = 'http://localhost:8080/ev/offer_findByRequire?require_id=' + id;
     return axios.get(url);
+}
+
+function getCurLetter(data, id) {
+    for (var i = 0; i < data.length; i++) {
+        for (var j = 0; j < data[i].array.length; j++) {
+            if (data[i].array[j].id === +id) {
+                return data[i].initial;
+            }
+        }
+    }
 }
 
 module.exports = router;

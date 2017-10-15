@@ -7,6 +7,11 @@ block title
 append link
   link(rel='stylesheet', href="http://ev.cpkso.com/css/index.css")
   link(rel='stylesheet', href="http://ev.cpkso.com/css/companies.css")
+block hright
+  .header-right
+    .search
+      input#com-input.search-input(onkeydown="entersearch(3);" type="text" placeholder="请输入企业名称" autocomplete="off" value="#{keyword}")
+      a#com-search-btn.search-btn
 block content
   .product-head-nav
     ol.breadcrumb
@@ -24,89 +29,38 @@ block content
           a.choose-all(href='/companies/search/0-#{ids[1]}-1') 不限
         #firstLetters.brand-ident
           ul
-            li.active
-              a(href='#brandA',data-toggle='enter',onclick='return false;') A
-            li
-              a(href='#brandB',data-toggle='enter',onclick='return false;') B
-            li
-              a(href='#brandC',data-toggle='enter',onclick='return false;') C
-            li
-              a(href='#brandF',data-toggle='enter',onclick='return false;') F
-            li
-              a(href='#brandG',data-toggle='enter',onclick='return false;') G
-            li
-              a(href='#brandH',data-toggle='enter',onclick='return false;') H
-            li
-              a(href='#brandJ',data-toggle='enter',onclick='return false;') J
-            li
-              a(href='#brandL',data-toggle='enter',onclick='return false;') L
-            li
-              a(href='#brandN',data-toggle='enter',onclick='return false;') N
-            li
-              a(href='#brandQ',data-toggle='enter',onclick='return false;') Q
-            li
-              a(href='#brandS',data-toggle='enter',onclick='return false;') S
-            li
-              a(href='#brandT',data-toggle='enter',onclick='return false;') T
-            li
-              a(href='#brandX',data-toggle='enter',onclick='return false;') X
-            li
-              a(href='#brandY',data-toggle='enter',onclick='return false;') Y
-            li
-              a(href='#brandZ',data-toggle='enter',onclick='return false;') Z
-            li
+            each province,index in provinces
+              - var letter = provinces.letter
+              - var upper = province.initial.toUpperCase()
+              - var lower = province.initial
+              li(class={active: lower===letter || (!letter&&index===0)})
+                a(href='#brand'+upper,data-toggle='enter',onclick='return false;')=upper
         #tabcontent.tab-content
-          mixin provinces(provinces)
-            each province in provinces
-              if province.id === +ids[0]
-                a.choose-on(href='javascript:;') #{province.name}
-              else
-                a(href='/companies/search/#{province.id}-#{ids[1]}-1') #{province.name}
-          #brandA.tab-pane.brand-list.active
-            +provinces(provinces.a)
-          #brandB.tab-pane.brand-list
-            +provinces(provinces.b)
-          #brandC.tab-pane.brand-list
-            +provinces(provinces.c)
-          #brandF.tab-pane.brand-list
-            +provinces(provinces.f)
-          #brandG.tab-pane.brand-list
-            +provinces(provinces.g)
-          #brandH.tab-pane.brand-list
-            +provinces(provinces.h)
-          #brandJ.tab-pane.brand-list
-            +provinces(provinces.j)
-          #brandL.tab-pane.brand-list
-            +provinces(provinces.l)
-          #brandN.tab-pane.brand-list
-            +provinces(provinces.n)
-          #brandQ.tab-pane.brand-list
-            +provinces(provinces.q)
-          #brandS.tab-pane.brand-list
-            +provinces(provinces.s)
-          #brandT.tab-pane.brand-list
-            +provinces(provinces.t)
-          #brandX.tab-pane.brand-list
-            +provinces(provinces.x)
-          #brandY.tab-pane.brand-list
-            +provinces(provinces.y)
-          #brandZ.tab-pane.brand-list
-            +provinces(provinces.z)
+          each province,index in provinces
+            - var letter = provinces.letter
+            - var upper = province.initial.toUpperCase()
+            - var lower = province.initial
+            .tab-pane.brand-list(id='brand'+upper,class={active: lower===letter || (!letter&&index===0)})
+              each pro in province.array
+                if pro.id === +ids[0]
+                  a.choose-on(href='javascript:;') #{pro.name}
+                else
+                  a(href='/companies/search/#{pro.id}-#{ids[1]}-1#{querystr}') #{pro.name}
       dl.category-list.clearfix
         dt.title 分类：
         dd.category-item
           if ids[1] === '0'
             a.choose-all.choose-on(href='javascript:;') 不限
           else
-            a.choose-all(href='/infos/search/#{ids[0]}-0-1') 不限
+            a.choose-all(href='/companies/search/#{ids[0]}-0-1#{querystr}') 不限
           if ids[1] === '1'
             a.choose-on(href='javascript:;') 整车
           else
-            a(href='/infos/search/#{ids[0]}-1-1') 整车
+            a(href='/companies/search/#{ids[0]}-1-1#{querystr}') 整车
           if ids[1] === '2'
             a.choose-on(href='javascript:;') 配件
           else
-            a(href='/infos/search/#{ids[0]}-2-1') 配件
+            a(href='/companies/search/#{ids[0]}-2-1#{querystr}') 配件
     .content-container.car-search-result
       .content-left
         ul#com-list
@@ -161,7 +115,7 @@ block content
                     span.current(href=url)= n++
                   else
                     - var url = '/companies/list/' + n
-                    a(href=url)= n++     
+                    a(href=url)= n++
               else if pageinfo.pageNo <= 3
                 - var n = 1
                 while n <= 5
@@ -213,7 +167,7 @@ block content
               if pageinfo.pageNo===1
                 span.disabled(href='javascript:;') 上一页
               else
-                - var url = keyword ? ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo-1) + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo-1)
+                - var url = keyword ? ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo-1) + querystr : ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo-1)
                 a(href=url) 上一页
               if pageinfo.maxPageNo < 7
                 - var n = 1
@@ -221,6 +175,7 @@ block content
                   if n===pageinfo.pageNo
                     span.current(href=url)= n++
                   else
+                    - var url = ids[0] + '-' + ids[1] + '-' + n + querystr
                     a(href=url)= n++     
               else if pageinfo.pageNo <= 3
                 - var n = 1
@@ -228,13 +183,13 @@ block content
                   if n===pageinfo.pageNo
                     span.current(href=url)= n++
                   else
-                    - var url = keyword ? ids[0] + '-' + ids[1] + '-' + n + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + n
+                    - var url = ids[0] + '-' + ids[1] + '-' + n + querystr
                     a(href=url)= n++
                 a ...
-                - var url = keyword ? ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo
+                - var url = ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo + querystr
                 a(href=url) #{pageinfo.maxPageNo}
               else if pageinfo.pageNo > pageinfo.maxPageNo-2
-                - var url = keyword ? ids[0] + '-' + ids[1] + '-1' + '?word=' + keyword : ids[0] + '-' + ids[1] + '-1'
+                - var url = ids[0] + '-' + ids[1] + '-1' + querystr
                 a(href=url) 1
                 a ...
                 - var n = pageinfo.pageNo-2
@@ -242,10 +197,10 @@ block content
                   if n===pageinfo.pageNo
                     span.current(href=url)= n++
                   else
-                    - var url = keyword ? ids[0] + '-' + ids[1] + '-' + n + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + n
+                    - var url = ids[0] + '-' + ids[1] + '-' + n + querystr
                     a(href=url)= n++        
               else
-                - var url = keyword ? ids[0] + '-' + ids[1] + '-1' + '?word=' + keyword : ids[0] + '-' + ids[1] + '-1'
+                - var url = ids[0] + '-' + ids[1] + '-1' + querystr
                 a(href=url) 1
                 if pageinfo.pageNo > 4
                   a ...
@@ -254,19 +209,32 @@ block content
                   if n===pageinfo.pageNo
                     span.current(href=url)= n++
                   else
-                    - var url = keyword ? ids[0] + '-' + ids[1] + '-' + n + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + n
+                    - var url = ids[0] + '-' + ids[1] + '-' + n + querystr
                     a(href=url)= n++        
                 if pageinfo.pageNo < pageinfo.maxPageNo-3
                   a ...
                 if pageinfo.pageNo < pageinfo.maxPageNo-2
-                  - var url = keyword ? ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo
+                  - var url = ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo + querystr
                   a(href=url) #{pageinfo.maxPageNo}
               if pageinfo.pageNo===pageinfo.maxPageNo
                 span.disabled(href='javascript:;') 下一页
               else
-                - var url = keyword ? ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo+1) + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo+1)
+                - var url = ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo+1) + querystr
                 a(href=url) 下一页
       .content-right
 
 append script
   script(src='http://ev.cpkso.com/js/enter.js')
+  script.
+    $('#com-search-btn').click(function(){
+      var word = $('#com-input').val();
+      var url = word ? '/companies/search/0-0-1?word=' + word : '/companies/search/0-0-1';
+      window.location.href = url;
+    })
+    function entersearch(id){
+      var event = window.event || arguments.callee.caller.arguments[0];
+      if (event.keyCode == 13 && id === 3) {
+        $('#com-search-btn').trigger('click');
+      }
+    }
+

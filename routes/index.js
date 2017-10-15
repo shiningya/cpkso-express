@@ -10,8 +10,6 @@ router.get('/', function(req, res, next) {
             data.sliders = sliders.data.response.data.PlaceCars;
             data.banners = banners.data.response.data.PlaceCars;
             data.newsG = newsG.data.response.data.PlaceArts;
-            console.log(data.sliders);
-            console.log(data.banners);
 
             data.hotCar = hotCar.data.response.data.PlaceCars;
             data.newCar = newCar.data.response.data.PlaceCars;

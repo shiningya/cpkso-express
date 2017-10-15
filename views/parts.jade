@@ -26,12 +26,12 @@ block content
           if ids[0] === '0'
             a.choose-all.choose-on(href='javascript:;') 不限
           else
-            a.choose-all(href='/parts/search/0-0-1') 不限
+            a.choose-all(href='/parts/search/0-0-1#{querystr}') 不限
           each ct in ct2
             if ct.id === +ids[0]
               a.choose-on(href='javescript:;',title='#{ct.name}') #{ct.name}
             else
-              a(href='/parts/search/#{ct.id}-0-1',title='#{ct.name}') #{ct.name}
+              a(href='/parts/search/#{ct.id}-0-1#{querystr}',title='#{ct.name}') #{ct.name}
       if id&&id!=='0'
         dl#ct2.category-list.clearfix
           dt.title 分类：
@@ -39,13 +39,13 @@ block content
             if ids[1] === '0'
               a.choose-all.choose-on(href='javescript:;') 不限
             else
-              a.choose-all(href='/parts/search/#{id}-0-1') 不限
+              a.choose-all(href='/parts/search/#{id}-0-1#{querystr}') 不限
             .ct2-list
               each ct in ct3
                 if ct.id === +ids[1]
                   a.choose-on(href='javescript:;') #{ct.name}
                 else
-                  a(href='/parts/search/#{ct.parent_id}-#{ct.id}-1') #{ct.name}
+                  a(href='/parts/search/#{ct.parent_id}-#{ct.id}-1#{querystr}') #{ct.name}
     .content-container.parts-search-result
       .content-left
         #parts-result.search-result.product-container
@@ -148,7 +148,7 @@ block content
               if pageinfo.pageNo===1
                 span.disabled(href='javascript:;') 上一页
               else
-                - var url = keyword ? ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo-1) + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo-1)
+                - var url = ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo-1) + querystr
                 a(href=url) 上一页
               if pageinfo.maxPageNo < 7
                 - var n = 1
@@ -156,7 +156,7 @@ block content
                   if n===pageinfo.pageNo
                     span.current(href=url)= n++
                   else
-                    - var url = keyword ? ids[0] + '-' + ids[1] + '-' + n + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + n
+                    - var url = ids[0] + '-' + ids[1] + '-' + n + querystr
                     a(href=url)= n++     
               else if pageinfo.pageNo <= 3
                 - var n = 1
@@ -164,13 +164,13 @@ block content
                   if n===pageinfo.pageNo
                     span.current(href=url)= n++
                   else
-                    - var url = keyword ? ids[0] + '-' + ids[1] + '-' + n + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + n
+                    - var url = ids[0] + '-' + ids[1] + '-' + n + querystr
                     a(href=url)= n++
                 a ...
-                - var url = keyword ? ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo
+                - var url = ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo + querystr
                 a(href=url) #{pageinfo.maxPageNo}
               else if pageinfo.pageNo > pageinfo.maxPageNo-2
-                - var url = keyword ? ids[0] + '-' + ids[1] + '-1' + '?word=' + keyword : ids[0] + '-' + ids[1] + '-1'
+                - var url = ids[0] + '-' + ids[1] + '-1' + querystr
                 a(href=url) 1
                 a ...
                 - var n = pageinfo.pageNo-2
@@ -178,10 +178,10 @@ block content
                   if n===pageinfo.pageNo
                     span.current(href=url)= n++
                   else
-                    - var url = keyword ? ids[0] + '-' + ids[1] + '-' + n + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + n
+                    - var url = ids[0] + '-' + ids[1] + '-' + n + querystr
                     a(href=url)= n++        
               else
-                - var url = keyword ? ids[0] + '-' + ids[1] + '-1' + '?word=' + keyword : ids[0] + '-' + ids[1] + '-1'
+                - var url = ids[0] + '-' + ids[1] + '-1' + querystr
                 a(href=url) 1
                 if pageinfo.pageNo > 4
                   a ...
@@ -190,17 +190,17 @@ block content
                   if n===pageinfo.pageNo
                     span.current(href=url)= n++
                   else
-                    - var url = keyword ? ids[0] + '-' + ids[1] + '-' + n + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + n
+                    - var url = ids[0] + '-' + ids[1] + '-' + n + querystr
                     a(href=url)= n++        
                 if pageinfo.pageNo < pageinfo.maxPageNo-3
                   a ...
                 if pageinfo.pageNo < pageinfo.maxPageNo-2
-                  - var url = keyword ? ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo
+                  - var url = ids[0] + '-' + ids[1] + '-' + pageinfo.maxPageNo + querystr
                   a(href=url) #{pageinfo.maxPageNo}
               if pageinfo.pageNo===pageinfo.maxPageNo
                 span.disabled(href='javascript:;') 下一页
               else
-                - var url = keyword ? ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo+1) + '?word=' + keyword : ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo+1)
+                - var url = ids[0] + '-' + ids[1] + '-' + (pageinfo.pageNo+1) + querystr
                 a(href=url) 下一页
       .content-right
         #showBar1.show-bar-sm
