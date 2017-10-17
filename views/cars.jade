@@ -34,7 +34,10 @@ block content
               a(href='/cars/search/#{ct.id}-#{ids[1]}-#{ids[2]}-#{ids[3]}-0-0-1#{querystr}') #{ct.name}
       #categoryBrand.category-list.clearfix
         dt.title 品牌：
-        a.choose-all.choose-on(href='javascript:;') 不限
+        if ids[1] === '0'
+          a.choose-all.choose-on(href='javascript:;') 不限
+        else
+          a.choose-all(href='/cars/search/#{ids[0]}-0-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1#{querystr}') 不限
         #firstLetters.brand-ident
           ul
             each brand,index in brands
@@ -50,7 +53,7 @@ block content
             - var lower = brand.initial
             .tab-pane.brand-list(id='brand'+upper,class={active: lower===letter || (!letter&&index===0)})
               each lbrand in brand.array
-                if lbrand.id === +ids[0]
+                if lbrand.id === +ids[1]
                   a.choose-on(href='javascript:;') #{lbrand.brand}
                 else
                   a(href='/cars/search/#{ids[0]}-#{lbrand.id}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1#{querystr}') #{lbrand.brand}
@@ -121,7 +124,7 @@ block content
                     .info-wrapper
                       a(href='/cars/#{car.id}',title='#{car.name}',target='_blank') 详情
                       a.cus-service(href='javascript:;') 客服
-                      a(href='/companys/#{car.company_id}',target='_blank',title='#{car.company_name}') 官网
+                      a(href='/companies/#{car.company_id}',target='_blank',title='#{car.company_name}') 官网
                     .car-detail
                       ul.detail-list
                         if car.mile
@@ -296,7 +299,7 @@ block content
                 ul.msg-list
                   each news in newsdata
                     li.side-list-item
-                      a(href='/news/#{news.uri}',title='#{news.title}',target='_blank') #{news.title}
+                      a(href='#{news.uri}',title='#{news.title}',target='_blank') #{news.title}
                       span.date #{news.date}
               +news(promo2)
             #policy.tab-pane

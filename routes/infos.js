@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
     var args = '';
     axios.all([getProvinces(),getInfos(args),getPromo()]).then(axios.spread(function(provinces,infos,promo) {
         var data = {};
+        data.curnav = 'infos';
         data.list = true;
         data.ids = ids;
         data.provinces = provinces.data.response.data;
@@ -24,6 +25,7 @@ router.get('/list/:page', function (req, res, next) {
     var args = '?requireCondition.pageNo=' + page;
     axios.all([getProvinces(),getPage(args),getPromo()]).then(axios.spread(function(provinces,infos,promo) {
         var data = {};
+        data.curnav = 'infos';
         data.list = true;
         data.ids = ids;
         data.provinces = provinces.data.response.data;
@@ -33,13 +35,11 @@ router.get('/list/:page', function (req, res, next) {
         data.promo = promo.data.response.data.PlaceCars;
         res.render('infos', data);
     }));
-});  
+});
 
 /* 筛选供求信息列表 */
 router.get('/search/:str', function(req, res, next) {
-    console.log(req.params.str);
     var ids = req.params.str.split('-');
-    console.log(ids);
     var args = '?requireCondition.pageNo=' + ids[2];
     if (ids[0] !== '0') {
         args += '&province=' + ids[0];
@@ -47,9 +47,9 @@ router.get('/search/:str', function(req, res, next) {
     if (ids[1]!=='0') {
         args += '&require.category.type=' + ids[1];
     }
-    console.log(args);
     axios.all([getProvinces(),getPage(args),getPromo()]).then(axios.spread(function(provinces,infos,promo) {
         var data = {};
+        data.curnav = 'infos';
         data.ids = ids;
         data.provinces = provinces.data.response.data;
         data.pageinfo = infos.data.response.data.Require_condition;
@@ -64,6 +64,7 @@ router.get('/:id', function(req, res, next) {
     var id = req.params.id;
     axios.all([getInfo(id), getOffers(id), getPromo()]).then(axios.spread(function(info, offers, promo) {
         var data = {};
+        data.curnav = 'infos';
         data.id = id;
         data.info = info.data.response.data.Require;
         data.offers = offers.data.response.data.Offers;
@@ -84,9 +85,7 @@ function getProvinces() {
 }
 
 function getPage(args) {
-    console.log(args);
     var url = 'http://localhost:8080/ev/require_skipPage' + args;
-    console.log(url);
     return axios.get(url);
 }
   

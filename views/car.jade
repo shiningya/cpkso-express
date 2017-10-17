@@ -66,10 +66,10 @@ block body
                 ul
                   each param,index in car.car.params
                     if index===0
-                      li.selected(data-price='#{param.price}')
+                      li.selected(data-price=param.price)
                         a(href='javascript:;') #{param.car_model}
                     else
-                      li(data-price='#{param.price}')
+                      li(data-price=param.price)
                         a(href='javascript:;') #{param.car_model}
             .contact.li
               .dt 联系人
@@ -218,6 +218,12 @@ block body
       script(src='http://ev.cpkso.com/js/mustache.min.js')
       script.
         $(document).ready(function() {
+          $('#owl-sm').owlCarousel({
+            items: 5,
+            navigation: true,
+            navigationText: ["", ""],
+            responsive: false
+          });
           var postUrl = 'http://localhost:8080/ev/car_singleById?car.id=' + #{car.car.id} ;
           $.ajax({
             url: postUrl,
@@ -250,12 +256,16 @@ block body
               }
             });
 
+            $('.J-img-list li').hover(function(event) {
+              var $pic = $(this).find('img');
+              $('.main-img img').attr('src', $pic.attr('src'));
+            });
             $('#choose li').click(function() {
               var $this = $(this);
-              var price = $this.attr('data-price');
+              var price = $this.attr('data-price') ? '￥' + $this.attr('data-price') + '万' : '暂无价格';
               $this.siblings().removeClass('selected');
               $this.addClass('selected');
-              $('#pdetail .price').html('¥ ' + price + '万');
+              $('#pdetail .price').html(price);
             })
           });
         });

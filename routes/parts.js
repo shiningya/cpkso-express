@@ -59,6 +59,7 @@ router.get('/', function (req, res, next) {
   var args = '';
   axios.all([getParts(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6()]).then(axios.spread(function (parts, promo1, promo2, promo3, promo4, promo5, promo6) {
     var data = {};
+    data.curnav = 'parts';
     data.ids = ['0','0'];
     data.keyword = '';
     data.querystr = '';
@@ -81,6 +82,7 @@ router.get('/list/:page', function (req, res, next) {
   var args = '?partsCondition.pageNo=' + page;
   axios.all([getPage(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6()]).then(axios.spread(function (parts, promo1, promo2, promo3, promo4, promo5, promo6) {
     var data = {};
+    data.curnav = 'parts';
     data.ids = ['0','0'];
     data.keyword = '';
     data.querystr = '';
@@ -117,6 +119,7 @@ router.get('/search/:str', function (req, res, next) {
   };
 axios.all([getCt3(id), getPage(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6()]).then(axios.spread(function (ct3, parts, promo1, promo2, promo3, promo4, promo5, promo6) {
     var data = {};
+    data.curnav = 'parts';
     data.id = id;
     data.keyword = keyword || '';
     data.querystr = querystr || '';
@@ -140,6 +143,7 @@ router.get('/:id', function (req, res, next) {
   var id = req.params.id;
   axios.all([getPart(id), getPromo8()]).then(axios.spread(function (part, promo8) {
     var data = {};
+    data.curnav = 'parts';
     data.id = id;
     data.keyword = '';
     data.part = part.data.response.data.Parts;

@@ -61,7 +61,7 @@ block content
                     .info-wrapper
                       a(href='/parts/#{part.id}',title='#{part.name}',target='_blank') 详情
                       a.cus-service(href='javascript:;') 客服
-                      a(href='/companys/#{part.company_id}',target='_blank',title='#{part.company_name}') 官网
+                      a(href='/companies/#{part.company_id}',target='_blank',title='#{part.company_name}') 官网
                     .car-detail
                       p.parts-info 简介：#{part.brief}
                 .detail
@@ -220,7 +220,7 @@ block content
                 ul.msg-list
                   each news in newsdata
                     li.side-list-item
-                      a(href='/news/#{news.uri}',title='#{news.title}',target='_blank') #{news.title}
+                      a(href='#{news.uri}',title='#{news.title}',target='_blank') #{news.title}
                       span.date #{news.date}
               +news(promo2)
             #policy.tab-pane

@@ -10,7 +10,7 @@ block content
   .main-body
     .header-wrapper(style='height:300px;')
       #banner.header-banner
-        a(href='/news/#{banner[0].uri}',title='#{banner[0].title}',target='_blank')
+        a(href='#{banner[0].uri}',title='#{banner[0].title}',target='_blank')
           img(src='#{banner[0].pic}',alt='#{banner[0].title}')
     .content-container
       .content-left
@@ -40,12 +40,12 @@ block content
                 each item in news
                   .news-item.clearfix
                     .news-item-image
-                      a(href='/news/#{item.content}',title='#{item.title}',target='_blank')
+                      a(href='#{item.content}',title='#{item.title}',target='_blank')
                         img(src='#{item.thumb}',alt='#{item.title}')
                       span.tag #{item.artCt}
                     .news-item-info
                       h4.news-item-title
-                        a(href='/news/#{item.content}',title='#{item.title}',target='_blank') #{item.title}
+                        a(href='#{item.content}',title='#{item.title}',target='_blank') #{item.title}
                       p.news-item-summary #{item.brief}
                       .news-item-footer
                         .news-time #{item.publish_time}
@@ -121,7 +121,7 @@ block content
           ul#newslist.list-unstyled.zixun-item
             each item in promo2
               li
-                a(href='/news/#{item.uri}',target='_blank',title='#{item.title}')
+                a(href='#{item.uri}',target='_blank',title='#{item.title}')
                   img(src='#{item.pic}',alt='#{item.title}')
                   span #{item.title}
         #aditem.right3

@@ -150,7 +150,7 @@ block content
           .tab-pane.active#guide
             .owl-lg.owl-carousel
               each news in newsG
-                a.item(href='/news/#{news.uri}',title='#{news.title}',target='_blank')
+                a.item(href='#{news.uri}',title='#{news.title}',target='_blank')
                   img(src='#{news.pic}',style='width:280px;height:180px;',alt='#{news.title}')
                   p.title #{news.title}
     .products
@@ -302,7 +302,7 @@ block content
       a(href='/companies/#{promo3[0].entity_id}',title='#{promo3[0].title}',target='_blank')
         img(src='#{promo3[0].pic}',alt='#{promo3[0].title}')
 append script
-  script(src='js/owl.carousel.min.js')
+  script(src="http://ev.cpkso.com/js/owl.carousel.min.js")
   script.
     $(function(){
       $('.owl-lg').owlCarousel({

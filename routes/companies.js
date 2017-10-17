@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
     var args = '';
     axios.all([getProvinces(), getCompanies(args)]).then(axios.spread(function(provinces, companies) {
         var data = {};
+        data.curnav = 'companies';
         data.list = true;
         data.ids = ids;
         data.keyword = '';
@@ -25,6 +26,7 @@ router.get('/list/:page', function (req, res, next) {
     var args = '?companyCondition.pageNo=' + page;
     axios.all([getProvinces(), getPage(args)]).then(axios.spread(function(provinces, companies) {
         var data = {};
+        data.curnav = 'companies';
         data.list = true;
         data.ids = ids;
         data.keyword = '';
@@ -54,6 +56,7 @@ router.get('/search/:str', function(req, res, next) {
     };
     axios.all([getProvinces(), getPage(args)]).then(axios.spread(function(provinces, companies) {
         var data = {};
+        data.curnav = 'companies';
         data.keyword = keyword || '';
         data.querystr = querystr || '';
         data.ids = ids;
@@ -70,6 +73,7 @@ router.get('/:id/', function(req, res, next) {
     var id = req.params.id;
     axios.all([getCompany(id), getComProds(id), getComNews(id)]).then(axios.spread(function(company, comProds, comNews) {
         var data = {};
+        data.curnav = 'company';
         data.id = id;
         data.company = company.data.response.data.Company;
         data.products = comProds.data.response.data.Products;
@@ -82,6 +86,7 @@ router.get('/:id/intro', function(req, res, next) {
     var id = req.params.id;
     axios.all([getCompany(id)]).then(axios.spread(function(company) {
         var data = {};
+        data.curnav = 'intro';
         data.id = id;
         data.company = company.data.response.data.Company;
         res.render('intro', data);
@@ -92,6 +97,7 @@ router.get('/:id/products', function(req, res, next) {
     var id = req.params.id;
     axios.all([getCompany(id), getComProds(id)]).then(axios.spread(function(company, comProds) {
         var data = {};
+        data.curnav = 'products';
         data.id = id;
         data.company = company.data.response.data.Company;
         data.products = comProds.data.response.data.Products;
@@ -103,6 +109,7 @@ router.get('/:id/trend', function(req, res, next) {
     var id = req.params.id;
     axios.all([getCompany(id), getComNews(id)]).then(axios.spread(function(company, comNews) {
         var data = {};
+        data.curnav = 'trend';
         data.id = id;
         data.company = company.data.response.data.Company;
         data.comNews = comNews.data.response.data.Articles;

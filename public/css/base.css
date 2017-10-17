@@ -629,6 +629,45 @@ img{
 	margin-bottom: 30px;
 }
 
+.footer-icon{
+	text-align:center;
+	padding:15px 0 15px 0;
+}
+.footer-icon a {
+    height: 40px;
+    padding: 6px 0px 0 34px;
+    display: inline-block;
+    color: #424345;
+    text-align: left;
+    font-size:12px;
+    margin: 0px 2px;
+}
+.footer-icon a.icon1{
+	width:99px;
+	background:url(../img/2.png) no-repeat;
+	vertical-align: middle;
+}
+.footer-icon a.icon2{
+	width:88px;
+	background:url(../img/1.png) no-repeat;
+	vertical-align: middle;
+}
+.footer-icon a.icon3{
+	width:92px;
+	background:url(../img/4.png) no-repeat;
+	vertical-align: middle;
+}
+.footer-icon a.icon4{
+	width:92px;
+	background:url(../img/3.png) no-repeat;
+	vertical-align: middle;
+}
+.footer-icon a.icon5{
+	width:92px;
+	background:url(../img/5.png) no-repeat;
+	vertical-align: middle;
+}
+
 
 #owl-lg {
     width: 1160px;
