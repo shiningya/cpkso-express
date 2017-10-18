@@ -275,6 +275,23 @@ router.get('/pinpai/:page', function(req, res, next) {
     }));
 });
 
+/* 新闻详情页 */
+router.get('/:id', function(req, res, next) {
+    var id = req.params.id;
+    axios.all([getContent(id), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(content, promo1, promo2, promo3, promo4, promo5) {
+        var data = {};
+        data.curnav = 'news';
+        data.content = content.data.response.data.Article;
+        data.promo1 = promo1.data.response.data.PlaceCars;
+        data.promo2 = promo2.data.response.data.PlaceArts;
+        data.promo3 = promo3.data.response.data.PlaceCars;
+        data.promo4 = promo4.data.response.data.PlaceCars;
+        data.promo5 = promo5.data.response.data.PlaceCars;
+        res.render('newsdetail', data);
+    }));
+});
+
+
 
 function getBanner() {
     return axios.get('http://localhost:8080/ev/placeArt_findByAdsUniqueId?ads_unique_id=Z01');
@@ -299,6 +316,11 @@ function getNews3(page) {
 /* 获取各个分类跳页的数据 */
 function getNews4(id,page) {
     var url = 'http://localhost:8080/ev/article_search?articleCondition.artCt.id=' + id + '&articleCondition.pageNo=' + page;
+    return axios.get(url);
+}
+
+function getContent(id) {
+    var url = 'http://localhost:8080/ev/article_singleById?article.id=' + id;
     return axios.get(url);
 }
 

@@ -299,7 +299,7 @@ block content
                 ul.msg-list
                   each news in newsdata
                     li.side-list-item
-                      a(href='#{news.uri}',title='#{news.title}',target='_blank') #{news.title}
+                      a(href='/news/#{news.entity_id}',title='#{news.title}',target='_blank') #{news.title}
                       span.date #{news.date}
               +news(promo2)
             #policy.tab-pane
