@@ -3,7 +3,7 @@ var axios = require('axios');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get(['/',/^(\/index)/], function(req, res, next) {
     axios.all([getSliders(), getBanners(), getNewsG(), getHotCar(), getNewCar(), getdsCar(), getcyCar(), getNewParts(), getHotParts(), getStandard(), getAuxiliary(), getCarBody(), getElectric(), getSteering(), getUnderpan(), getSealing(), getInterior(), getCarRequire(), getPartsRequire(), getCarRequirePic(), getPartsRequirePic(), getShows(), getPromo1(), getPromo2(), getPromo3()])
         .then(axios.spread(function(sliders, banners, newsG, hotCar, newCar, dsCar, cyCar, newParts, hotParts, standard, auxiliary, carBody, electric, steering, underpan, sealing, interior, carReq, partsReq, carReqPic, partsReqPic, shows, promo1, promo2, promo3) {
             var data = {};

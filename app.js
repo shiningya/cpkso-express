@@ -29,11 +29,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/news', news);
-app.use('/cars', cars);
-app.use('/parts', parts);
-app.use('/infos', infos);
-app.use('/companies', companies);
+app.use(['/news','/news.html'], news);
+app.use(['/cars','/carresult.html'], cars);
+app.use(['/parts','/partsresult.html'], parts);
+app.use(['/infos','/needmsg.html'], infos);
+app.use(['/companies','/enterprise.html'], companies);
 app.use('/domain', domain);
 
 // catch 404 and forward to error handler
