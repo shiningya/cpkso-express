@@ -150,7 +150,7 @@ block content
           .tab-pane.active#guide
             .owl-lg.owl-carousel
               each news in newsG
-                a.item(href='/news/#{news.entity_id}',title='#{news.title}',target='_blank')
+                a.item(href='/news/#{news.entity_id}.html',title='#{news.title}',target='_blank')
                   img(src='#{news.pic}',style='width:280px;height:180px;',alt='#{news.title}')
                   p.title #{news.title}
     .products

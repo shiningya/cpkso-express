@@ -17,6 +17,8 @@ html
       link(rel='stylesheet', href='http://ev.cpkso.com/css/base.css')
       link(rel='stylesheet', href='http://ev.cpkso.com/css/company.css')
       link(rel='stylesheet', href='http://ev.cpkso.com/css/searchresult.css')
+      link(rel="Bookmark", href="#{company.logo}")
+      link(rel="Shortcut Icon", href="#{company.logo}")
   body
     include includes/com-header.jade
     block content
@@ -24,3 +26,11 @@ html
     block script
       script(src='http://ev.cpkso.com/js/jquery-2.0.0.min.js')
       script(src='http://ev.cpkso.com/js/bootstrap.min.js')
+      script.
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?35c730b0f82f32d01fea78ebcb2a05ce";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();

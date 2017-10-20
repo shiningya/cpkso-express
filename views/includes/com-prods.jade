@@ -5,10 +5,10 @@ if products
       ul.list-content
         each prod in products
           if prod.type === 1
-            - var url = '/cars/' + prod.id
+            - var url = 'http://ev.cpkso.com/cars/' + prod.id
             - var price = '￥' + prod.price + '万'
           if prod.type === 2
-            - var url = '/parts/' + prod.id
+            - var url = 'http://ev.cpkso.com/parts/' + prod.id
             - var price = prod.price      
           li.list-item
             .figure

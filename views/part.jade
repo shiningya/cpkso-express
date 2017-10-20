@@ -55,11 +55,14 @@ block content
               span
         .company.li
           .dt 类型
-          .dd #{part.category.name} - #{part.ct2}
+          .dd #{part.category} - #{part.ct2}
         .company.li
           .dt 产地
-          if part.company.city
-            .dd #{part.company.province} - #{part.company.city}
+          if part.province
+            if part.city
+              .dd #{part.province} - #{part.city}
+            else
+              .dd #{part.province}
           else
             .dd 不详
         .contact.li
@@ -121,6 +124,10 @@ append script
       navigation: true,
       navigationText: ["", ""],
       responsive: false
+    });
+    $('.J-img-list li').hover(function(event) {
+      var $pic = $(this).find('img');
+      $('.main-img img').attr('src', $pic.attr('src'));
     });
     $('#part-search-btn').click(function(){
       var word = $('#part-input').val();

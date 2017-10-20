@@ -1,9 +1,9 @@
 extends layout
 
 block title
-  title= '新能源电动车新闻网、电动车配件咨询网-产品快搜新能源电动车'
-  meta(name="keywords", content="新能源电动车新闻网、电动车配件咨询网")
-  meta(name="description", content="新能源电动车新闻网是产品快搜新能源电动车网旗下新闻资讯频道，汇集了国内外新能源电动车行业市场行情、电动车企业动态、新能源电动车汗液政策法规等各类资讯，为用户提供最新、最全面新能源行业信息及最前沿的新能源电动汽车技术资讯。")
+  title #{content.title}-新能源电动车新闻网、电动车配件咨询网-产品快搜新能源电动车
+  meta(name="keywords", content="#{content.title}-新能源电动车新闻网、电动车配件咨询网")
+  meta(name="description", content="#{content.title}-新能源电动车新闻网是产品快搜新能源电动车网旗下新闻资讯频道，汇集了国内外新能源电动车行业市场行情、电动车企业动态、新能源电动车汗液政策法规等各类资讯，为用户提供最新、最全面新能源行业信息及最前沿的新能源电动汽车技术资讯。")
 append link
   link(rel='stylesheet', href="http://ev.cpkso.com/css/news.css")
 block content
@@ -34,7 +34,7 @@ block content
           ul#newslist.list-unstyled.zixun-item
             each item in promo2
               li
-                a(href='/news/#{item.entity_id}',target='_blank',title='#{item.title}')
+                a(href='/news/#{item.entity_id}.html',target='_blank',title='#{item.title}')
                   img(src='#{item.pic}',alt='#{item.title}')
                   span #{item.title}
         #aditem.right3

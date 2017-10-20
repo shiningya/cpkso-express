@@ -276,8 +276,9 @@ router.get('/pinpai/:page', function(req, res, next) {
 });
 
 /* 新闻详情页 */
-router.get('/:id', function(req, res, next) {
-    var id = req.params.id;
+router.get('/:name', function(req, res, next) {
+    var name = req.params.name;
+    var id = name.replace('.html','');
     axios.all([getContent(id), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(content, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';

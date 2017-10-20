@@ -8,8 +8,8 @@
     <title>资讯右侧内容</title>
     <link href="css/reset.css" rel="stylesheet">
     <link href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://ev.cpkso.com/css/base.css" rel="stylesheet">
-    <link href="http://ev.cpkso.com/css/news.css" rel="stylesheet">
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/news.css" rel="stylesheet">
     <style>
         .content-right {
             margin: 0;
@@ -77,7 +77,7 @@
     <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 
-    <script type="text/javascript" src="http://ev.cpkso.com/js/mustache.min.js"></script>
+    <script type="text/javascript" src="js/mustache.min.js"></script>
     <script>
 
 
@@ -129,7 +129,7 @@
             })
             .done(function (data) {
                 var alistData = data.response.data;
-                var alistTpl = '{{#PlaceArts}}<li><a href="{{uri}}" target="_blank"><img src="{{pic}}"><span>{{title}}</a></li>{{/PlaceArts}}';
+                var alistTpl = '{{#PlaceArts}}<li><a href="/news/{{entity_id}}.html" target="_blank"><img src="{{pic}}"><span>{{title}}</a></li>{{/PlaceArts}}';
                 var alistcontent = Mustache.render(alistTpl, alistData);
                 var lista = $('#newslist');
                 lista.html(alistcontent);
