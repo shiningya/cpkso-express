@@ -61,7 +61,10 @@ block content
                     .info-wrapper
                       a(href='/parts/#{part.id}',title='#{part.name}',target='_blank') 详情
                       a.cus-service(href='javascript:;') 客服
-                      a(href='/companies/#{part.company_id}',target='_blank',title='#{part.company_name}') 官网
+                      if part.url
+                        a(href='#{part.url}',target='_blank',title='#{part.company_name}') 官网
+                      else
+                        a(href='/companies/#{part.company_id}',target='_blank',title='#{part.company_name}') 企业
                     .car-detail
                       p.parts-info 简介：#{part.brief}
                 .detail

@@ -124,7 +124,10 @@ block content
                     .info-wrapper
                       a(href='/cars/#{car.id}',title='#{car.name}',target='_blank') 详情
                       a.cus-service(href='javascript:;') 客服
-                      a(href='/companies/#{car.company_id}',target='_blank',title='#{car.company_name}') 官网
+                      if car.url
+                        a(href='#{car.url}',target='_blank',title='#{car.company_name}') 官网
+                      else
+                        a(href='/companies/#{car.company_id}',target='_blank',title='#{car.company_name}') 企业
                     .car-detail
                       ul.detail-list
                         if car.mile
@@ -321,7 +324,7 @@ block content
           +bar(promo7)
 
 append script
-  script(src='http://ev.cpkso.com/js/enter.js')
+  script(src='http://ev.cpkso.com/js/lib/enter.js')
   script.
     $('#car-search-btn').click(function(){
       var word = $('#car-input').val();

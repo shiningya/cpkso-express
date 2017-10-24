@@ -103,7 +103,7 @@ block body
                   div!= car.car.detail
                 #product-config.tab-pane                
                   div(style='width:920px;')
-                    form#filter.param-filter.wrap(action='http://localhost:8080/ev/param_findParamTables',method='post',enctype='multipart/form-data')
+                    form#filter.param-filter.wrap(action='http://ev.cpkso.com/admin/param_findParamTables',method='post',enctype='multipart/form-data')
                     .nav.select-wrap.wrap
                       .myScrollspy
                         .nav(data-spy='affix',data-offset-top='932',style='width:920px;')
@@ -211,16 +211,16 @@ block body
                           table#colorTable
     include includes/footer.jade
     block script
-      script(src='http://ev.cpkso.com/js/jquery-2.0.0.min.js')
-      script(src='http://ev.cpkso.com/js/bootstrap.min.js')
-      script(src='http://ev.cpkso.com/js/jquery.form.js')
-      script(src='http://ev.cpkso.com/js/owl.carousel.min.js')
-      script(src='http://ev.cpkso.com/js/mustache.min.js')
+      script(src='http://ev.cpkso.com/js/lib/jquery-2.0.0.min.js')
+      script(src='http://ev.cpkso.com/js/lib/bootstrap.min.js')
+      script(src='http://ev.cpkso.com/js/lib/jquery.form.js')
+      script(src='http://ev.cpkso.com/js/lib/owl.carousel.min.js')
+      script(src='http://ev.cpkso.com/js/lib/mustache.min.js')
       script.
         var _hmt = _hmt || [];
         (function() {
           var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?35c730b0f82f32d01fea78ebcb2a05ce";
+          hm.src = "https://hm.baidu.com/hm.js?6c4119bd6ed6dca0c77afc24f4b663aa";
           var s = document.getElementsByTagName("script")[0]; 
           s.parentNode.insertBefore(hm, s);
         })();
@@ -328,7 +328,7 @@ block body
 
         function tableRender(tpl, data, el) {
           var data = data.response.data;
-          var emptyParams = []
+          var emptyParams = [];
           var empty = {};
           if (data.Params === null) {
             data.Params = emptyParams;

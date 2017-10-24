@@ -31,7 +31,7 @@ block content
               - var upper = province.initial.toUpperCase()
               - var lower = province.initial
               li(class={active: lower===letter || (!letter&&index===0)})
-                a(href='#brand'+upper,data-toggle='enter',onclick='return false;')=upper
+                a(href='#brand'+upper,data-toggle='enter',onclick='return false;') #{province.initial}
         #tabcontent.tab-content
           each province,index in provinces
             - var letter = provinces.letter
@@ -287,13 +287,13 @@ block content
       a(href='/cars/#{promo[0].entity_id}',title='#{promo[0].title}')
         img(src='#{promo[0].pic}',alt='#{promo[0].title}')
 append script
-  script(src='http://ev.cpkso.com/js/jquery.form.js')
-  script(src='http://ev.cpkso.com/js/mustache.min.js')
-  script(src='http://ev.cpkso.com/js/jquery.validate.js')
-  script(src='http://ev.cpkso.com/js/validate-methods.js')
-  script(src='http://ev.cpkso.com/js/messages_zh.js')
-  script(src='http://ev.cpkso.com/js/enter.js')
-  script(src='http://ev.cpkso.com/js/WdatePicker.js')
+  script(src='http://ev.cpkso.com/js/lib/jquery.form.js')
+  script(src='http://ev.cpkso.com/js/lib/mustache.min.js')
+  script(src='http://ev.cpkso.com/js/lib/jquery.validate.js')
+  script(src='http://ev.cpkso.com/js/lib/validate-methods.js')
+  script(src='http://ev.cpkso.com/js/lib/messages_zh.js')
+  script(src='http://ev.cpkso.com/js/lib/enter.js')
+  script(src='http://ev.cpkso.com/js/lib/WdatePicker.js')
   script.
     $(document).ready(function() {
       $.ajax({

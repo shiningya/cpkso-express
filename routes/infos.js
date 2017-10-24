@@ -52,6 +52,7 @@ router.get('/search/:str', function(req, res, next) {
         data.curnav = 'infos';
         data.ids = ids;
         data.provinces = provinces.data.response.data;
+        data.provinces.letter = getCurLetter(data.provinces, data.ids[0]);
         data.pageinfo = infos.data.response.data.Require_condition;
         data.infos = infos.data.response.data.Requires;
         data.promo = promo.data.response.data.PlaceCars;

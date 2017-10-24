@@ -99,7 +99,7 @@ block content
                   span.title 企业简介：
                   span.brief #{company.brief}
               .com-site
-                a(href='/companies/#{company.id}',target='_blank',title='#{company.name}') 企业官网
+                a(href='/companies/#{company.id}',target='_blank',title='#{company.name}') 进入企业
         .page-wrapper
           if list
             .pagination.clearfix
@@ -224,7 +224,7 @@ block content
       .content-right
 
 append script
-  script(src='http://ev.cpkso.com/js/enter.js')
+  script(src='http://ev.cpkso.com/js/lib/enter.js')
   script.
     $('#com-search-btn').click(function(){
       var word = $('#com-input').val();

@@ -40,7 +40,7 @@ block content
                           a(title='特斯拉', href='/cars/search/0-99-0-0-0-0-1',target='_blank')
                             img(src='img/icon/logo-1.png',alt='特斯拉')
                         li
-                          a(title='比亚迪', href='/cars/search/0-99-0-0-0-0-1',target='_blank')
+                          a(title='比亚迪', href='/cars/search/0-7-0-0-0-0-1',target='_blank')
                             img(src='img/icon/logo-2.png',alt='比亚迪')
                         li
                           a(title='雷克萨斯', href='/cars/search/0-60-0-0-0-0-1',target='_blank')
@@ -74,26 +74,26 @@ block content
                       h3.title 类型
                       ul#brand.type-list.type
                         li
-                          a(title='低速电动车', href='/cars/search/0-0-0-0-1-0-1',target='_blank') 低速电动车
+                          a(title='低速电动车', href='/cars/search/15-0-0-0-0-0-1',target='_blank') 低速电动车
                         li
-                          a(title='纯电动', href='/cars/search/0-0-0-0-2-0-1',target='_blank') 纯电动
+                          a(title='纯电动', href='/cars/search/3-0-0-0-1-0-1',target='_blank') 纯电动
                         li
-                          a(title='插电式', href='/cars/search/0-0-0-0-3-0-1',target='_blank') 插电式
+                          a(title='插电式', href='/cars/search/3-0-0-0-2-0-1',target='_blank') 插电式
                         li
-                          a(title='增程式', href='/cars/search/0-0-0-0-4-0-1',target='_blank') 增程式
+                          a(title='增程式', href='/cars/search/3-0-0-0-3-0-1',target='_blank') 增程式
                         li
-                          a(title='混合动力', href='/cars/search/0-0-0-0-5-0-1',target='_blank') 混合动力
+                          a(title='混合动力', href='/cars/search/3-0-0-0-4-0-1',target='_blank') 混合动力
                     li.filter-type
                       h3.title 级别
                       ul#brand.type-list.level
                         li
-                          a(title='微型', href='/cars/search/0-0-0-0-0-1-1',target='_blank') 微型
+                          a(title='微型', href='/cars/search/3-0-0-0-0-1-1',target='_blank') 微型
                         li
-                          a(title='小型', href='/cars/search/0-0-0-0-0-2-1',target='_blank') 小型
+                          a(title='小型', href='/cars/search/3-0-0-0-0-2-1',target='_blank') 小型
                         li
-                          a(title='紧凑型', href='/cars/search/0-0-0-0-0-3-1',target='_blank') 紧凑型
+                          a(title='紧凑型', href='/cars/search/3-0-0-0-0-3-1',target='_blank') 紧凑型
                         li
-                          a(title='中型', href='/cars/search/0-0-0-0-0-4-1',target='_blank') 中型
+                          a(title='中型', href='/cars/search/3-0-0-0-0-4-1',target='_blank') 中型
                 .tab-pane#parts  
                   .filter-type
                     h3.title 分类
@@ -131,7 +131,7 @@ block content
             .banner
               a(href='/cars/#{banners[i].entity_id}',target='_blank')
                 img(src='#{banners[i].pic}')
-    .news
+    .news-guide
       ul.nav.nav-tabs
         li.active
           a(href='/news/daogou/',title='导购',target='_blank') 导购
@@ -153,17 +153,17 @@ block content
                 a.item(href='/news/#{news.entity_id}.html',title='#{news.title}',target='_blank')
                   img(src='#{news.pic}',style='width:280px;height:180px;',alt='#{news.title}')
                   p.title #{news.title}
-    .products
+    #J_cars.products
       .content-left
         ul.nav.nav-tabs
           li.active
-            a(href='#new-car',data-toggle='tab',title='最新车型') 最新车型
+            a(href='#new-car',data-toggle='tab',data-loaded='1',data-id='NEW',title='最新车型') 最新车型
           li
-            a(href='#hot-car',data-toggle='tab',title='热门车型') 热门车型
+            a(href='#hot-car',data-toggle='tab',data-loaded='',data-id='HOT',title='热门车型') 热门车型
           li
-            a(href='#low-car',data-toggle='tab',title='低速车型') 低速车型
+            a(href='#low-car',data-toggle='tab',data-loaded='',data-id='DSCX',title='低速车型') 低速车型
           li
-            a(href='#ev-car',data-toggle='tab',title='乘用车型') 乘用车型
+            a(href='#ev-car',data-toggle='tab',data-loaded='',data-id='CYCX',title='乘用车型') 乘用车型
           li.fr-li
             a(href='/cars/',title='进入车型库',target='_blank') 进入车型库
         .tab-content
@@ -172,20 +172,17 @@ block content
                 ul.list-content
                   each car in cars
                     li.list-item
-                      .detail
-                        h3.title #{car.title}
-                        p.desc #{car.describe}
                       a(href='/cars/#{car.entity_id}',title='#{car.title}',target='_blank')
+                        .detail
+                          h3.title #{car.title}
+                          p.desc #{car.describe}
                         img(src='#{car.pic}',alt='#{car.title}')
                       .car-logo
                         img(src='#{car.logo}',alt='#{car.title}')
             +car(newCar)
           .tab-pane#hot-car
-            +car(hotCar)
           .tab-pane#low-car
-            +car(dsCar)
           .tab-pane#ev-car
-            +car(cyCar)
       .content-right
         #needCar.recommend
           .header
@@ -200,7 +197,6 @@ block content
                       a.item(href='/infos/#{req.id}',title='#{req.title}',target='_blank')
                         img(src='#{req.pic_thumb}',alt='#{req.title}')
                   +require(carReq)
-            p.slogan 整车求购
             #needCarMsg.msg
               mixin requireList(reqs)
                 ul
@@ -211,30 +207,30 @@ block content
     #companyBar1.company-bar
       a(href='/companies/#{promo1[0].entity_id}',title='#{promo1[0].title}',target='_blank')
         img(src='#{promo1[0].pic}',alt='#{promo1[0].title}')
-    .products
+    #J_parts.products
       .content-left
         .tab-container
           ul#partsTabs.nav.nav-tabs
             li.active
-              a(href='#new-product',data-toggle='tab',title='最新配件') 最新配件
+              a(href='#new-product',data-toggle='tab',data-loaded='1',data-id='INDNEWP',title='最新配件') 最新配件
             li
-              a(href='#hot-product',data-toggle='tab',title='热门配件') 热门配件
+              a(href='#hot-product',data-toggle='tab',data-loaded='',data-id='INDHOTP',title='热门配件') 热门配件
             li
-              a(href='#standard',data-toggle='tab',title='标准件') 标准件
+              a(href='#standard',data-toggle='tab',data-loaded='',data-id='IND6',title='标准件') 标准件
             li
-              a(href='#auxiliary',data-toggle='tab',title='辅助件') 辅助件
+              a(href='#auxiliary',data-toggle='tab',data-loaded='',data-id='IND7',title='辅助件') 辅助件
             li
-              a(href='#car-body',data-toggle='tab',title='车身系统') 车身系统
+              a(href='#car-body',data-toggle='tab',data-loaded='',data-id='IND8',title='车身系统') 车身系统
             li
-              a(href='#electric',data-toggle='tab',title='电气系统') 电气系统
+              a(href='#electric',data-toggle='tab',data-loaded='',data-id='IND9',title='电气系统') 电气系统
             li
-              a(href='#steering',data-toggle='tab',title='转向系统') 转向系统
+              a(href='#steering',data-toggle='tab',data-loaded='',data-id='IND10',title='转向系统') 转向系统
             li
-              a(href='#underpan',data-toggle='tab',title='底盘系统') 底盘系统
+              a(href='#underpan',data-toggle='tab',data-loaded='',data-id='IND11',title='底盘系统') 底盘系统
             li
-              a(href='#sealing',data-toggle='tab',title='密封系统') 密封系统
+              a(href='#sealing',data-toggle='tab',data-loaded='',data-id='IND12',title='密封系统') 密封系统
             li
-              a(href='#interior',data-toggle='tab',title='内饰系统') 内饰系统
+              a(href='#interior',data-toggle='tab',data-loaded='',data-id='IND13',title='内饰系统') 内饰系统
             li.fr-li
               a(href='/parts/',title='进入配件库',target='_blank') 进入配件库
           .tab-content
@@ -243,30 +239,21 @@ block content
                   ul.list-content
                     each part in parts
                       li.list-item
-                        .detail
-                          h3.title #{part.title}
-                          p.desc #{part.brief}
                         a(href='/parts/#{part.entity_id}',title='#{part.title}',target='_blank')
+                          .detail
+                            h3.title #{part.title}
+                            p.desc #{part.brief}
                           img(src='#{part.pic}',alt='#{part.title}')
               +parts(newParts)
             #hot-product.tab-pane    
-              +parts(hotParts)
             #standard.tab-pane    
-              +parts(standard)
             #auxiliary.tab-pane    
-              +parts(auxiliary)
             #car-body.tab-pane    
-              +parts(carBody)
             #electric.tab-pane    
-              +parts(electric)
             #steering.tab-pane    
-              +parts(steering)
             #underpan.tab-pane    
-              +parts(underpan)
             #sealing.tab-pane    
-              +parts(sealing)
             #interior.tab-pane    
-              +parts(interior)
       .content-right
         #needParts.recommend
           .header
@@ -277,12 +264,63 @@ block content
               .carousel-wrapper
                 #slider-sm-2.owl-carousel
                   +require(partsReq)
-            p.slogan 配件求购
             #needPartsMsg.msg
               +requireList(partsReqPic)
     #companyBar2.company-bar
       a(href='/companies/#{promo2[0].entity_id}',title='#{promo2[0].title}',target='_blank')
         img(src='#{promo2[0].pic}',alt='#{promo2[0].title}')
+    .products
+      .content-left
+        #J_news.news
+          ul.nav.nav-tabs
+            li.active
+              a(href='#newsNew',title='最新资讯',data-toggle='tab',data-loaded='1',data-id='') 最新资讯
+            li
+              a(href='#newsNewCar',title='新车',data-toggle='tab',data-loaded='',data-id='1') 新车
+            li
+              a(href='#newsTec',title='技术',data-toggle='tab',data-loaded='',data-id='2') 技术
+            li
+              a(href='#newsIndus',title='行业',data-toggle='tab',data-loaded='',data-id='3') 行业
+            li
+              a(href='#newsPol',title='政策',data-toggle='tab',data-loaded='',data-id='4') 政策
+            li
+              a(href='#newsUse',title='用车',data-toggle='tab',data-loaded='',data-id='6') 用车
+            li.fr-li
+              a(href='/news/',title='查看更多',target='_blank') 更多
+          .tab-container
+            .tab-content
+              #newsNew.tab-pane.active
+                .news-content
+                  each item in newsN
+                    .news-item.clearfix
+                      .news-item-image
+                        a(href='/news/#{item.id}.html',title='#{item.title}',target='_blank')
+                          img(src='#{item.thumb}',alt='#{item.title}')
+                        span.tag #{item.artCt}
+                      .news-item-info
+                        h4.news-item-title
+                          a(href='/news/#{item.id}.html',title='#{item.title}',target='_blank') #{item.title}
+                        p.news-item-summary #{item.brief}
+                        .news-item-footer
+                          .news-time #{item.publish_time}
+              #newsNewCar.tab-pane
+              #newsTec.tab-pane
+              #newsIndus.tab-pane
+              #newsPol.tab-pane
+              #newsUse.tab-pane
+      .content-right
+        .news.news-brand
+          ul.nav.nav-tabs
+            li.active
+              a(href='#newsBrand',title='品牌专区',data-toggle='tab') 品牌专区
+            li.fr-li
+              a(href='/news/pinpai/',title='查看更多',target='_blank') 更多
+          .news-brand-content
+            each item in newsB
+              .news-item.clearfix
+                h4.news-item-title.clearfix
+                  a(href='/news/#{item.id}.html',title='#{item.title}',target='_blank') #{item.title}
+                p.news-time #{item.publish_time}
     .company-show
       .title
         .line
@@ -298,16 +336,31 @@ block content
                   .pic
                     a(href='/companies/#{show.entity_id}',title='#{show.title}',target='_blank')
                       img(src='#{pic}',alt='#{show.title}')
-    #companyBar3.company-bar
-      a(href='/companies/#{promo3[0].entity_id}',title='#{promo3[0].title}',target='_blank')
-        img(src='#{promo3[0].pic}',alt='#{promo3[0].title}')
+    .company-show
+      .title
+        .line
+        .text 会员企业
+        .line
+      #vip.owl-carousel.owl-theme
+        each vip in vips
+          .item
+            a(href='/companies/#{vip.entity_id}',title='#{vip.title}',target='_blank')
+              img(src='#{vip.pic}',alt='#{vip.title}')
 append script
-  script(src="http://ev.cpkso.com/js/owl.carousel.min.js")
+  script(src="http://ev.cpkso.com/js/lib/mustache.min.js")
+  script(src="http://ev.cpkso.com/js/template.js")
+  script(src="http://ev.cpkso.com/js/lib/owl.carousel.min.js")
   script.
     $(function(){
       $('.owl-lg').owlCarousel({
         items: 4,
         autoPlay: true,
+        responsive: false
+      });
+      $('#vip').owlCarousel({
+        items: 5,
+        autoPlay: true,
+        margin: 80,
         responsive: false
       });
       $('#sliders,#slider-sm-1,#slider-sm-2').owlCarousel({
