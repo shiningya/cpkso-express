@@ -212,7 +212,7 @@
 	bottom: 30px;
 	right: 5%;
 }
-#sliders .owl-controls .owl-page span{
+#sliders .owl-dots span{
 	border-radius: 0;
 	margin: 4px;
 	background-color: #fff;

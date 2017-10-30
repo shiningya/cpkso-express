@@ -35,7 +35,7 @@ block content
               ul#owl-sm.owl-carousel
                 each pic in part.pics
                   li.item
-                    img(src='#{pic}')
+                    img(src='#{pic}',alt='#{part.name}')
       .item-info-wrapper
         .header-wrapper.clearfix
           .product-name #{part.name}

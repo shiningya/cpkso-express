@@ -42,7 +42,7 @@ block body
                   ul#owl-sm.owl-carousel
                     each pic in car.car.pics
                       li.item
-                        img(src='#{pic}')
+                        img(src='#{pic}',alt='#{car.car.name}')
           .item-info-wrapper
             .header-wrapper
               .product-name #{car.car.name}

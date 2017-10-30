@@ -1,6 +1,38 @@
 var express = require('express');
 var axios = require('axios');
 var router = express.Router();
+var exhibitions = [
+    {
+        "title": "低速电动车",
+        "url": "http://www.ciaae.cn",
+        "pic": "http://ev.cpkso.com/img/exhibition1.jpg"
+    },
+    {
+        "title": "电动乘用车",
+        "url": "http://www.km-paev.com",
+        "pic": "http://ev.cpkso.com/img/exhibition2.jpg"
+    },
+    {
+        "title": "电动三轮车",
+        "url": "http://www.chautotechexpo.com",
+        "pic": "http://ev.cpkso.com/img/exhibition3.jpg"
+    },
+    {
+        "title": "电动客车",
+        "url": "http://www.hanneng-sh.com",
+        "pic": "http://ev.cpkso.com/img/exhibition4.jpg"
+    },
+    {
+        "title": "电动客车",
+        "url": "http://www.zhengzhouauto.org",
+        "pic": "http://ev.cpkso.com/img/exhibition5.jpg"
+    },
+    {
+        "title": "电动客车",
+        "url": "http://www.zhengzhouauto.org",
+        "pic": "http://ev.cpkso.com/img/exhibition6.jpg"
+    }
+];
 
 /* GET users listing. */
 router.get(['/',/^(\/index)/], function(req, res, next) {
@@ -23,6 +55,7 @@ router.get(['/',/^(\/index)/], function(req, res, next) {
             data.newsN = newsN.data.response.data.Articles;
             data.newsB = newsB.data.response.data.Articles;
             data.shows = shows.data.response.data.PlaceCompanyMutPics;
+            data.exhibitions = exhibitions;
             data.vips = vips.data.response.data.PlaceCompanys;
             data.promo1 = promo1.data.response.data.PlaceCompanys;
             data.promo2 = promo2.data.response.data.PlaceCompanys;
