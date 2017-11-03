@@ -70,3 +70,6 @@ html
         .back-wrapper
           a(href='javascript:;',onclick='window.history.back();') 返回上一页
           a(href='/') 返回首页
+    h1= message
+    h2= error.status
+    pre #{error.stack}

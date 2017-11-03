@@ -10,7 +10,7 @@ block content
   .main-body
     .header-wrapper(style='height:300px;')
       #banner.header-banner
-        a(href='/news/#{banner[0].entity_id}',title='#{banner[0].title}',target='_blank')
+        a(href='/news/#{banner[0].entity_id}.html',title='#{banner[0].title}',target='_blank')
           img(src='#{banner[0].pic}',alt='#{banner[0].title}')
     .content-container
       .content-left
@@ -47,69 +47,136 @@ block content
                       h4.news-item-title
                         a(href='/news/#{item.id}.html',title='#{item.title}',target='_blank') #{item.title}
                       p.news-item-summary #{item.brief}
+                      p.news-tags
+                        each tag in item.tags
+                          a.tag(href='/news/search/#{tag.id}-1') #{tag.name}
                       .news-item-footer
-                        .news-time #{item.publish_time}
-        .page-wrapper.clearfix
-          block page
+                        if item.author&&item.author!==1003
+                          span.news-source 来源：
+                            a(href='/companies/#{item.author}',target='_blank') #{item.author_name}
+                        span.news-time #{item.publish_time}
+        if list
+          .page-wrapper.clearfix
+            block page
+              .pagination.clearfix
+                if pageinfo.pageNo===1
+                  span.disabled(href='javascript:;') 上一页
+                else
+                  a(href=pageinfo.pageNo-1) 上一页
+                if pageinfo.maxPageNo < 7
+                  - var n = 1
+                  while n <= pageinfo.maxPageNo
+                    if n===pageinfo.pageNo
+                      - var url = '/news/list/' + n
+                      span.current(href=url)= n++
+                    else
+                      - var url = '/news/list/' + n
+                      a(href=url)= n++     
+                else if pageinfo.pageNo <= 3
+                  - var n = 1
+                  while n <= 5
+                    if n===pageinfo.pageNo
+                      - var url = '/news/list/' + n
+                      span.current(href=url)= n++
+                    else
+                      - var url = '/news/list/' + n
+                      a(href=url)= n++
+                  a ...
+                  - var url = '/news/list/' + pageinfo.maxPageNo
+                  a(href=url) #{pageinfo.maxPageNo}
+                else if pageinfo.pageNo > pageinfo.maxPageNo-2
+                  a(href='1') 1
+                  a ...
+                  - var n = pageinfo.pageNo-2
+                  while n <= pageinfo.maxPageNo
+                    if n===pageinfo.pageNo
+                      - var url = '/news/list/' + n
+                      span.current(href=url)= n++
+                    else
+                      - var url = '/news/list/' + n
+                      a(href=url)= n++        
+                else
+                  a(href='1') 1
+                  if pageinfo.pageNo > 4
+                    a ...
+                  - var n = pageinfo.pageNo-2
+                  while n <= pageinfo.pageNo+2
+                    if n===pageinfo.pageNo
+                      - var url = '/news/list/' + n
+                      span.current(href=url)= n++
+                    else
+                      - var url = '/news/list/' + n
+                      a(href=url)= n++        
+                  if pageinfo.pageNo < pageinfo.maxPageNo-3
+                    a ...
+                  if pageinfo.pageNo < pageinfo.maxPageNo-2
+                    - var url = '/news/list/' + pageinfo.maxPageNo
+                    a(href=url) #{pageinfo.maxPageNo}
+                if pageinfo.pageNo===pageinfo.maxPageNo
+                  - var url = '/news/list/' + n
+                  span.disabled(href='javascript:;') 下一页
+                else
+                  - var url = '/news/list/' + (pageinfo.pageNo+1)
+                  a(href=url) 下一页
+        else
+          .page-wrapper.clearfix
             .pagination.clearfix
               if pageinfo.pageNo===1
                 span.disabled(href='javascript:;') 上一页
               else
-                a(href=pageinfo.pageNo-1) 上一页
+                - var url = ids[0] + '-' + (pageinfo.pageNo-1)
+                a(href=url) 上一页
               if pageinfo.maxPageNo < 7
                 - var n = 1
                 while n <= pageinfo.maxPageNo
                   if n===pageinfo.pageNo
-                    - var url = '/news/list/' + n
                     span.current(href=url)= n++
                   else
-                    - var url = '/news/list/' + n
+                    - var url = ids[0] + '-' + n
                     a(href=url)= n++     
               else if pageinfo.pageNo <= 3
                 - var n = 1
                 while n <= 5
                   if n===pageinfo.pageNo
-                    - var url = '/news/list/' + n
                     span.current(href=url)= n++
                   else
-                    - var url = '/news/list/' + n
+                    - var url = ids[0] + '-' + n
                     a(href=url)= n++
                 a ...
-                - var url = '/news/list/' + pageinfo.maxPageNo
+                - var url = ids[0] + '-' + pageinfo.maxPageNo
                 a(href=url) #{pageinfo.maxPageNo}
               else if pageinfo.pageNo > pageinfo.maxPageNo-2
-                a(href='1') 1
+                - var url = ids[0] + '-1'
+                a(href=url) 1
                 a ...
                 - var n = pageinfo.pageNo-2
                 while n <= pageinfo.maxPageNo
                   if n===pageinfo.pageNo
-                    - var url = '/news/list/' + n
                     span.current(href=url)= n++
                   else
-                    - var url = '/news/list/' + n
+                    - var url = ids[0] + '-' + n
                     a(href=url)= n++        
               else
-                a(href='1') 1
+                - var url = ids[0] + '-1'
+                a(href=url) 1
                 if pageinfo.pageNo > 4
                   a ...
                 - var n = pageinfo.pageNo-2
                 while n <= pageinfo.pageNo+2
                   if n===pageinfo.pageNo
-                    - var url = '/news/list/' + n
                     span.current(href=url)= n++
                   else
-                    - var url = '/news/list/' + n
+                    - var url = ids[0] + '-' + n
                     a(href=url)= n++        
                 if pageinfo.pageNo < pageinfo.maxPageNo-3
                   a ...
                 if pageinfo.pageNo < pageinfo.maxPageNo-2
-                  - var url = '/news/list/' + pageinfo.maxPageNo
+                  - var url = ids[0] + '-' + pageinfo.maxPageNo
                   a(href=url) #{pageinfo.maxPageNo}
               if pageinfo.pageNo===pageinfo.maxPageNo
-                - var url = '/news/list/' + n
                 span.disabled(href='javascript:;') 下一页
               else
-                - var url = '/news/list/' + (pageinfo.pageNo+1)
+                - var url = ids[0] + '-' + (pageinfo.pageNo+1)
                 a(href=url) 下一页
       .content-right
         #newsad.right4

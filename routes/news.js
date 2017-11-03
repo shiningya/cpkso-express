@@ -7,6 +7,7 @@ router.get('/', function(req, res, next) {
     axios.all([getBanner(), getNews(), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -24,6 +25,7 @@ router.get('/list/:page', function(req, res, next) {
     axios.all([getBanner(), getNews3(page), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -41,6 +43,7 @@ router.get('/xinche/', function(req, res) {
     axios.all([getBanner(), getNews2(1), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -59,6 +62,7 @@ router.get('/xinche/:page', function(req, res, next) {
     axios.all([getBanner(), getNews4(1,page), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -76,6 +80,7 @@ router.get('/jishu/', function(req, res) {
     axios.all([getBanner(), getNews2(2), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -93,6 +98,7 @@ router.get('/jishu/:page', function(req, res, next) {
     axios.all([getBanner(), getNews4(2,page), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -110,6 +116,7 @@ router.get('/hangye/', function(req, res) {
     axios.all([getBanner(), getNews2(3), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -127,6 +134,7 @@ router.get('/hangye/:page', function(req, res, next) {
     axios.all([getBanner(), getNews4(3,page), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -144,6 +152,7 @@ router.get('/zhengce/', function(req, res) {
     axios.all([getBanner(), getNews2(4), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -161,6 +170,7 @@ router.get('/zhengce/:page', function(req, res, next) {
     axios.all([getBanner(), getNews4(4,page), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -178,6 +188,7 @@ router.get('/daogou/', function(req, res) {
     axios.all([getBanner(), getNews2(5), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -195,6 +206,7 @@ router.get('/daogou/:page', function(req, res, next) {
     axios.all([getBanner(), getNews4(5,page), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -212,6 +224,7 @@ router.get('/yongche/', function(req, res) {
     axios.all([getBanner(), getNews2(6), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -229,6 +242,7 @@ router.get('/yongche/:page', function(req, res, next) {
     axios.all([getBanner(), getNews4(6,page), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -246,6 +260,7 @@ router.get('/pinpai/', function(req, res) {
     axios.all([getBanner(), getNews2(7), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -263,6 +278,7 @@ router.get('/pinpai/:page', function(req, res, next) {
     axios.all([getBanner(), getNews4(7,page), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(banner, news, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.banner = banner.data.response.data.PlaceArts;
         data.news = news.data.response.data.Articles;
         data.pageinfo = news.data.response.data.Article_condition;
@@ -275,6 +291,29 @@ router.get('/pinpai/:page', function(req, res, next) {
     }));
 });
 
+router.get('/search/:str', function (req, res, next) {
+    var ids = req.params.str.split('-');
+    var args = '?articleCondition.pageNo=' + ids[1] + '&';
+    if (ids[0] !== '0') {
+        args += 'articleCondition.tag.id=' + ids[0];
+    };
+    axios.all([getBanner(), getNews5(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function (banner, news, promo1, promo2, promo3, promo4, promo5) {
+        var data = {};
+        data.curnav = 'news';
+        data.ids = ids;
+        data.list = false;
+        data.banner = banner.data.response.data.PlaceArts;
+        data.news = news.data.response.data.Articles;
+        data.pageinfo = news.data.response.data.Article_condition;
+        data.promo1 = promo1.data.response.data.PlaceCars;
+        data.promo2 = promo2.data.response.data.PlaceArts;
+        data.promo3 = promo3.data.response.data.PlaceCars;
+        data.promo4 = promo4.data.response.data.PlaceCars;
+        data.promo5 = promo5.data.response.data.PlaceCars;
+        res.render('news', data);
+    }));
+});
+
 /* 新闻详情页 */
 router.get('/:name', function(req, res, next) {
     var name = req.params.name;
@@ -282,6 +321,7 @@ router.get('/:name', function(req, res, next) {
     axios.all([getContent(id), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5()]).then(axios.spread(function(content, promo1, promo2, promo3, promo4, promo5) {
         var data = {};
         data.curnav = 'news';
+        data.list = true;
         data.content = content.data.response.data.Article;
         data.promo1 = promo1.data.response.data.PlaceCars;
         data.promo2 = promo2.data.response.data.PlaceArts;
@@ -317,6 +357,12 @@ function getNews3(page) {
 /* 获取各个分类跳页的数据 */
 function getNews4(id,page) {
     var url = 'http://localhost:8080/ev/article_search?articleCondition.artCt.id=' + id + '&articleCondition.pageNo=' + page;
+    return axios.get(url);
+}
+
+/* 获取标签对应的数据 */
+function getNews5(args) {
+    var url = 'http://localhost:8080/ev/article_search' + args;
     return axios.get(url);
 }
 

@@ -10,11 +10,13 @@ block content
   .main-body
     .products
       .content-left
-        .dttitle
-          a #{content.title}
-            span 发布于：#{content.publish_time}
-              button#small.smallFont
-              button#big.bigFont
+        .dtheader
+          .title #{content.title}
+          .info
+            span.time 发布于：#{content.publish_time}
+            if content.author&&content.author!==1003
+              span.source 来源：
+                a(href='/companies/#{content.author}',target='_blank') #{content.author_name}
         #newsContent.dtcontent!= content.detail
         .bdsharebuttonbox
           a.bds_more(href="#" data-cmd="more")
@@ -23,7 +25,6 @@ block content
           a.bds_tqq(href="#" data-cmd="tqq")
           a.bds_renren(href="#" data-cmd="renren")
           a.bds_weixin(href="#" data-cmd="weixin")
-
       .content-right
         #newsad.right4
           #newsA.ad-item(style='margin-top:20px;')
