@@ -14,8 +14,8 @@ router.get('/', function(req, res, next) {
         data.keyword = '';
         data.querystr = '';
         data.provinces = provinces.data.response.data;
-        data.pageinfo = companies.data.response.data.Company_condition;
-        data.companies = companies.data.response.data.Companys;
+        data.pageinfo = companies.data.response.query;
+        data.companies = companies.data.response.data;
         res.render('companies', data);
     }));
 });
@@ -32,8 +32,8 @@ router.get('/list/:page', function (req, res, next) {
         data.keyword = '';
         data.querystr = '';
         data.provinces = provinces.data.response.data;
-        data.pageinfo = companies.data.response.data.Company_condition;
-        data.companies = companies.data.response.data.Companys;
+        data.pageinfo = companies.data.response.query;
+        data.companies = companies.data.response.data;
         res.render('companies', data);
     }));
 });  
@@ -61,9 +61,9 @@ router.get('/search/:str', function(req, res, next) {
         data.querystr = querystr || '';
         data.ids = ids;
         data.provinces = provinces.data.response.data;
-        data.provinces.letter = getCurLetter(data.provinces, data.ids[0]);
-        data.pageinfo = companies.data.response.data.Company_condition;
-        data.companies = companies.data.response.data.Companys;
+        data.provinces.letter = ids[0]==='0' ? null : getCurLetter(data.provinces, data.ids[0]);
+        data.pageinfo = companies.data.response.query;
+        data.companies = companies.data.response.data;
         res.render('companies', data);
     }));
 });
@@ -75,9 +75,9 @@ router.get('/:id/', function(req, res, next) {
         var data = {};
         data.curnav = 'company';
         data.id = id;
-        data.company = company.data.response.data.Company;
-        data.products = comProds.data.response.data.Products;
-        data.comNews = comNews.data.response.data.Articles;
+        data.company = company.data.response.data;
+        data.products = comProds.data.response.data;
+        data.comNews = comNews.data.response.data;
         res.render('company', data);
     }));
 });
@@ -88,7 +88,7 @@ router.get('/:id/intro', function(req, res, next) {
         var data = {};
         data.curnav = 'intro';
         data.id = id;
-        data.company = company.data.response.data.Company;
+        data.company = company.data.response.data;
         res.render('intro', data);
     }));
 });
@@ -99,8 +99,8 @@ router.get('/:id/products', function(req, res, next) {
         var data = {};
         data.curnav = 'products';
         data.id = id;
-        data.company = company.data.response.data.Company;
-        data.products = comProds.data.response.data.Products;
+        data.company = company.data.response.data;
+        data.products = comProds.data.response.data;
         res.render('products', data);
     }));
 });
@@ -111,8 +111,8 @@ router.get('/:id/trend', function(req, res, next) {
         var data = {};
         data.curnav = 'trend';
         data.id = id;
-        data.company = company.data.response.data.Company;
-        data.comNews = comNews.data.response.data.Articles;
+        data.company = company.data.response.data;
+        data.comNews = comNews.data.response.data;
         res.render('trend', data);
     }));
 });
@@ -151,6 +151,7 @@ function getComNews(id) {
 
 function getCurLetter(data, id) {
     for (var i = 0; i < data.length; i++) {
+        data[i].array = data[i].array || [];
         for (var j = 0; j < data[i].array.length; j++) {
             if (data[i].array[j].id === +id) {
                 return data[i].initial;

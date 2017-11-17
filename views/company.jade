@@ -9,7 +9,7 @@ block content
   .main-body
     .content-left
       include includes/com-intro.jade
-      if comNews.length!==0
+      if comNews && comNews.length!==0
         include includes/com-trend.jade
       include includes/com-prods.jade
     .content-right

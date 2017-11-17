@@ -40,25 +40,25 @@ router.get(['/',/^(\/index)/], function(req, res, next) {
         .then(axios.spread(function(sliders, banners, newsG, newCar, newParts, carReq, partsReq, carReqPic, partsReqPic, newsN, newsB, shows, vips, promo1, promo2) {
             var data = {};
             data.curnav = 'index';
-            data.sliders = sliders.data.response.data.PlaceCars;
-            data.banners = banners.data.response.data.PlaceCars;
-            data.newsG = newsG.data.response.data.PlaceArts;
+            data.sliders = sliders.data.response.data;
+            data.banners = banners.data.response.data;
+            data.newsG = newsG.data.response.data;
 
-            data.newCar = newCar.data.response.data.PlaceCars;
-            data.newParts = newParts.data.response.data.PlacePartss;
+            data.newCar = newCar.data.response.data;
+            data.newParts = newParts.data.response.data;
 
-            data.carReq = carReq.data.response.data.Requires;
-            data.partsReq = partsReq.data.response.data.Requires;
-            data.carReqPic = carReqPic.data.response.data.Requires;
-            data.partsReqPic = partsReqPic.data.response.data.Requires;
+            data.carReq = carReq.data.response.data;
+            data.partsReq = partsReq.data.response.data;
+            data.carReqPic = carReqPic.data.response.data;
+            data.partsReqPic = partsReqPic.data.response.data;
 
-            data.newsN = newsN.data.response.data.Articles;
-            data.newsB = newsB.data.response.data.Articles;
-            data.shows = shows.data.response.data.PlaceCompanyMutPics;
+            data.newsN = newsN.data.response.data;
+            data.newsB = newsB.data.response.data;
+            data.shows = shows.data.response.data;
             data.exhibitions = exhibitions;
-            data.vips = vips.data.response.data.PlaceCompanys;
-            data.promo1 = promo1.data.response.data.PlaceCompanys;
-            data.promo2 = promo2.data.response.data.PlaceCompanys;
+            data.vips = vips.data.response.data;
+            data.promo1 = promo1.data.response.data;
+            data.promo2 = promo2.data.response.data;
 
             res.render('index', data);
         }));

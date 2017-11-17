@@ -41,11 +41,12 @@ block content
             - var upper = province.initial.toUpperCase()
             - var lower = province.initial
             .tab-pane.brand-list(id='brand'+upper,class={active: lower===letter || (!letter&&index===0)})
-              each pro in province.array
-                if pro.id === +ids[0]
-                  a.choose-on(href='javascript:;') #{pro.name}
-                else
-                  a(href='/companies/search/#{pro.id}-#{ids[1]}-1#{querystr}') #{pro.name}
+              if province.array
+                each pro in province.array
+                  if pro.id === +ids[0]
+                    a.choose-on(href='javascript:;') #{pro.name}
+                  else
+                    a(href='/companies/search/#{pro.id}-#{ids[1]}-1#{querystr}') #{pro.name}
       dl.category-list.clearfix
         dt.title 分类：
         dd.category-item
@@ -63,43 +64,46 @@ block content
             a(href='/companies/search/#{ids[0]}-2-1#{querystr}') 配件
     .content-container.car-search-result
       .content-left
-        ul#com-list
-          each company in companies
-            li.com
-              .com-logo
-                a(href='/companies/#{company.id}',title='#{company.name}',target='_blank')
-                  if company.logo
-                    img(src='#{company.logo}',alt='#{company.name}')
-                  else
-                    img(src='/img/com-logo.png',alt='#{company.name}')
-              .com-detail
-                h4
-                  a.title(href='/companies/#{company.id}',title='#{company.name}',target='_blank') #{company.name}
-                  if company.vip===1
-                    span.approve-icon
-                dl
-                  dt.title 企业类型：
-                  if company.company_ct==='0'
-                    dd 生产型
-                  else if company.company_ct==='1'
-                    dd 销售型
-                  else
-                    dd #{company.company_ct}
-                  dt.title 注册地址：
-                  if company.province
-                    dd #{company.province}
-                  else
-                    dd 暂无信息
-                  dt.title 联系人：
-                  if company.charge
-                    dd #{company.charge}
-                  else
-                    dd 暂无信息
-                .com-brief
-                  span.title 企业简介：
-                  span.brief #{company.brief}
-              .com-site
-                a(href='/companies/#{company.id}',target='_blank',title='#{company.name}') 进入企业
+        if companies
+          ul#com-list
+            each company in companies
+              li.com
+                .com-logo
+                  a(href='/companies/#{company.id}',title='#{company.name}',target='_blank')
+                    if company.logo
+                      img(src='#{company.logo}',alt='#{company.name}')
+                    else
+                      img(src='/img/com-logo.png',alt='#{company.name}')
+                .com-detail
+                  h4
+                    a.title(href='/companies/#{company.id}',title='#{company.name}',target='_blank') #{company.name}
+                    if company.vip===1
+                      span.approve-icon
+                  dl
+                    dt.title 企业类型：
+                    if company.company_ct==='0'
+                      dd 生产型
+                    else if company.company_ct==='1'
+                      dd 销售型
+                    else
+                      dd #{company.company_ct}
+                    dt.title 注册地址：
+                    if company.province
+                      dd #{company.province}
+                    else
+                      dd 暂无信息
+                    dt.title 联系人：
+                    if company.charge
+                      dd #{company.charge}
+                    else
+                      dd 暂无信息
+                  .com-brief
+                    span.title 企业简介：
+                    span.brief #{company.brief}
+                .com-site
+                  a(href='/companies/#{company.id}',target='_blank',title='#{company.name}') 进入企业
+        else
+          p 暂无相关企业
         .page-wrapper
           if list
             .pagination.clearfix

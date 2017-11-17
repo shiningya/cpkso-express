@@ -145,15 +145,15 @@ router.get('/', function(req, res, next) {
         data.miles = miles;
         data.types = types;
         data.levels = levels;
-        data.cars = cars.data.response.data.Cars;
-        data.pageinfo = cars.data.response.data.Car_condition;
-        data.promo1 = promo1.data.response.data.PlaceCars;
-        data.promo2 = promo2.data.response.data.PlaceArts;
-        data.promo3 = promo3.data.response.data.PlaceArts;
-        data.promo4 = promo4.data.response.data.PlaceCars;
-        data.promo5 = promo5.data.response.data.PlaceArts;
-        data.promo6 = promo6.data.response.data.PlaceArts;
-        data.promo7 = promo7.data.response.data.PlaceCars;
+        data.cars = cars.data.response.data;
+        data.pageinfo = cars.data.response.query;
+        data.promo1 = promo1.data.response.data;
+        data.promo2 = promo2.data.response.data;
+        data.promo3 = promo3.data.response.data;
+        data.promo4 = promo4.data.response.data;
+        data.promo5 = promo5.data.response.data;
+        data.promo6 = promo6.data.response.data;
+        data.promo7 = promo7.data.response.data;
         res.render('cars', data);
     }));
 });
@@ -175,15 +175,15 @@ router.get('/list/:page', function(req, res, next) {
         data.miles = miles;
         data.types = types;
         data.levels = levels;
-        data.cars = cars.data.response.data.Cars;
-        data.pageinfo = cars.data.response.data.Car_condition;
-        data.promo1 = promo1.data.response.data.PlaceCars;
-        data.promo2 = promo2.data.response.data.PlaceArts;
-        data.promo3 = promo3.data.response.data.PlaceArts;
-        data.promo4 = promo4.data.response.data.PlaceCars;
-        data.promo5 = promo5.data.response.data.PlaceArts;
-        data.promo6 = promo6.data.response.data.PlaceArts;
-        data.promo7 = promo7.data.response.data.PlaceCars;
+        data.cars = cars.data.response.data;
+        data.pageinfo = cars.data.response.query;
+        data.promo1 = promo1.data.response.data;
+        data.promo2 = promo2.data.response.data;
+        data.promo3 = promo3.data.response.data;
+        data.promo4 = promo4.data.response.data;
+        data.promo5 = promo5.data.response.data;
+        data.promo6 = promo6.data.response.data;
+        data.promo7 = promo7.data.response.data;
         res.render('cars', data);
     }));
 });
@@ -216,6 +216,7 @@ router.get('/search/:str', function(req, res, next) {
         var querystr = '?word=' + keyword;
         args += 'carCondition.car_name=' + codeword;
     };
+    console.log(args);
     axios.all([getBrandList(), getPage(args), getPromo1(), getPromo2(), getPromo3(), getPromo4(), getPromo5(), getPromo6(), getPromo7()]).then(axios.spread(function(brands, cars, promo1, promo2, promo3, promo4, promo5, promo6, promo7) {
         var data = {};
         data.curnav = 'cars';
@@ -224,20 +225,20 @@ router.get('/search/:str', function(req, res, next) {
         data.querystr = querystr || '';
         data.ct2 = ct2;
         data.brands = brands.data.response.data;
-        data.brands.letter = getCurLetter(data.brands, ids[1]);
+        data.brands.letter = ids[1]==='0' ? null : getCurLetter(data.brands, ids[1]);
         data.prices = prices;
         data.miles = miles;
         data.types = types;
         data.levels = levels;
-        data.cars = cars.data.response.data.Cars;
-        data.pageinfo = cars.data.response.data.Car_condition;
-        data.promo1 = promo1.data.response.data.PlaceCars;
-        data.promo2 = promo2.data.response.data.PlaceArts;
-        data.promo3 = promo3.data.response.data.PlaceArts;
-        data.promo4 = promo4.data.response.data.PlaceCars;
-        data.promo5 = promo5.data.response.data.PlaceArts;
-        data.promo6 = promo6.data.response.data.PlaceArts;
-        data.promo7 = promo7.data.response.data.PlaceCars;
+        data.cars = cars.data.response.data;
+        data.pageinfo = cars.data.response.query;
+        data.promo1 = promo1.data.response.data;
+        data.promo2 = promo2.data.response.data;
+        data.promo3 = promo3.data.response.data;
+        data.promo4 = promo4.data.response.data;
+        data.promo5 = promo5.data.response.data;
+        data.promo6 = promo6.data.response.data;
+        data.promo7 = promo7.data.response.data;
         res.render('cars', data);
     }));
 });
@@ -250,8 +251,8 @@ router.get('/:id', function(req, res, next) {
         data.curnav = 'cars';
         data.id = id;
         data.keyword = '';
-        data.car = car.data.response.data.Car;
-        data.promo8 = promo8.data.response.data.PlaceCars;
+        data.car = car.data.response.data;
+        data.promo8 = promo8.data.response.data;
         res.render('car', data);
     }));
 });
@@ -263,6 +264,7 @@ function getBrandList() {
 
 function getCars(args) {
     var url = 'http://localhost:8080/ev/car_search' + args;
+    console.log(url);
     return axios.get(url);
 }
 
@@ -315,8 +317,9 @@ function getPromo8() {
 
 function getCurLetter(data, id) {
     for (var i = 0; i < data.length; i++) {
+        data[i].array = data[i].array || [];
         for (var j = 0; j < data[i].array.length; j++) {
-            if (data[i].array[j].id === +id) {
+            if (data[i].array && data[i].array[j].id === +id) {
                 return data[i].initial;
             }
         }

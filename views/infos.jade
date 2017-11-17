@@ -38,11 +38,12 @@ block content
             - var upper = province.initial.toUpperCase()
             - var lower = province.initial
             .tab-pane.brand-list(id='brand'+upper,class={active: lower===letter || (!letter&&index===0)})
-              each pro in province.array
-                if pro.id === +ids[0]
-                  a.choose-on(href='javascript:;') #{pro.name}
-                else
-                  a(href='/infos/search/#{pro.id}-#{ids[1]}-1') #{pro.name}
+              if province.array
+                each pro in province.array
+                  if pro.id === +ids[0]
+                    a.choose-on(href='javascript:;') #{pro.name}
+                  else
+                    a(href='/infos/search/#{pro.id}-#{ids[1]}-1') #{pro.name}
       dl.category-list.clearfix
         dt.title 分类：
         dd.category-item
@@ -301,9 +302,9 @@ append script
         url: 'http://ev.cpkso.com/admin/province_list'
       })
       .done(function(data){
-        var data = data.response.data;
-        var provTpl = "<option value=''>-请选择-</option>{{#Province}}<option value='{{id}}'>{{name}}</option>{{/Province}}"
-        var provHtml = Mustache.render(provTpl, data);
+        var response = data.response;
+        var provTpl = "<option value=''>-请选择-</option>{{#data}}<option value='{{id}}'>{{name}}</option>{{/data}}"
+        var provHtml = Mustache.render(provTpl, response);
         $('#province').html(provHtml);
       })
       $('#needForm').validate({

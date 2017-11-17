@@ -8,7 +8,10 @@ header.header
   if company.contact||company.contact2
     .header-right
       img(src='http://ev.cpkso.com/img/phone-logo.png')
-      span #{company.contact} #{company.contact2}
+      if company.contact
+        span.tel #{company.contact}
+      else
+        span.tel #{company.contact2}
 nav.nav-wrapper
   ul.nav-list
     if domain

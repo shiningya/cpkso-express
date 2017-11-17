@@ -12,9 +12,9 @@ router.get('/', function(req, res, next) {
         data.list = true;
         data.ids = ids;
         data.provinces = provinces.data.response.data;
-        data.pageinfo = infos.data.response.data.Require_condition;
-        data.infos = infos.data.response.data.Requires;
-        data.promo = promo.data.response.data.PlaceCars;
+        data.pageinfo = infos.data.response.query;
+        data.infos = infos.data.response.data;
+        data.promo = promo.data.response.data;
         res.render('infos', data);
     }));
 });
@@ -29,10 +29,10 @@ router.get('/list/:page', function (req, res, next) {
         data.list = true;
         data.ids = ids;
         data.provinces = provinces.data.response.data;
-        data.provinces.letter = getCurLetter(data.provinces, data.ids[0]);
-        data.pageinfo = infos.data.response.data.Require_condition;
-        data.infos = infos.data.response.data.Requires;
-        data.promo = promo.data.response.data.PlaceCars;
+        data.provinces.letter = ids[0] === '0' ? null : getCurLetter(data.provinces, data.ids[0]);
+        data.pageinfo = infos.data.response.query;
+        data.infos = infos.data.response.data;
+        data.promo = promo.data.response.data;
         res.render('infos', data);
     }));
 });
@@ -52,10 +52,10 @@ router.get('/search/:str', function(req, res, next) {
         data.curnav = 'infos';
         data.ids = ids;
         data.provinces = provinces.data.response.data;
-        data.provinces.letter = getCurLetter(data.provinces, data.ids[0]);
-        data.pageinfo = infos.data.response.data.Require_condition;
-        data.infos = infos.data.response.data.Requires;
-        data.promo = promo.data.response.data.PlaceCars;
+        data.provinces.letter = ids[0] === '0' ? null : getCurLetter(data.provinces, data.ids[0]);
+        data.pageinfo = infos.data.response.query;
+        data.infos = infos.data.response.data;
+        data.promo = promo.data.response.data;
         res.render('infos', data);
     }));
 });
@@ -67,9 +67,9 @@ router.get('/:id', function(req, res, next) {
         var data = {};
         data.curnav = 'infos';
         data.id = id;
-        data.info = info.data.response.data.Require;
-        data.offers = offers.data.response.data.Offers;
-        data.promo = promo.data.response.data.PlaceCars;
+        data.info = info.data.response.data;
+        data.offers = offers.data.response.data;
+        data.promo = promo.data.response.data;
         res.render('info', data);
     }));
 });
@@ -82,6 +82,7 @@ function getInfos(args) {
 
 function getProvinces() {
     var url = 'http://localhost:8080/ev/province_listByInitial';
+    console.log(url);
     return axios.get(url);
 }
 
@@ -107,6 +108,7 @@ function getOffers(id) {
 
 function getCurLetter(data, id) {
     for (var i = 0; i < data.length; i++) {
+        data[i].array = data[i].array || [];
         for (var j = 0; j < data[i].array.length; j++) {
             if (data[i].array[j].id === +id) {
                 return data[i].initial;

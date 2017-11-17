@@ -52,11 +52,12 @@ block content
             - var upper = brand.initial.toUpperCase()
             - var lower = brand.initial
             .tab-pane.brand-list(id='brand'+upper,class={active: lower===letter || (!letter&&index===0)})
-              each lbrand in brand.array
-                if lbrand.id === +ids[1]
-                  a.choose-on(href='javascript:;') #{lbrand.brand}
-                else
-                  a(href='/cars/search/#{ids[0]}-#{lbrand.id}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1#{querystr}') #{lbrand.brand}
+              if brand.array
+                each lbrand in brand.array
+                  if lbrand.id === +ids[1]
+                    a.choose-on(href='javascript:;') #{lbrand.brand}
+                  else
+                    a(href='/cars/search/#{ids[0]}-#{lbrand.id}-#{ids[2]}-#{ids[3]}-#{ids[4]}-#{ids[5]}-1#{querystr}') #{lbrand.brand}
       dl#categoryPrice.category-list.clearfix
         dt.title 价格：
         dd.category-item
@@ -109,60 +110,63 @@ block content
     .content-container.car-search-result
       .content-left
         #car-result.search-result.product-container
-          ul.list-content
-            each car in cars
-              li.list-item
-                .figure
-                  a(href='/cars/#{car.id}',title='#{car.name}',target='_blank')
-                    if car.prompt===1
-                      span.recommend-icon
-                    img(src='#{car.pic}',alt='#{car.name}')
-                  a.car-logo(href='javascript:;',title='#{car.name}')
-                    if car.brand
-                      img(src='#{car.brand}',alt='#{car.name}')
-                  .car-info
-                    .info-wrapper
-                      a(href='/cars/#{car.id}',title='#{car.name}',target='_blank') 详情
-                      a.cus-service(href='javascript:;') 客服
-                      if car.url
-                        a(href='#{car.url}',target='_blank',title='#{car.company_name}') 官网
-                      else
-                        a(href='/companies/#{car.company_id}',target='_blank',title='#{car.company_name}') 企业
-                    .car-detail
-                      ul.detail-list
-                        if car.mile
-                          li
-                            p 纯电续航：
-                              span #{car.mile}km
-                        if car.max_speed
-                          li
-                            p 最高时速：
-                              span #{car.max_speed}km
-                        if car.charge_time
-                          li
-                            p 充电时间：
-                              span #{car.charge_time}h
-                        if car.accelerate
-                          li
-                            p 百公里加速：
-                              span #{car.accelerate}s
-                .detail
-                  if car.w1===1
-                    a.desc(href='/cars/#{car.id}',style='text-indent:26px;',title='#{car.name}',target='_blank') #{car.name}
-                      span.hot-icon
-                  else
-                    a.desc(href='/cars/#{car.id}',title='#{car.name}',target='_blank') #{car.name}
-                  .company-detail
-                    a.company-name(href='/companies/#{car.company_id}',target='_blank',title='#{car.company_name}') #{car.company_name}
-                      if car.vip===1
-                        span.approve-icon
-                  .msg
-                    if car.price
-                      p.price ￥#{car.price}万
+          if cars
+            ul.list-content
+              each car in cars
+                li.list-item
+                  .figure
+                    a(href='/cars/#{car.id}',title='#{car.name}',target='_blank')
+                      if car.prompt===1
+                        span.recommend-icon
+                      img(src='#{car.pic}',alt='#{car.name}')
+                    a.car-logo(href='javascript:;',title='#{car.name}')
+                      if car.brand
+                        img(src='#{car.brand}',alt='#{car.name}')
+                    .car-info
+                      .info-wrapper
+                        a(href='/cars/#{car.id}',title='#{car.name}',target='_blank') 详情
+                        a.cus-service(href='javascript:;') 客服
+                        if car.url
+                          a(href='#{car.url}',target='_blank',title='#{car.company_name}') 官网
+                        else
+                          a(href='/companies/#{car.company_id}',target='_blank',title='#{car.company_name}') 企业
+                      .car-detail
+                        ul.detail-list
+                          if car.mile
+                            li
+                              p 纯电续航：
+                                span #{car.mile}km
+                          if car.max_speed
+                            li
+                              p 最高时速：
+                                span #{car.max_speed}km
+                          if car.charge_time
+                            li
+                              p 充电时间：
+                                span #{car.charge_time}h
+                          if car.accelerate
+                            li
+                              p 百公里加速：
+                                span #{car.accelerate}s
+                  .detail
+                    if car.w1===1
+                      a.desc(href='/cars/#{car.id}',style='text-indent:26px;',title='#{car.name}',target='_blank') #{car.name}
+                        span.hot-icon
                     else
-                      p.price 暂无价格
-                    if car.hot
-                      p.view-count 已浏览#{car.hot}
+                      a.desc(href='/cars/#{car.id}',title='#{car.name}',target='_blank') #{car.name}
+                    .company-detail
+                      a.company-name(href='/companies/#{car.company_id}',target='_blank',title='#{car.company_name}') #{car.company_name}
+                        if car.vip===1
+                          span.approve-icon
+                    .msg
+                      if car.price
+                        p.price ￥#{car.price}万
+                      else
+                        p.price 暂无价格
+                      if car.hot
+                        p.view-count 已浏览#{car.hot}
+          else
+            p 暂无相关车型
         .page-wrapper.clearfix
           if list
             .pagination.clearfix

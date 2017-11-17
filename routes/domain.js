@@ -10,9 +10,9 @@ router.get('/:domain/', function(req, res, next) {
         var data = {};
         data.curnav = 'company';
         data.domain = true;
-        data.company = company.data.response.data.Company;
-        data.products = comProds.data.response.data.Products;
-        data.comNews = comNews.data.response.data.Articles;
+        data.company = company.data.response.data;
+        data.products = comProds.data.response.data;
+        data.comNews = comNews.data.response.data;
         res.render('company', data);
     }));
 });
@@ -23,7 +23,7 @@ router.get('/:domain/intro', function(req, res, next) {
         var data = {};
         data.curnav = 'intro';
         data.domain = true;
-        data.company = company.data.response.data.Company;
+        data.company = company.data.response.data;
         res.render('intro', data);
     }));
 });
@@ -34,8 +34,8 @@ router.get('/:domain/products', function(req, res, next) {
         var data = {};
         data.curnav = 'products';
         data.domain = true;
-        data.company = company.data.response.data.Company;
-        data.products = comProds.data.response.data.Products;
+        data.company = company.data.response.data;
+        data.products = comProds.data.response.data;
         res.render('products', data);
     }));
 });
@@ -46,8 +46,8 @@ router.get('/:domain/trend', function(req, res, next) {
         var data = {};
         data.curnav = 'trend';
         data.domain = true;
-        data.company = company.data.response.data.Company;
-        data.comNews = comNews.data.response.data.Articles;
+        data.company = company.data.response.data;
+        data.comNews = comNews.data.response.data;
         res.render('trend', data);
     }));
 });
